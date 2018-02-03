@@ -1,0 +1,45 @@
+﻿
+@using EPS.UI.Portal.Models
+@{
+    ViewBag.Title = "DepartmentList";
+    List<DepartmentModel> departmentList = ViewBag.Model as List<DepartmentModel>;
+}
+
+<div class="box">
+    @*<div class="box-header">
+            <h3 class="box-title">Hover Data Table</h3>
+        </div>*@
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>部门Id</th>
+                    <th>部门名称</th>
+                    <th>公司名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var department in departmentList)
+                {
+                    <tr>
+                        <td>@department.Id</td>
+                        <td>@department.Name</td>
+                        <td>@department.CompanyName<input type="hidden" name="companyId" value=@department.CompanyId /></td>
+                    </tr>
+                }
+            </tbody>
+            @*<tfoot>
+                    <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                    </tr>
+                </tfoot>*@
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+
