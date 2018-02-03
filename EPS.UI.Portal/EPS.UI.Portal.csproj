@@ -158,7 +158,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\PatrolReportModel.cs" />
     <Compile Include="Models\PatrolSchemeModel.cs" />
@@ -8197,9 +8199,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Transaction\SchemeList.cshtml" />
-    <Content Include="Views\SystemManagement\Employee.cshtml" />
-    <Content Include="Views\SystemManagement\Department.cshtml" />
-    <Content Include="Views\SystemManagement\Group.cshtml" />
+    <Content Include="Views\SystemManagement\EmployeeList.cshtml" />
+    <Content Include="Views\SystemManagement\DepartmentList.cshtml" />
+    <Content Include="Views\SystemManagement\GroupList.cshtml" />
     <Content Include="Views\Transaction\PatrolReportList.cshtml" />
     <Content Include="Views\Transaction\AddScheme.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />

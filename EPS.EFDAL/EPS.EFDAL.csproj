@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDal.cs" />
+    <Compile Include="DepartmentDal.cs" />
     <Compile Include="EmployeeDal.cs" />
+    <Compile Include="GroupDal.cs" />
     <Compile Include="MenuDal.cs" />
     <Compile Include="CompanyDal.cs" />
     <Compile Include="PatrolReportDal.cs" />

@@ -19,8 +19,18 @@ namespace EPS.UI.Portal.Controllers
     public class SystemManagementController : BaseController
     {
         EmployeeService bll = new EmployeeService();
-     
-        public ActionResult Employee()
+        DepartmentService departmentBll = new DepartmentService();
+        GroupService groupBll = new GroupService();
+
+        /// <summary>
+        /// Employees the list.
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/3 19:20
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult EmployeeList()
         {
             List<Employee> employeeList = bll.GetElementList().Result;
             List<EmployeeModel> modelList = new List<EmployeeModel>();
@@ -45,21 +55,27 @@ namespace EPS.UI.Portal.Controllers
             return View();
 
         }
-        
-        public ActionResult Department()
-        {
-            List<Employee> employeeList = bll.GetElementList().Result;
-            List<EmployeeModel> modelList = new List<EmployeeModel>();
 
-            foreach (var item in employeeList)
+        /// <summary>
+        /// Departments the list.
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/3 19:20
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult DepartmentList()
+        {
+            List<Department> departmentList = departmentBll.GetElementList().Result;
+            List<DepartmentModel> modelList = new List<DepartmentModel>();
+
+            foreach (var item in departmentList)
             {
-                EmployeeModel model = new EmployeeModel()
+                DepartmentModel model = new DepartmentModel()
                 {
 
-                    GroupName = item.Group.Name,
-                    GroupId = item.GroupId,
-                    DepartmentName = item.Department.Name,
-                    DepartmentId = item.Department.Id,
+                    Id = item.Id,
+                    Name = item.Name,
                     CompanyName = item.Company.Name,
                     CompanyId = item.Company.Id,
                 };
@@ -68,23 +84,31 @@ namespace EPS.UI.Portal.Controllers
 
             ViewBag.Model = modelList;
             return View();
-        }        
-       public ActionResult Group()
+        }
+
+        /// <summary>
+        /// Groups the list.
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/3 19:21
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult GroupList()
         {
-            List<Employee> employeeList = bll.GetElementList().Result;
-            List<EmployeeModel> modelList = new List<EmployeeModel>();
+            List<Group> employeeList = groupBll.GetElementList().Result;
+            List<GroupModel> modelList = new List<GroupModel>();
 
             foreach (var item in employeeList)
             {
-                EmployeeModel model = new EmployeeModel()
+                GroupModel model = new GroupModel()
                 {
-                    
-                    GroupName = item.Group.Name,
-                    GroupId = item.Group.Id,
+                    Id = item.Id,
+                    Name = item.Name,
                     DepartmentName = item.Department.Name,
-                    DepartmentId = item.Department.Id,
-                    CompanyName = item.Company.Name,
-                    CompanyId = item.CompanyId,
+                    DepartmentId = item.DepartmentId,
+                    CompanyName = item.Department.Company.Name,
+                    CompanyId = item.Department.CompanyId,
                 };
                 modelList.Add(model);
             }

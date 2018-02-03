@@ -4,3 +4,8 @@ C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Common\obj\Debug\EPS.Common.cspro
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Common\obj\Debug\EPS.Common.csproj.CoreCompileInputs.cache
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Common\obj\Debug\EPS.Common.dll
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Common\obj\Debug\EPS.Common.pdb
+E:\project\EPS\EPS.Common\bin\Debug\EPS.Common.dll
+E:\project\EPS\EPS.Common\bin\Debug\EPS.Common.pdb
+E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.csproj.CoreCompileInputs.cache
+E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.dll
+E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.pdb
