@@ -56,9 +56,17 @@
       <Project>{17e18178-3dcb-4655-a1e4-9bb2253b61b5}</Project>
       <Name>EPS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EPS.DALFactory\EPS.DALFactory.csproj">
+      <Project>{97e36671-cf3f-45b1-bbd1-46dde9b45eaf}</Project>
+      <Name>EPS.DALFactory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EPS.EFDAL\EPS.EFDAL.csproj">
       <Project>{a8e890a7-b8fd-42bd-ab3d-117fa509c46a}</Project>
       <Name>EPS.EFDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPS.IDAL\EPS.IDAL.csproj">
+      <Project>{c4a40f75-72bc-4b54-8134-10c9e3d18c04}</Project>
+      <Name>EPS.IDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
       <Project>{7e09a44e-8531-48dd-ba50-7ceb857587a4}</Project>

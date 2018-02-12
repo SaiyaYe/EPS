@@ -1,4 +1,5 @@
 ﻿using EPS.Common;
+using EPS.IDAL;
 using EPS.Model;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EPS.EFDAL
 {
-    public class UserDal : BaseDal<User>
+    public class UserDal : BaseDal<User>, IUserDal
     {
         DataModelContainer db = new DataModelContainer();
 

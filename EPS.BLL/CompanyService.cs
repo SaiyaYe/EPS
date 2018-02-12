@@ -9,13 +9,7 @@ using System.Threading.Tasks;
 
 namespace EPS.BLL
 {
-    public class CompanyService
+    public class CompanyService : BaseService<Company>
     {
-        CompanyDal dal = new CompanyDal();
-
-        public ServiceResult<Company> GetCompanyById(int id)
-        {
-            return dal.GetCompanyById(id);
-        }
     }
 }

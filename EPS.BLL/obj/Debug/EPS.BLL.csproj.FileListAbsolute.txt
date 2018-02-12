@@ -32,3 +32,7 @@ E:\project\EPS\EPS.BLL\obj\Debug\EPS.BLL.csprojResolveAssemblyReference.cache
 E:\project\EPS\EPS.BLL\obj\Debug\EPS.BLL.csproj.CoreCompileInputs.cache
 E:\project\EPS\EPS.BLL\obj\Debug\EPS.BLL.dll
 E:\project\EPS\EPS.BLL\obj\Debug\EPS.BLL.pdb
+E:\project\EPS\EPS.BLL\bin\Debug\EPS.DALFactory.dll
+E:\project\EPS\EPS.BLL\bin\Debug\EPS.IDAL.dll
+E:\project\EPS\EPS.BLL\bin\Debug\EPS.DALFactory.pdb
+E:\project\EPS\EPS.BLL\bin\Debug\EPS.IDAL.pdb

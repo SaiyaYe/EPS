@@ -34,3 +34,5 @@ E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.csprojResolveAssemblyReference.cach
 E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.csproj.CoreCompileInputs.cache
 E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.dll
 E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.pdb
+E:\project\EPS\EPS.EFDAL\bin\Debug\EPS.IDAL.dll
+E:\project\EPS\EPS.EFDAL\bin\Debug\EPS.IDAL.pdb

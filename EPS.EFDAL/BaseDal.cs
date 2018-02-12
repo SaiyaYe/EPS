@@ -1,7 +1,9 @@
 ﻿using EPS.Common;
+using EPS.IDAL;
 using EPS.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -9,9 +11,12 @@ using System.Threading.Tasks;
 
 namespace EPS.EFDAL
 {
-    public class BaseDal<T> where T : class, new()
+    public class BaseDal<T> : IBaseDal<T> where T : class, new()
     {
-        DataModelContainer db = new DataModelContainer();
+        public DbContext Db
+        {
+            get { return DbContextFactory.GetCurrentDbContext(); }
+        }
 
         /// <summary>
         /// Gets the element by id.
@@ -22,7 +27,7 @@ namespace EPS.EFDAL
         /// 创建时间：2018/1/28 18:47
         /// 修改者：
         /// 修改时间：
-        public ServiceResult<T> GetElementById(int id)
+        public ServiceResult<T> Find(int id)
         {
             if (id <= 0)
             {
@@ -33,7 +38,7 @@ namespace EPS.EFDAL
                 };
             }
 
-            T element = db.Set<T>().Find(id);
+            T element = Db.Set<T>().Find(id);
             if (element == null)
             {
                 return new ServiceResult<T>
@@ -62,7 +67,7 @@ namespace EPS.EFDAL
         {
             return new ServiceResultList<T>
             {
-                Result = db.Set<T>().ToList(),
+                Result = Db.Set<T>().ToList(),
                 State = true
             };
         }
@@ -76,12 +81,37 @@ namespace EPS.EFDAL
         /// 创建时间：2018/1/28 18:50
         /// 修改者：
         /// 修改时间：
-        public ServiceResultList<T> GetElementList(Expression<Func<T, bool>> whereLambda = null)
+        public ServiceResultList<T> Where(Expression<Func<T, bool>> whereLambda = null)
         {
             return new ServiceResultList<T>
             {
-                Result = db.Set<T>().Where(whereLambda).ToList(),
+                Result = Db.Set<T>().Where(whereLambda).ToList(),
                 State = true
+            };
+        }
+
+        /// <summary>
+        /// 获取分页列表
+        /// </summary>
+        /// <param name="pageSize">页容量</param>
+        /// <param name="pageIndex">页码号</param>
+        /// <param name="whereLambda">条件查询</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/11 11:11
+        /// 修改者：
+        /// 修改时间：
+        public ServiceResultList<T> GetPageList(int pageSize = 15, int pageIndex = 1, Expression<Func<T, bool>> whereLambda = null)
+        {
+            var result = Db.Set<T>().Where(whereLambda)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return new ServiceResultList<T>
+            {
+                State = true,
+                Result = result
             };
         }
 
@@ -96,24 +126,29 @@ namespace EPS.EFDAL
         /// 修改时间：
         public ServiceResult<bool> Add(T element)
         {
-            db.Set<T>().Add(element);
-            try
+            Db.Set<T>().Add(element);
+            return new ServiceResult<bool>
             {
-                db.SaveChanges();
-                return new ServiceResult<bool>
-                {
-                    Result = true,
-                    State = true
-                };
-            }
-            catch (Exception e)
-            {
-                return new ServiceResult<bool>
-                {
-                    State = false,
-                    Message = e.ToString()
-                };
-            }
+                Result = true,
+                State = true
+            };
+            //try
+            //{
+            //    Db.SaveChanges();
+            //    return new ServiceResult<bool>
+            //    {
+            //        Result = true,
+            //        State = true
+            //    };
+            //}
+            //catch (Exception e)
+            //{
+            //    return new ServiceResult<bool>
+            //    {
+            //        State = false,
+            //        Message = e.ToString()
+            //    };
+            //}
         }
 
         /// <summary>
@@ -127,7 +162,7 @@ namespace EPS.EFDAL
         /// 修改时间：
         public ServiceResult<bool> DeleteById(int id)
         {
-            ServiceResult<T> result = GetElementById(id);
+            ServiceResult<T> result = Find(id);
             if (!result.State)
             {
                 return new ServiceResult<bool>
@@ -137,8 +172,7 @@ namespace EPS.EFDAL
                 };
             }
 
-            db.Set<T>().Remove(result.Result);
-            db.SaveChanges();
+            Db.Set<T>().Remove(result.Result);
 
             return new ServiceResult<bool>
             {

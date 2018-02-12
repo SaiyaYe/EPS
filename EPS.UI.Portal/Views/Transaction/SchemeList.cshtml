@@ -1,12 +1,26 @@
 ﻿@using EPS.UI.Portal.Models
+<link href="/wwwroot/lib/layer/theme/default/layer.css" rel="stylesheet" />
+<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
+<script src="/wwwroot/lib/layer/layer.js"></script>
+
 @{
     ViewBag.Title = "SchemeList";
     List<PatrolSchemeModel> patrolSchemeList = ViewBag.Model as List<PatrolSchemeModel>;
 }
 
+<div>
+    <div style="float:left">
+        @Html.Action("CompanyDepartmentGroupEmployee", "Select")
+    </div>
+    <div style="float:left">
+        @Html.ActionLink("添加", "AddScheme", "Transaction", new { }, new { @class = "btn btn-primary" })
+    </div>
+    <div style="float:left">
 
-@Html.ActionLink("添加", "AddScheme", "Transaction", new { }, new { @class = "btn btn-primary btn-lg"})
-
+    </div>
+    <div style="clear:both">
+    </div>
+</div>
 
 <div class="box">
     @*<div class="box-header">
@@ -39,21 +53,36 @@
                         <td>
                             @Html.ActionLink("删除", "DeleteSchemeById", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-primary" })
                             @Html.ActionLink("更新", "UpdateScheme", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-primary" })
+                            @*<input id="btn_Delete" type="button" class="btn btn-primary" value="删除" />*@
                         </td>
-                        @*<td>@patrolScheme.DefectType<input type="hidden" name="defectTypeId" value=@patrolScheme.DefectTypeId /></td>*@
                     </tr>
                 }
             </tbody>
-            @*<tfoot>
-                    <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                </tfoot>*@
         </table>
     </div>
     <!-- /.box-body -->
 </div>
+
+<script>
+                                                                    //$(function () {
+                                                                    //    console.log($('#btn_Delete').val())
+                                                                    //    $('#btn_Delete').click(function () {
+                                                                    //        console.log($('#btn_Delete').val())
+                                                                    //    });
+                                                                    //    $('#btn_Delete').click(function () {
+                                                                    //        layer.alert('确定要删除吗', {
+                                                                    //            //skin: 'layui-layer-molv',   //样式类名  自定义样式
+                                                                    //            closeBtn: 1,                // 是否显示关闭按钮
+                                                                    //            anim: 1,                    //动画类型
+                                                                    //            btn: ['确定', '取消'],      //按钮
+                                                                    //            icon: 3,                    // icon
+                                                                    //            yes: function () {
+                                                                    //                layer.msg('按钮1')
+                                                                    //            },
+                                                                    //            btn2: function () {
+                                                                    //                layer.msg('按钮2')
+                                                                    //            }
+                                                                    //        });
+                                                                    //    })
+                                                                    //});
+</script>

@@ -1,5 +1,7 @@
 ﻿using EPS.Common;
+using EPS.DALFactory;
 using EPS.EFDAL;
+using EPS.IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,12 @@ namespace EPS.BLL
 {
     public class BaseService<T> where T : class, new()
     {
-        BaseDal<T> dal = new BaseDal<T>();
+        IBaseDal<T> dal = DbFactory.GetDal<T>(typeof(T).Name);
+
+        public IDbSession DbSession
+        {
+            get { return DbSessionFactory.GetCurrentDbSession(); }
+        }
 
         /// <summary>
         /// Gets the element by id.
@@ -22,9 +29,9 @@ namespace EPS.BLL
         /// 创建时间：2018/1/28 19:07
         /// 修改者：
         /// 修改时间：
-        public ServiceResult<T> GetElementById(int id)
+        public ServiceResult<T> Find(int id)
         {
-            return dal.GetElementById(id);
+            return dal.Find(id);
         }
 
         /// <summary>
@@ -49,9 +56,9 @@ namespace EPS.BLL
         /// 创建时间：2018/1/28 19:08
         /// 修改者：
         /// 修改时间：
-        public ServiceResultList<T> GetElementList(Expression<Func<T, bool>> whereLambda = null)
+        public ServiceResultList<T> Where(Expression<Func<T, bool>> whereLambda = null)
         {
-            return dal.GetElementList(whereLambda);
+            return dal.Where(whereLambda);
         }
 
         /// <summary>
@@ -65,7 +72,8 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<bool> Add(T element)
         {
-            return dal.Add(element);
+            dal.Add(element);
+            return DbSession.SaveChanges();
         }
 
         /// <summary>

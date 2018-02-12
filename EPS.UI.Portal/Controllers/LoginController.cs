@@ -22,13 +22,7 @@ namespace EPS.UI.Portal.Controllers
             username = username.Trim();
             password = password.Trim();
             var result = bll.Login(username, password);
-            if (!result.State)
-            {
-                return Content(result.Message);
-            }
-            
-            Response.Redirect("/Home/Index");
-            return View();
+            return Json(result);
         }
     }
 }

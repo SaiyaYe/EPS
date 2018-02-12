@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EPS.IDAL;
 using EPS.Model;
 
 namespace EPS.EFDAL
@@ -14,7 +15,7 @@ namespace EPS.EFDAL
     /// 创建日期：2018/2/2
     /// </summary>
     /// <seealso cref="EPS.EFDAL.BaseDal{EPS.Model.PatrolReport}" />
-    public class PatrolReportDal : BaseDal<PatrolReport>
+    public class PatrolReportDal : BaseDal<PatrolReport>, IPatrolReportDal
     {
     }
 }

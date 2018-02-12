@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDal.cs" />
+    <Compile Include="DbContextFactory.cs" />
     <Compile Include="DepartmentDal.cs" />
     <Compile Include="EmployeeDal.cs" />
     <Compile Include="GroupDal.cs" />
@@ -62,6 +63,10 @@
     <ProjectReference Include="..\EPS.Common\EPS.Common.csproj">
       <Project>{17e18178-3dcb-4655-a1e4-9bb2253b61b5}</Project>
       <Name>EPS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPS.IDAL\EPS.IDAL.csproj">
+      <Project>{c4a40f75-72bc-4b54-8134-10c9e3d18c04}</Project>
+      <Name>EPS.IDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
       <Project>{7e09a44e-8531-48dd-ba50-7ceb857587a4}</Project>

@@ -9,12 +9,12 @@ using System.Web.Mvc;
 
 namespace EPS.UI.Portal.Controllers
 {
-  
+
     public class TransactionController : BaseController
     {
         PatrolSchemeService bll = new PatrolSchemeService();
         PatrolReportService bll1 = new PatrolReportService();
-        
+
         /// <summary>
         /// Schemes the list.
         /// </summary>
@@ -25,7 +25,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult SchemeList()
         {
-            
+
             List<PatrolScheme> patrolSchemeList = bll.GetElementList().Result;
             List<PatrolSchemeModel> modelList = new List<PatrolSchemeModel>();
 
@@ -45,11 +45,11 @@ namespace EPS.UI.Portal.Controllers
                 };
                 modelList.Add(model);
             }
-        
+
             ViewBag.Model = modelList;
             return View();
         }
-       
+
         public ActionResult PatrolReportList()
         {
             List<PatrolReport> patrolReportList = bll1.GetElementList().Result;
@@ -118,7 +118,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult DeleteSchemeById(int schemeId)
         {
-            PatrolScheme scheme = bll.GetElementById(schemeId).Result;
+            PatrolScheme scheme = bll.Find(schemeId).Result;
             PatrolSchemeModel model = new PatrolSchemeModel
             {
                 Id = scheme.Id,
@@ -162,7 +162,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult UpdateScheme(int schemeId)
         {
-            PatrolScheme scheme = bll.GetElementById(schemeId).Result;
+            PatrolScheme scheme = bll.Find(schemeId).Result;
             PatrolSchemeModel model = new PatrolSchemeModel
             {
                 Id = scheme.Id,
@@ -178,11 +178,21 @@ namespace EPS.UI.Portal.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public ActionResult UpdateScheme(PatrolSchemeModel scheme, FormCollection fc)
-        //{
-        //    int schemeId = scheme.Id;
-
-        //}
+        [HttpPost]
+        public ActionResult UpdateScheme(PatrolSchemeModel model)
+        {
+            PatrolScheme patrolScheme = new PatrolScheme
+            {
+                Id = model.Id,
+                Number = model.Number,
+                PatrolRouteId = model.PatrolRouteId,
+                EmployeeId = model.EmployeeId,
+                SchemeDate = model.SchemeDate,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate
+            };
+            var result = bll.UpdateScheme(patrolScheme);
+            return RedirectToAction("SchemeList");
+        }
     }
 }
