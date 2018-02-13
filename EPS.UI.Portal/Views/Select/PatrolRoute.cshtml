@@ -1,0 +1,12 @@
+﻿@using EPS.UI.Portal.Models
+<link href="/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="/wwwroot/lib/AmazeUI/css/amazeui.css" rel="stylesheet" />
+
+@{
+    var patrolRouteList = ViewBag.PatrolRouteList as List<SelectListItem> ?? new List<SelectListItem>();
+}
+
+<select data-am-selected id="patrolRouteSelection" name="patrolRouteId">
+    <option selected="selected" value=0>请选择巡检路线</option>
+    @Html.Partial("component/SelectOptions", patrolRouteList)
+</select>

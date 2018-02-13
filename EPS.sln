@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPS.IDAL", "EPS.IDAL\EPS.ID
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPS.DALFactory", "EPS.DALFactory\EPS.DALFactory.csproj", "{97E36671-CF3F-45B1-BBD1-46DDE9B45EAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPS.IBLL", "EPS.IBll\EPS.IBLL.csproj", "{1C61E665-3774-4F7F-AE4B-4480797AF9DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{97E36671-CF3F-45B1-BBD1-46DDE9B45EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97E36671-CF3F-45B1-BBD1-46DDE9B45EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97E36671-CF3F-45B1-BBD1-46DDE9B45EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C61E665-3774-4F7F-AE4B-4480797AF9DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C61E665-3774-4F7F-AE4B-4480797AF9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C61E665-3774-4F7F-AE4B-4480797AF9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C61E665-3774-4F7F-AE4B-4480797AF9DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

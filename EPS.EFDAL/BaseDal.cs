@@ -56,24 +56,20 @@ namespace EPS.EFDAL
         }
 
         /// <summary>
-        /// Gets the element list.
+        /// 查询
         /// </summary>
         /// <returns></returns>
         /// 创建者：叶烨星
         /// 创建时间：2018/1/28 19:29
         /// 修改者：
         /// 修改时间：
-        public ServiceResultList<T> GetElementList()
+        public IQueryable<T> Query()
         {
-            return new ServiceResultList<T>
-            {
-                Result = Db.Set<T>().ToList(),
-                State = true
-            };
+            return Db.Set<T>();
         }
 
         /// <summary>
-        /// Gets the element list.
+        /// 条件查询
         /// </summary>
         /// <param name="whereLambda">The where lambda.</param>
         /// <returns></returns>
@@ -81,13 +77,9 @@ namespace EPS.EFDAL
         /// 创建时间：2018/1/28 18:50
         /// 修改者：
         /// 修改时间：
-        public ServiceResultList<T> Where(Expression<Func<T, bool>> whereLambda = null)
+        public IQueryable<T> Where(Expression<Func<T, bool>> whereLambda = null)
         {
-            return new ServiceResultList<T>
-            {
-                Result = Db.Set<T>().Where(whereLambda).ToList(),
-                State = true
-            };
+            return Db.Set<T>().Where(whereLambda);
         }
 
         /// <summary>
@@ -101,18 +93,14 @@ namespace EPS.EFDAL
         /// 创建时间：2018/2/11 11:11
         /// 修改者：
         /// 修改时间：
-        public ServiceResultList<T> GetPageList(int pageSize = 15, int pageIndex = 1, Expression<Func<T, bool>> whereLambda = null)
+        public IQueryable<T> GetPageList(Expression<Func<T, bool>> whereLambda, Expression<Func<T, bool>> orderLambda, int pageSize = 15, int pageIndex = 1)
         {
             var result = Db.Set<T>().Where(whereLambda)
+                .OrderBy(orderLambda)
                 .Skip((pageIndex - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+                .Take(pageSize);
 
-            return new ServiceResultList<T>
-            {
-                State = true,
-                Result = result
-            };
+            return result;
         }
 
         /// <summary>

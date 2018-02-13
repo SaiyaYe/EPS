@@ -15,13 +15,13 @@ namespace EPS.DALFactory
     public class DbSession : IDbSession
     {
         #region dal实例
-        //public IMenuDal MenuDal { get { return DbFactory.GetDal<Menu>() as IMenuDal; } }
+        //public IMenuDal MenuDal { get { return DbFactory.GetDal<Menu>(typeof(Menu).Name) as IMenuDal; } }
 
-        //public ICompanyDal CompanyDal { get { return DbFactory.GetDal<Company>() as ICompanyDal; } }
+        //public ICompanyDal CompanyDal { get { return DbFactory.GetDal<Company>(typeof(Company).Name) as ICompanyDal; } }
 
-        //public IDepartmentDal DepartmentDal { get { return DbFactory.GetDal<Department>() as IDepartmentDal; } }
+        //public IDepartmentDal DepartmentDal { get { return DbFactory.GetDal<Department>(typeof(Department).Name) as IDepartmentDal; } }
 
-        //public IGroupDal GroupDal { get { return DbFactory.GetDal<Group>() as IGroupDal; } }
+        //public IGroupDal GroupDal { get { return DbFactory.GetDal<Group>(typeof(Group).Name) as IGroupDal; } }
         #endregion
 
         //public IQueryable<TEntity> EntityQueryable<TEntity>(OrmStrategy strategy, bool cache) where TEntity : class, new()

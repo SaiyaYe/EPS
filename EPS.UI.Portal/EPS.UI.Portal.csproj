@@ -8396,7 +8396,6 @@
     <Content Include="wwwroot\lib\select2\README.md" />
     <Content Include="wwwroot\lib\select2\select2.jquery.json" />
     <Content Include="wwwroot\lib\select2\select2_locale_en.js.template" />
-    <Content Include="Views\Transaction\DeleteSchemeById.cshtml" />
     <Content Include="Views\Transaction\UpdateScheme.cshtml" />
     <Content Include="wwwroot\lib\moment\.bower.json" />
     <Content Include="wwwroot\lib\moment\bower.json" />
@@ -8411,6 +8410,7 @@
     <Content Include="wwwroot\lib\AmazeUI\fonts\fontawesome-webfont.woff2" />
     <Content Include="wwwroot\lib\AmazeUI\fonts\FontAwesome.otf" />
     <Content Include="Views\Shared\Component\SelectOptions.cshtml" />
+    <Content Include="Views\Select\PatrolRoute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -8443,6 +8443,10 @@
     <ProjectReference Include="..\EPS.Common\EPS.Common.csproj">
       <Project>{17e18178-3dcb-4655-a1e4-9bb2253b61b5}</Project>
       <Name>EPS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPS.IBll\EPS.IBLL.csproj">
+      <Project>{1C61E665-3774-4F7F-AE4B-4480797AF9DF}</Project>
+      <Name>EPS.IBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
       <Project>{7e09a44e-8531-48dd-ba50-7ceb857587a4}</Project>

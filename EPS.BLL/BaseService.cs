@@ -44,7 +44,11 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResultList<T> GetElementList()
         {
-            return dal.GetElementList();
+            return new ServiceResultList<T>
+            {
+                Result = dal.Query().ToList(),
+                State = true
+            };
         }
 
         /// <summary>
@@ -58,7 +62,11 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResultList<T> Where(Expression<Func<T, bool>> whereLambda = null)
         {
-            return dal.Where(whereLambda);
+            return new ServiceResultList<T>
+            {
+                Result = dal.Where(whereLambda).ToList(),
+                State = true
+            };
         }
 
         /// <summary>
@@ -87,7 +95,16 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<bool> DeleteById(int id)
         {
-            return dal.DeleteById(id);
+            var result = dal.DeleteById(id);
+            if (!result.State)
+            {
+                return new ServiceResult<bool>
+                {
+                    State = false,
+                    Message = result.Message
+                };
+            }
+            return DbSession.SaveChanges();
         }
     }
 }

@@ -8,81 +8,128 @@
     List<PatrolSchemeModel> patrolSchemeList = ViewBag.Model as List<PatrolSchemeModel>;
 }
 
-<div>
-    <div style="float:left">
-        @Html.Action("CompanyDepartmentGroupEmployee", "Select")
-    </div>
-    <div style="float:left">
-        @Html.ActionLink("添加", "AddScheme", "Transaction", new { }, new { @class = "btn btn-primary" })
-    </div>
-    <div style="float:left">
+<section class="content-header">
+    <h1>
+        巡检计划
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>电力巡检业务</li>
+        <li class="active">巡检计划</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
 
-    </div>
-    <div style="clear:both">
-    </div>
-</div>
+<section class="content container-fluid">
+    <div class="ibox float-e-margins">
+        <form class="form-inline" action="@Url.Action("SchemeList")" method="get">
+            <div style="float:left">
+                @Html.Action("CompanyDepartmentGroupEmployee", "Select")
+            </div>
+            <button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
+            <div style="float:left">
 
-<div class="box">
-    @*<div class="box-header">
-            <h3 class="box-title">Hover Data Table</h3>
-        </div>*@
-    <!-- /.box-header -->
-    <div class="box-body">
-        <table id="example2" class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>计划编号</th>
-                    <th>计划制定人</th>
-                    <th>巡检路线</th>
-                    <th>计划时间</th>
-                    <th>巡检开始时间</th>
-                    <th>巡检结束时间</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var patrolScheme in patrolSchemeList)
-                {
-                    <tr>
-                        <td>@patrolScheme.Number<input type="hidden" name="id" value=@patrolScheme.Id /></td>
-                        <td>@patrolScheme.EmployeeName<input type="hidden" name="employeeId" value=@patrolScheme.EmployeeId /></td>
-                        <td>@patrolScheme.PatrolRouteName<input type="hidden" name="patrolRouteId" value=@patrolScheme.PatrolRouteId /></td>
-                        <td>@patrolScheme.SchemeDate.ToString("yyyy-MM-dd")</td>
-                        <td>@patrolScheme.StartDate.ToString("yyyy-MM-dd")</td>
-                        <td>@patrolScheme.EndDate.ToString("yyyy-MM-dd")</td>
-                        <td>
-                            @Html.ActionLink("删除", "DeleteSchemeById", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("更新", "UpdateScheme", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-primary" })
-                            @*<input id="btn_Delete" type="button" class="btn btn-primary" value="删除" />*@
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            </div>
+            @Html.ActionLink("添加", "AddScheme", "Transaction", new { }, new { @class = "btn btn-success", style = "float:right" })
+            <div style="clear:both">
+            </div>
+        </form>
+
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>计划编号</th>
+                            <th>计划制定人</th>
+                            <th>巡检路线</th>
+                            <th>计划时间</th>
+                            <th>巡检开始时间</th>
+                            <th>巡检结束时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var patrolScheme in patrolSchemeList)
+                        {
+                            <tr>
+                                <td>@patrolScheme.Number<input type="hidden" name="id" class="schemeId" value=@patrolScheme.Id /></td>
+                                <td>@patrolScheme.EmployeeName<input type="hidden" name="employeeId" value=@patrolScheme.EmployeeId /></td>
+                                <td>@patrolScheme.PatrolRouteName<input type="hidden" name="patrolRouteId" value=@patrolScheme.PatrolRouteId /></td>
+                                <td>@patrolScheme.SchemeDate.ToString("yyyy-MM-dd")</td>
+                                <td>@patrolScheme.StartDate.ToString("yyyy-MM-dd")</td>
+                                <td>@patrolScheme.EndDate.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    @Html.ActionLink("修改", "UpdateScheme", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-primary" })
+                                    @*@Html.ActionLink("删除", "DeleteSchemeById", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-danger" })*@
+                                    <button class="btn btn-danger btn_Delete" id=@patrolScheme.Id value="删除">删除</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @*<div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                    </div><div class="col-sm-7">
+                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
+                                <li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
+                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
+                                <li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>*@
+            <!-- /.box-body -->
+        </div>
     </div>
-    <!-- /.box-body -->
-</div>
+</section>
+
 
 <script>
-                                                                    //$(function () {
-                                                                    //    console.log($('#btn_Delete').val())
-                                                                    //    $('#btn_Delete').click(function () {
-                                                                    //        console.log($('#btn_Delete').val())
-                                                                    //    });
-                                                                    //    $('#btn_Delete').click(function () {
-                                                                    //        layer.alert('确定要删除吗', {
-                                                                    //            //skin: 'layui-layer-molv',   //样式类名  自定义样式
-                                                                    //            closeBtn: 1,                // 是否显示关闭按钮
-                                                                    //            anim: 1,                    //动画类型
-                                                                    //            btn: ['确定', '取消'],      //按钮
-                                                                    //            icon: 3,                    // icon
-                                                                    //            yes: function () {
-                                                                    //                layer.msg('按钮1')
-                                                                    //            },
-                                                                    //            btn2: function () {
-                                                                    //                layer.msg('按钮2')
-                                                                    //            }
-                                                                    //        });
-                                                                    //    })
-                                                                    //});
+    $(function () {
+        //点击删除按钮
+        $('.btn_Delete').click(function () {
+            var schemeId = $(this).attr('id')
+            console.log(schemeId)
+            layer.alert('确定要删除吗', {
+                //skin: 'layui-layer-molv',   //样式类名  自定义样式
+                closeBtn: 1,                // 是否显示关闭按钮
+                anim: 1,                    //动画类型
+                btn: ['确定', '取消'],      //按钮
+                icon: 3,                    // icon
+                yes: function () {
+                    layer.msg('按钮1')
+                    
+                    $.ajax({
+                        url: '/Transaction/DeleteSchemeById',
+                        type: 'post',
+                        async: false,
+                        data: { schemeId: schemeId},
+                        success: function (result) {
+                            if (!result.State) {
+                                layer.alert("删除失败", { icon: 2 });
+                            }
+                            else {
+                                setTimeout(function () {
+                                    window.location = window.location.href;
+                                }, 1);
+                                layer.alert("删除成功", { icon: 1 });
+                            }
+                        }
+                    })
+                },
+                btn2: function () {
+                }
+            });
+        })
+    });
 </script>

@@ -55,6 +55,7 @@
     <Compile Include="MenuDal.cs" />
     <Compile Include="CompanyDal.cs" />
     <Compile Include="PatrolReportDal.cs" />
+    <Compile Include="PatrolRouteDal.cs" />
     <Compile Include="PatrolSchemeDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDal.cs" />

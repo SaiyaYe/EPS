@@ -228,3 +228,5 @@ E:\project\EPS\EPS.UI.Portal\bin\EPS.IDAL.dll
 E:\project\EPS\EPS.UI.Portal\bin\EPS.DALFactory.dll
 E:\project\EPS\EPS.UI.Portal\bin\EPS.IDAL.pdb
 E:\project\EPS\EPS.UI.Portal\bin\EPS.DALFactory.pdb
+E:\project\EPS\EPS.UI.Portal\bin\EPS.IBll.dll
+E:\project\EPS\EPS.UI.Portal\bin\EPS.IBll.pdb

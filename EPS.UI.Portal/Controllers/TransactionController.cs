@@ -1,4 +1,5 @@
 ﻿using EPS.BLL;
+using EPS.IBLL;
 using EPS.Model;
 using EPS.UI.Portal.Models;
 using System;
@@ -12,8 +13,9 @@ namespace EPS.UI.Portal.Controllers
 
     public class TransactionController : BaseController
     {
-        PatrolSchemeService bll = new PatrolSchemeService();
-        PatrolReportService bll1 = new PatrolReportService();
+        IPatrolSchemeService patrolSchemeService = new PatrolSchemeService();
+        IPatrolReportService patrolReportService = new PatrolReportService();
+        IEmployeeService employeeService = new EmployeeService();
 
         /// <summary>
         /// Schemes the list.
@@ -23,10 +25,10 @@ namespace EPS.UI.Portal.Controllers
         /// 创建时间：2018/1/31 10:03
         /// 修改者：
         /// 修改时间：
-        public ActionResult SchemeList()
+        public ActionResult SchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0)
         {
+            List<PatrolScheme> patrolSchemeList = patrolSchemeService.GetPatrolSchemeList(companyId, departmentId, groupId, employeeId).Result;
 
-            List<PatrolScheme> patrolSchemeList = bll.GetElementList().Result;
             List<PatrolSchemeModel> modelList = new List<PatrolSchemeModel>();
 
             foreach (var item in patrolSchemeList)
@@ -52,7 +54,7 @@ namespace EPS.UI.Portal.Controllers
 
         public ActionResult PatrolReportList()
         {
-            List<PatrolReport> patrolReportList = bll1.GetElementList().Result;
+            List<PatrolReport> patrolReportList = patrolReportService.GetElementList().Result;
             List<PatrolReportModel> modelList = new List<PatrolReportModel>();
 
             foreach (var item in patrolReportList)
@@ -83,9 +85,19 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult AddScheme()
         {
+            //var result=
             return View();
         }
 
+        /// <summary>
+        /// Adds the scheme.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/13 19:03
+        /// 修改者：
+        /// 修改时间：
         [HttpPost]
         public ActionResult AddScheme(PatrolSchemeModel model)
         {
@@ -98,7 +110,7 @@ namespace EPS.UI.Portal.Controllers
                 StartDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[0].Trim()),
                 EndDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[1].Trim()),
             };
-            var result = bll.Add(patrolScheme);
+            var result = patrolSchemeService.Add(patrolScheme);
             if (!result.State)
             {
                 return Content(result.Message);
@@ -116,39 +128,11 @@ namespace EPS.UI.Portal.Controllers
         /// 创建时间：2018/2/1 16:45
         /// 修改者：
         /// 修改时间：
-        public ActionResult DeleteSchemeById(int schemeId)
-        {
-            PatrolScheme scheme = bll.Find(schemeId).Result;
-            PatrolSchemeModel model = new PatrolSchemeModel
-            {
-                Id = scheme.Id,
-                Number = scheme.Number,
-                EmployeeId = scheme.EmployeeId,
-                EmployeeName = scheme.Employee.Name,
-                PatrolRouteId = scheme.PatrolRouteId,
-                PatrolRouteName = scheme.PatrolRoute.Name,
-                SchemeDate = scheme.SchemeDate,
-                StartDate = scheme.StartDate,
-                EndDate = scheme.EndDate
-            };
-            return View(model);
-        }
-
-
-        /// <summary>
-        /// Deletes the scheme by id
-        /// </summary>
-        /// <param name="schemeId">The scheme id</param>
-        /// <returns></returns>
-        /// 创建者：叶烨星
-        /// 创建时间：2018/2/1 16:45
-        /// 修改者：
-        /// 修改时间：
         [HttpPost]
-        public ActionResult DeleteSchemeById(int schemeId, FormCollection fc)
+        public ActionResult DeleteSchemeById(int schemeId, FormCollection fc = null)
         {
-            bll.DeleteById(schemeId);
-            return RedirectToAction("SchemeList");
+            var result = patrolSchemeService.DeleteById(schemeId);
+            return Json(result);
         }
 
         /// <summary>
@@ -162,7 +146,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult UpdateScheme(int schemeId)
         {
-            PatrolScheme scheme = bll.Find(schemeId).Result;
+            PatrolScheme scheme = patrolSchemeService.Find(schemeId).Result;
             PatrolSchemeModel model = new PatrolSchemeModel
             {
                 Id = scheme.Id,
@@ -178,6 +162,15 @@ namespace EPS.UI.Portal.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Updates the scheme.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/13 19:03
+        /// 修改者：
+        /// 修改时间：
         [HttpPost]
         public ActionResult UpdateScheme(PatrolSchemeModel model)
         {
@@ -191,7 +184,7 @@ namespace EPS.UI.Portal.Controllers
                 StartDate = model.StartDate,
                 EndDate = model.EndDate
             };
-            var result = bll.UpdateScheme(patrolScheme);
+            var result = patrolSchemeService.UpdateScheme(patrolScheme);
             return RedirectToAction("SchemeList");
         }
     }

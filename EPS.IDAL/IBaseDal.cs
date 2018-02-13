@@ -29,7 +29,7 @@ namespace EPS.IDAL
         /// 创建时间：2018/1/28 19:29
         /// 修改者：
         /// 修改时间：
-        ServiceResultList<T> GetElementList();
+        IQueryable<T> Query();
 
         /// <summary>
         /// Gets the element list.
@@ -40,7 +40,7 @@ namespace EPS.IDAL
         /// 创建时间：2018/1/28 18:50
         /// 修改者：
         /// 修改时间：
-        ServiceResultList<T> Where(Expression<Func<T, bool>> whereLambda = null);
+        IQueryable<T> Where(Expression<Func<T, bool>> whereLambda = null);
 
         /// <summary>
         /// 获取分页列表
@@ -53,7 +53,7 @@ namespace EPS.IDAL
         /// 创建时间：2018/2/11 11:11
         /// 修改者：
         /// 修改时间：
-        ServiceResultList<T> GetPageList(int pageSize = 15, int pageIndex = 1, Expression<Func<T, bool>> whereLambda = null);
+        IQueryable<T> GetPageList(Expression<Func<T, bool>> whereLambda, Expression<Func<T, bool>> orderLambda, int pageSize = 15, int pageIndex = 1);
 
         /// <summary>
         /// Adds the specified element.

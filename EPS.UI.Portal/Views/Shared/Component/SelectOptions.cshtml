@@ -1,0 +1,9 @@
+﻿@model IList<SelectListItem>
+@if (Model == null)
+{
+    return;
+}
+@foreach (var item in Model)
+{
+    <option value="@item.Value" @if (item.Selected) { @Html.Raw("selected=\"selected\"") }>@item.Text</option>
+}

@@ -1,5 +1,6 @@
 ﻿using EPS.Common;
 using EPS.EFDAL;
+using EPS.IBLL;
 using EPS.Model;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EPS.BLL
 {
-    public class MenuService : BaseService<Menu>
+    public class MenuService : BaseService<Menu>, IMenuService
     {
     }
 }

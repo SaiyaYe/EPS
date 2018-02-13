@@ -1,7 +1,6 @@
 ﻿@{
-    ViewBag.Title = "AddScheme";
+    ViewBag.Title = "添加巡检计划";
 }
-
 <!-- jQuery 3 -->
 @*<script src="/AdminLTE-2.4.2/bower_components/jquery/dist/jquery.min.js"></script>*@
 @*<script src="~/wwwroot/lib/jquery/dist/jquery.min.js"></script>*@
@@ -12,49 +11,55 @@
 <script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
 @*<link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
 <link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-<!-- Moment -->
-@*<script src="/AdminLTE-2.4.2/bower_components/moment/min/moment.min.js"></script>*@
-@*<script src="~/wwwroot/lib/moment/min/moment.min.js"></script>*@
-<script src="~/wwwroot/lib/moment/moment.js"></script>
-<!-- date-range-picker -->
-<link href="~/wwwroot/components/daterangepicker/daterangepicker.css" rel="stylesheet" />
-<script src="~/wwwroot/components/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="/AdminLTE-2.4.2/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
+<section class="content-header">
+    <h1>
+        添加巡检计划
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>电力巡检业务</li>
+        <li><a href="SchemeList">巡检计划</a></li>
+        <li class="active">添加巡检计划</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
 
-<form role="form" method="post" action="/Transaction/AddScheme">
-    <div class="box-body">
-        <div class="form-group">
-            <label for="exampleInputEmail1">计划编号</label>
-            <input class="form-control" id="Number" name="Number">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">计划制定人</label>
-            <input class="form-control" id="EmployeeName" name="EmployeeName">
-            <input type="hidden" name="employeeId" value=1 />
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">巡检路线</label>
-            <input class="form-control" id="PatrolRouteName" name="PatrolRouteName">
-            <input type="hidden" name="PatrolRouteId" value=1 />
-        </div>
-        <div class="form-group">
-            <label>巡检时间</label>
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input type="text" class="form-control pull-right" id="reservation" name="DateRange">
+
+<section class="container body-content">
+    <form role="form" method="post" action="/Transaction/AddScheme" class="form-horizontal col-lg-12">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">计划编号</label><br />
+                <input class="input-group col-lg-5" id="Number" name="Number">
             </div>
-            <!-- /.input group -->
-        </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">计划制定人</label><br />
+                @Html.Action("CompanyDepartmentGroupEmployee", "Select")
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">巡检路线</label><br />
+                @Html.Action("PatrolRoute", "Select")
+            </div>
+            <div class="form-group">
+                <label>巡检时间</label><br />
+                <div class="input-group col-lg-5">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" id="reservation" name="DateRange">
+                </div>
+                <!-- /.input group -->
+            </div>
 
-    </div>
-    <!-- /.box-body -->
-    <button type="submit" class="btn btn-primary">确定</button>
-    @Html.ActionLink("返回", "SchemeList", new { }, new { @class = "btn btn-primary" })
-</form>
+        </div>
+        <!-- /.box-body -->
+        <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-check"></i>确定</button>
+        <a href="SchemeList" class="btn btn-default btn-lg"><i class="fa fa-close"></i>返回</a>
+    </form>
+</section>
 
 <script>
     $(function () {
@@ -67,5 +72,4 @@
             console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
         });
     })
-
 </script>

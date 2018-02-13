@@ -44,6 +44,7 @@
     <Compile Include="DepartmentService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="GroupService.cs" />
+    <Compile Include="PatrolRouteService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="CompanyService.cs" />
@@ -63,6 +64,10 @@
     <ProjectReference Include="..\EPS.EFDAL\EPS.EFDAL.csproj">
       <Project>{a8e890a7-b8fd-42bd-ab3d-117fa509c46a}</Project>
       <Name>EPS.EFDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPS.IBll\EPS.IBLL.csproj">
+      <Project>{1C61E665-3774-4F7F-AE4B-4480797AF9DF}</Project>
+      <Name>EPS.IBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\EPS.IDAL\EPS.IDAL.csproj">
       <Project>{c4a40f75-72bc-4b54-8134-10c9e3d18c04}</Project>
