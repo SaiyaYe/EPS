@@ -1,83 +1,81 @@
 ﻿@model EPS.UI.Portal.Models.PatrolSchemeModel
-
 @{
     ViewBag.Title = "UpdateScheme";
 }
+<section class="content-header">
+    <h1>
+        更新巡检计划
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>电力巡检业务</li>
+        <li>巡检计划</li>
+        <li class="active">更新巡检计划</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
 
-<h2>修改计划</h2>
+<section class="content container-fluid">
+    <form action="/Transaction/UpdateScheme" method="post">
+        @Html.AntiForgeryToken()
 
-<form action="/Transaction/UpdateScheme" method="post">
-    @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            <span class="control-label col-md-2" style="font-weight:bold">计划编号</span>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <span class="control-label col-md-2" style="font-weight:bold">计划编号</span>
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        @*<div class="form-group">
+            <div class="form-group">
                 <span class="control-label col-md-2" style="font-weight:bold">巡检路线</span>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PatrolRouteId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PatrolRouteId, "", new { @class = "text-danger" })
+                <div class="col-md-7">
+                    @Html.Action("PatrolRoute", "Select")
                 </div>
-            </div>*@
-
-        <div class="form-group">
-            <span class="control-label col-md-2" style="font-weight:bold">巡检路线</span>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PatrolRouteName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PatrolRouteName, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.EmployeeId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmployeeId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <span class="control-label col-md-2" style="font-weight:bold">员工</span>
+                <div class="col-md-7">
+                    @Html.Action("CompanyDepartmentGroupEmployee", "Select")
                 </div>
-            </div>*@
+            </div>
 
-        <div class="form-group">
-            <span class="control-label col-md-2" style="font-weight:bold">员工</span>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <span class="control-label col-md-2" style="font-weight:bold">巡检开始日期</span>
+                <div class="col-md-10">
+                    @Html.Partial("Component/DateSelection")
+                    @*@Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="control-label col-md-2" style="font-weight:bold">巡检结束日期</span>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="保存" class="btn btn-primary" />
+                    @Html.ActionLink("返回", "SchemeList", new { }, new { @class = "btn btn-primary" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <span class="control-label col-md-2" style="font-weight:bold">巡检开始日期</span>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <span class="control-label col-md-2" style="font-weight:bold">巡检结束日期</span>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="保存" class="btn btn-primary" />
-                @Html.ActionLink("返回", "SchemeList", new { }, new { @class = "btn btn-primary" })
-            </div>
-        </div>
-    </div>
-</form>
-
-<div>
-
-</div>
+    </form>
+</section>

@@ -27,13 +27,12 @@
     <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
 </section>
 
-
 <section class="container body-content">
     <form role="form" method="post" action="/Transaction/AddScheme" class="form-horizontal col-lg-12">
         <div class="box-body">
             <div class="form-group">
                 <label for="exampleInputEmail1">计划编号</label><br />
-                <input class="input-group col-lg-5" id="Number" name="Number">
+                <input class="input-group col-lg-10" id="Number" name="Number">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">计划制定人</label><br />
@@ -45,11 +44,8 @@
             </div>
             <div class="form-group">
                 <label>巡检时间</label><br />
-                <div class="input-group col-lg-5">
-                    <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                    </div>
-                    <input type="text" class="form-control pull-right" id="reservation" name="DateRange">
+                <div class="input-group col-lg-10">
+                    @Html.Partial("Component/DateRangeSelection")
                 </div>
                 <!-- /.input group -->
             </div>
@@ -60,16 +56,3 @@
         <a href="SchemeList" class="btn btn-default btn-lg"><i class="fa fa-close"></i>返回</a>
     </form>
 </section>
-
-<script>
-    $(function () {
-        //Date range picker
-        $('#reservation').daterangepicker({
-            "startDate": '@DateTime.Now.ToString("MM/dd/yyyy")',
-            "endDate": '@DateTime.Now.AddMonths(1).ToString("MM/dd/yyyy")'
-        }, function (start, end, label) {
-            $('#reservation').val()
-            console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-        });
-    })
-</script>

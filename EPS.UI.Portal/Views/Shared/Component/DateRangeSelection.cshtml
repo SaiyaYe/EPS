@@ -1,0 +1,31 @@
+﻿@using EPS.UI.Portal.Models
+@using EPS.Common
+@model DateRangeModel
+
+<div class="input-group-addon">
+    <i class="fa fa-calendar"></i>
+</div>
+<input type="text" class="form-control pull-right" id="dateRangeSelection" name="DateRange">
+
+<script>
+    $(function () {
+        //Date range picker
+        @{
+            var startDate = DateTime.Now.ToString("MM/dd/yyyy");
+            var endDate = DateTime.Now.AddMonths(1).ToString("MM/dd/yyyy");
+            if (Model != null)
+            {
+                startDate = Model.StartDate;
+                endDate = Model.EndDate;
+            }
+        }
+
+        $('#dateRangeSelection').daterangepicker({
+            "startDate": '@startDate',
+            "endDate": '@endDate'
+        }, function (start, end, label) {
+            $('#dateRangeSelection').val()
+            console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
+    })
+</script>
