@@ -1,4 +1,5 @@
-﻿@model EPS.UI.Portal.Models.PatrolSchemeModel
+﻿@using EPS.UI.Portal.Models
+@model PatrolSchemeModel
 @{
     ViewBag.Title = "UpdateScheme";
 }
@@ -56,7 +57,7 @@
             <div class="form-group">
                 <span class="control-label col-md-2" style="font-weight:bold">巡检开始日期</span>
                 <div class="col-md-10">
-                    @Html.Partial("Component/DateSelection")
+                    @Html.Partial("Component/DateSelection",new DateRangeModel {StartDate = Model.StartDate.ToString("MM/dd/yyyy") })
                     @*@Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })*@
                 </div>
@@ -65,8 +66,9 @@
             <div class="form-group">
                 <span class="control-label col-md-2" style="font-weight:bold">巡检结束日期</span>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                    @Html.Partial("Component/DateSelection", new DateRangeModel { StartDate = Model.EndDate.ToString("MM/dd/yyyy") })
+                    @*@Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 

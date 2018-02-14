@@ -111,3 +111,9 @@ C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.UI.Portal\obj\Debug\EPS.UI.Portal
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.UI.Portal\obj\Debug\EPS.UI.Portal.csproj.CoreCompileInputs.cache
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.UI.Portal\obj\Debug\EPS.UI.Portal.dll
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.UI.Portal\obj\Debug\EPS.UI.Portal.pdb
+E:\project\EPS\EPS.UI.Portal\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\project\EPS\EPS.UI.Portal\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\project\EPS\EPS.UI.Portal\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\project\EPS\EPS.UI.Portal\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\project\EPS\EPS.UI.Portal\bin\roslyn\System.IO.Compression.dll
+E:\project\EPS\EPS.UI.Portal\bin\roslyn\VBCSCompiler.exe
