@@ -4,6 +4,9 @@
 
 @{
     var companyList = ViewBag.CompanyList as List<SelectListItem> ?? new List<SelectListItem>();
+    var departmentList = ViewBag.DepartmentList as List<SelectListItem> ?? new List<SelectListItem>();
+    var groupList = ViewBag.GroupList as List<SelectListItem> ?? new List<SelectListItem>();
+    var employeeList = ViewBag.EmployeeList as List<SelectListItem> ?? new List<SelectListItem>();
 }
 <div>
     <select data-am-selected id="companySelection" name="companyId" onchange="selectChange($(this), $('#departmentSelection'))" data-url="@Url.Action("CompanyChange", "Select", new { companyId = "selectValue" })">
@@ -11,15 +14,15 @@
     </select>
 
     <select data-am-selected id="departmentSelection" name="departmentId" onchange="selectChange($(this), $('#groupSelection'))" data-url="@Url.Action("DepartmentChange", "Select", new { departmentId = "selectValue" })">
-        <option selected="selected" value=0>请选择部门</option>
+        @Html.Partial("component/SelectOptions", departmentList)
     </select>
 
     <select data-am-selected id="groupSelection" name="groupId" onchange="selectChange($(this), $('#employeeSelection'))" data-url="@Url.Action("GroupChange", "Select", new { groupId = "selectValue" })">
-        <option selected="selected" value=0>请选择小组</option>
+        @Html.Partial("component/SelectOptions", groupList)
     </select>
 
     <select data-am-selected id="employeeSelection" name="employeeId">
-        <option selected="selected" value=0>请选择人员</option>
+        @Html.Partial("component/SelectOptions", employeeList)
     </select>
     <div style="clear:both"></div>
 </div>
