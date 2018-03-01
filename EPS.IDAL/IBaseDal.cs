@@ -53,7 +53,7 @@ namespace EPS.IDAL
         /// 创建时间：2018/2/11 11:11
         /// 修改者：
         /// 修改时间：
-        IQueryable<T> GetPageList(Expression<Func<T, bool>> whereLambda, Expression<Func<T, bool>> orderLambda, int pageSize = 15, int pageIndex = 1);
+        ServiceResultList<T> GetPageList(Expression<Func<T, bool>> whereLambda, Expression<Func<T, bool>> orderLambda, int pageSize = 15, int pageIndex = 1);
 
         /// <summary>
         /// Adds the specified element.

@@ -29,7 +29,7 @@ namespace EPS.BLL
         /// 创建时间：2018/2/13 10:51
         /// 修改者：
         /// 修改时间：
-        public ServiceResultList<PatrolScheme> GetPatrolSchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int pageSize = 15, int pageIndex = 1)
+        public ServiceResultList<PatrolScheme> GetPatrolSchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolRouteId = 0, int pageSize = 15, int pageIndex = 1)
         {
             var query = dal.Query();
             if (companyId > 0)
@@ -52,14 +52,20 @@ namespace EPS.BLL
                 query = query.Where(u => u.EmployeeId == employeeId);
             }
 
+            if (patrolRouteId > 0)
+            {
+                query = query.Where(u => u.PatrolRouteId == patrolRouteId);
+            }
+
+            int totalCount = query.Count();
             var result = query.OrderBy(u => u.Id)
                               .Skip(pageSize * (pageIndex - 1))
-                              .Take(pageSize)
-                              .ToList();
+                              .Take(pageSize);
 
             return new ServiceResultList<PatrolScheme>
             {
-                Result = result,
+                Result = result.ToList(),
+                TotalCount = totalCount,
                 State = true
             };
         }

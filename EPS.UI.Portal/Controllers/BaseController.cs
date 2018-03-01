@@ -41,5 +41,18 @@ namespace EPS.UI.Portal.Controllers
 
             ViewBag.nav = modelList;
         }
+
+        protected void GetPaginationModel(int currentCount, int totalCount, int pageIndex, int pageSize = 15)
+        {
+            var pageModel = new PaginationModel()
+            {
+                CurrentCount = currentCount,
+                TotalCount = totalCount,
+                TotalPageCount = (totalCount / pageSize + (totalCount % pageSize == 0 ? 0 : 1)),
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+            ViewBag.PageModel = pageModel;
+        }
     }
 }

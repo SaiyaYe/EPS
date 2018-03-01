@@ -7,7 +7,6 @@
 }
 <div>
     <select data-am-selected id="companySelection" name="companyId" onchange="selectChange($(this), $('#departmentSelection'))" data-url="@Url.Action("CompanyChange", "Select", new { companyId = "selectValue" })">
-        <option selected="selected" value=0>请选择公司</option>
         @Html.Partial("component/SelectOptions", companyList)
     </select>
 

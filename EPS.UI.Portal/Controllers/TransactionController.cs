@@ -1,4 +1,5 @@
 ﻿using EPS.BLL;
+using EPS.Common;
 using EPS.IBLL;
 using EPS.Model;
 using EPS.UI.Portal.Models;
@@ -25,12 +26,13 @@ namespace EPS.UI.Portal.Controllers
         /// 创建时间：2018/1/31 10:03
         /// 修改者：
         /// 修改时间：
-        public ActionResult SchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0)
+        public ActionResult SchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolRouteId = 0, int pageIndex = 1, int pagesize = 0)
         {
-            List<PatrolScheme> patrolSchemeList = patrolSchemeService.GetPatrolSchemeList(companyId, departmentId, groupId, employeeId).Result;
-
             List<PatrolSchemeModel> modelList = new List<PatrolSchemeModel>();
 
+            pagesize = pagesize == 0 ? ControllerCommon.PageSize : pagesize;
+            var result = patrolSchemeService.GetPatrolSchemeList(companyId, departmentId, groupId, employeeId, patrolRouteId);
+            List<PatrolScheme> patrolSchemeList = result.Result;
             foreach (var item in patrolSchemeList)
             {
                 PatrolSchemeModel model = new PatrolSchemeModel()
@@ -38,15 +40,26 @@ namespace EPS.UI.Portal.Controllers
                     Id = item.Id,
                     Number = item.Number,
                     EmployeeId = item.EmployeeId,
-                    EmployeeName = item.Employee.Name,
+                    Employee = new EmployeeModel
+                    {
+                        Id = item.EmployeeId,
+                        Name = item.Employee.Name,
+                        CompanyId = item.Employee.CompanyId,
+                        DepartmentId = item.Employee.DepartmentId,
+                        GroupId = item.Employee.GroupId
+                    },
                     PatrolRouteId = item.PatrolRouteId,
                     PatrolRouteName = item.PatrolRoute.Name,
                     SchemeDate = item.SchemeDate,
                     StartDate = item.StartDate,
-                    EndDate = item.EndDate
+                    EndDate = item.EndDate,
+                    IsCompleted = item.IsCompleted,
+                    Remark = item.Remark
                 };
                 modelList.Add(model);
             }
+
+            GetPaginationModel(modelList.Count, result.TotalCount, pageIndex, pagesize);
 
             ViewBag.Model = modelList;
             return View();
@@ -85,7 +98,6 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult AddScheme()
         {
-            //var result=
             return View();
         }
 
@@ -152,7 +164,14 @@ namespace EPS.UI.Portal.Controllers
                 Id = scheme.Id,
                 Number = scheme.Number,
                 EmployeeId = scheme.EmployeeId,
-                EmployeeName = scheme.Employee.Name,
+                Employee = new EmployeeModel
+                {
+                    Id = scheme.EmployeeId,
+                    Name = scheme.Employee.Name,
+                    CompanyId = scheme.Employee.CompanyId,
+                    DepartmentId = scheme.Employee.DepartmentId,
+                    GroupId = scheme.Employee.GroupId
+                },
                 PatrolRouteId = scheme.PatrolRouteId,
                 PatrolRouteName = scheme.PatrolRoute.Name,
                 SchemeDate = scheme.SchemeDate,
@@ -181,11 +200,16 @@ namespace EPS.UI.Portal.Controllers
                 PatrolRouteId = model.PatrolRouteId,
                 EmployeeId = model.EmployeeId,
                 SchemeDate = model.SchemeDate,
-                StartDate = model.StartDate,
-                EndDate = model.EndDate
+                StartDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[0].Trim()),
+                EndDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[0].Trim())
             };
             var result = patrolSchemeService.UpdateScheme(patrolScheme);
             return RedirectToAction("SchemeList");
+        }
+
+        public ActionResult Set()
+        {
+            return View();
         }
     }
 }

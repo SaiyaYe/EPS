@@ -24,7 +24,7 @@ namespace EPS.IBLL
         /// 创建时间：2018/2/13 10:26
         /// 修改者：
         /// 修改时间：
-        ServiceResultList<PatrolScheme> GetPatrolSchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int pageSize = 15, int pageIndex = 1);
+        ServiceResultList<PatrolScheme> GetPatrolSchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolRouteId = 0, int pageSize = 15, int pageIndex = 1);
 
         /// <summary>
         /// 更新巡检计划

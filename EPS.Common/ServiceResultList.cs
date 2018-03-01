@@ -10,6 +10,8 @@ namespace EPS.Common
     {
         public List<T> Result { get; set; }
 
+        public int TotalCount { get; set; }
+
         public bool State { get; set; }
 
         public string Message { get; set; }

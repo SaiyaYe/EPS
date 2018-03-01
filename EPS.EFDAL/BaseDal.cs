@@ -93,14 +93,20 @@ namespace EPS.EFDAL
         /// 创建时间：2018/2/11 11:11
         /// 修改者：
         /// 修改时间：
-        public IQueryable<T> GetPageList(Expression<Func<T, bool>> whereLambda, Expression<Func<T, bool>> orderLambda, int pageSize = 15, int pageIndex = 1)
+        public ServiceResultList<T> GetPageList(Expression<Func<T, bool>> whereLambda, Expression<Func<T, bool>> orderLambda, int pageSize = 15, int pageIndex = 1)
         {
-            var result = Db.Set<T>().Where(whereLambda)
-                .OrderBy(orderLambda)
+            var result = Db.Set<T>().Where(whereLambda);
+            int totalCount = result.Count();
+
+            result = result.OrderBy(orderLambda)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize);
-
-            return result;
+            
+            return new ServiceResultList<T>
+            {
+                Result = result.ToList(),
+                TotalCount = totalCount,
+            };
         }
 
         /// <summary>

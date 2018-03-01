@@ -165,6 +165,7 @@
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\PaginationModel.cs" />
     <Compile Include="Models\PatrolReportModel.cs" />
     <Compile Include="Models\PatrolSchemeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -8414,6 +8415,9 @@
     <Content Include="Views\Select\PatrolRoute.cshtml" />
     <Content Include="Views\Shared\Component\DateRangeSelection.cshtml" />
     <Content Include="Views\Shared\Component\DateSelection.cshtml" />
+    <Content Include="Views\Shared\Pagination.cshtml" />
+    <Content Include="App_Code\Pagination.cshtml" />
+    <Content Include="Views\Transaction\Set.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

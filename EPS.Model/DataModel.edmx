@@ -105,6 +105,8 @@
     <Property Name="SchemeDate" Type="datetime" Nullable="false" />
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Remark" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Dictionary">
     <Key>
@@ -551,6 +553,8 @@
           </Property>
           <Property Name="StartDate" Type="DateTime" Nullable="false" />
           <Property Name="EndDate" Type="DateTime" Nullable="false" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="Remark" Type="String" Nullable="true" MaxLength="Max" />
         </EntityType>
         <EntityType Name="Dictionary">
           <Key>
@@ -924,6 +928,8 @@
           <ScalarProperty Name="SchemeDate" ColumnName="SchemeDate" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

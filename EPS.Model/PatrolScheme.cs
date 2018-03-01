@@ -14,6 +14,12 @@ namespace EPS.Model
     
     public partial class PatrolScheme
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PatrolScheme()
+        {
+            this.IsCompleted = false;
+        }
+    
         public int Id { get; set; }
         public string Number { get; set; }
         public int EmployeeId { get; set; }
@@ -21,6 +27,8 @@ namespace EPS.Model
         public System.DateTime SchemeDate { get; set; }
         public System.DateTime StartDate { get; set; }
         public System.DateTime EndDate { get; set; }
+        public bool IsCompleted { get; set; }
+        public string Remark { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual PatrolRoute PatrolRoute { get; set; }

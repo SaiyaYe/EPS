@@ -22,21 +22,40 @@
 
 <section class="content container-fluid">
     <div class="ibox float-e-margins">
+        @*title*@
         <form class="form-inline" action="@Url.Action("SchemeList")" method="get">
             <div style="float:left">
                 @Html.Action("CompanyDepartmentGroupEmployee", "Select")
             </div>
-            <button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
             <div style="float:left">
+                @Html.Action("PatrolRoute", "Select")
+                @*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*@
+            </div>
+            @*<div style="float:left">
+                <label style="font-weight:lighter">巡检开始时间</label>
+                <div class="input-group">
+                    @Html.Partial("Component/DateRangeSelection")
+                </div>
+            </div>
+            <div style="float:left">
+                <label style="font-weight:lighter">&nbsp巡检结束时间</label>
+                <div class="input-group">
+                    @Html.Partial("Component/DateRangeSelection")
+                </div>
+            </div>*@
 
+
+            <div style="float:left">
+                &nbsp<button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
             </div>
             @Html.ActionLink("添加", "AddScheme", "Transaction", new { }, new { @class = "btn btn-success", style = "float:right" })
             <div style="clear:both">
             </div>
         </form>
 
+        @*table*@
         <div class="box">
-            <!-- /.box-header -->
+            @*table-body*@
             <div class="box-body">
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
@@ -47,6 +66,8 @@
                             <th>计划时间</th>
                             <th>巡检开始时间</th>
                             <th>巡检结束时间</th>
+                            <th>是否完成</th>
+                            <th>备注</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -55,14 +76,15 @@
                         {
                             <tr>
                                 <td>@patrolScheme.Number<input type="hidden" name="id" class="schemeId" value=@patrolScheme.Id /></td>
-                                <td>@patrolScheme.EmployeeName<input type="hidden" name="employeeId" value=@patrolScheme.EmployeeId /></td>
+                                <td>@patrolScheme.Employee.Name<input type="hidden" name="employeeId" value=@patrolScheme.EmployeeId /></td>
                                 <td>@patrolScheme.PatrolRouteName<input type="hidden" name="patrolRouteId" value=@patrolScheme.PatrolRouteId /></td>
                                 <td>@patrolScheme.SchemeDate.ToString("yyyy-MM-dd")</td>
                                 <td>@patrolScheme.StartDate.ToString("yyyy-MM-dd")</td>
                                 <td>@patrolScheme.EndDate.ToString("yyyy-MM-dd")</td>
+                                <td>@(patrolScheme.IsCompleted == true ? "已完成" : "未完成")</td>
+                                <td>@patrolScheme.Remark</td>
                                 <td>
                                     @Html.ActionLink("修改", "UpdateScheme", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-primary" })
-                                    @*@Html.ActionLink("删除", "DeleteSchemeById", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-danger" })*@
                                     <button class="btn btn-danger btn_Delete" id=@patrolScheme.Id value="删除">删除</button>
                                 </td>
                             </tr>
@@ -70,29 +92,19 @@
                     </tbody>
                 </table>
             </div>
-            @*<div class="row">
-                    <div class="col-sm-5">
-                        <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                    </div><div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
-                                <li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
-                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
-                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
-                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
-                                <li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
-                                <li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>*@
-            <!-- /.box-body -->
+
+            @*pagination*@
+            <div class="text-right">
+                <div class="pagination">
+                    @{
+                        var pageModel = ViewBag.PageModel == null ? null : (PaginationModel)ViewBag.PageModel;
+                    }
+                    @Html.Partial("Pagination", pageModel)
+                </div>
+            </div>
         </div>
     </div>
 </section>
-
 
 <script>
     $(function () {
@@ -108,12 +120,12 @@
                 icon: 3,                    // icon
                 yes: function () {
                     layer.msg('按钮1')
-                    
+
                     $.ajax({
                         url: '/Transaction/DeleteSchemeById',
                         type: 'post',
                         async: false,
-                        data: { schemeId: schemeId},
+                        data: { schemeId: schemeId },
                         success: function (result) {
                             if (!result.State) {
                                 layer.alert("删除失败", { icon: 2 });

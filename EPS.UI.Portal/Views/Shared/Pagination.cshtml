@@ -1,0 +1,207 @@
+﻿@model EPS.UI.Portal.Models.PaginationModel
+@if (this.Model.TotalPageCount <= 0)
+{
+    return;
+}
+
+<ul class="pagination">
+    <li class="disabled">
+        <a id="PaginationTotalCount" href="#;">
+            共@(this.Model.TotalCount)条
+        </a>
+    </li>
+    <li class="disabled">
+        <a href="#;">
+            共@(this.Model.TotalPageCount)页
+        </a>
+    </li>
+    <li class="disabled">
+        每页显示
+        <select data-am-selected class="am-input-sm" style="float: left;border-left-width: 0;" id="selPageSize" name="selPageSize" onchange="selPageSize(this.value)">
+            @{
+                foreach (var item in new List<int> { 10, 15, 25, 30, 50, 100, 200 })
+                {
+                    <option value="@item" @Html.Raw(this.Model.PageSize == item ? "selected=\"selected\"" : string.Empty)>@item</option>
+                }
+            }
+        </select>条
+    </li>
+    @if (Model.PageIndex > 1)
+    {
+        <li @Html.Raw(this.Model.PageIndex == 1 ? "class=\"disabled\"" : string.Empty)>
+            <a @Html.Raw(this.Model.PageIndex == 1 ? string.Empty : "name=\"pagelink\"") value="@(Math.Max(this.Model.PageIndex - 1, 1))" href="#;" title="上一页">
+                上一页
+            </a>
+        </li>
+    }
+
+
+    @{
+        if (Model.TotalPageCount <= 15)
+        {
+            for (var index = 1; index <= 15; index++)
+            {
+                if (index > Model.TotalPageCount)
+                {
+                    continue;
+                }
+                <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                    <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                </li>
+            }
+        }
+        else
+        {
+            var pageBefore = this.Model.PageIndex - 7;
+            var pageAfter = this.Model.PageIndex + 2;
+            if (pageBefore < 0)
+            {
+                for (var index = 1; index <= 9; index++)
+                {
+                    <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                        <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                    </li>
+                }
+                <li>
+                    <span>…</span>
+                </li>
+                for (var index = Model.TotalPageCount - 5; index <= Model.TotalPageCount; index++)
+                {
+                    <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                        <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                    </li>
+                }
+            }
+            else if (pageAfter < Model.TotalPageCount - 5)
+            {
+                for (var index = 1; index <= 4; index++)
+                {
+                    <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                        <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                    </li>
+                }
+                <li>
+                    <span>…</span>
+                </li>
+                for (var index = this.Model.PageIndex - 2; index <= this.Model.PageIndex + 2; index++)
+                {
+                    <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                        <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                    </li>
+                }
+                <li>
+                    <span>…</span>
+                </li>
+                for (var index = Model.TotalPageCount - 4; index <= Model.TotalPageCount; index++)
+                {
+                    <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                        <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                    </li>
+                }
+            }
+            else
+            {
+                for (var index = 1; index <= 5; index++)
+                {
+                    <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                        <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                    </li>
+                }
+                <li>
+                    <span>…</span>
+                </li>
+
+                for (var index = Model.TotalPageCount - 9; index <= Model.TotalPageCount; index++)
+                {
+                    <li @Html.Raw(index == this.Model.PageIndex ? "class=\"active\"" : string.Empty)>
+                        <a @Html.Raw(index == this.Model.PageIndex ? string.Empty : "name=\"pagelink\"") value="@index" href="#;">@index</a>
+                    </li>
+                }
+            }
+
+        }
+
+
+    }
+    @if (Model.PageIndex < this.Model.TotalPageCount)
+    {
+        <li @Html.Raw(this.Model.PageIndex == this.Model.TotalPageCount ? "class=\"disabled\"" : string.Empty)>
+            <a @Html.Raw(this.Model.PageIndex == this.Model.TotalPageCount ? string.Empty : "name=\"pagelink\"") value="@(Math.Min(this.Model.PageIndex + 1, this.Model.TotalPageCount))" href="#;" title="下一页">
+                下一页
+            </a>
+        </li>
+    }
+    <li>
+        <input type="text" style="width:50px;padding:4px 12px; height:35px; line-height:35px;" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="5" id="txtPaginationIndex" />
+    </li>
+    <li>
+        <button class="btn btn-primary" style="vertical-align:top !important;" onclick="paginationGoToPage('@this.Model.TotalPageCount')">Go</button>
+    </li>
+</ul>
+<input id="hidPageIndex" type="hidden" value="@this.Model.PageIndex" />
+
+<script>
+    function selPageSize(pageSize) {
+        if ($('[name=btnSortQuery]').length > 0) {
+            sortQuery();
+            return;
+        }
+        query();
+    }
+
+    function paginationGoToPage(pageTotal) {
+        var pageSize = $("#txtPaginationIndex").val();
+        if (parseInt(pageSize) > parseInt(pageTotal)) {
+            layer.msg("无效的页码");
+            return;
+        }
+        if ($('[name=btnSortQuery]').length > 0) {
+            sortQuery(pageSize);
+            return;
+        }
+        query(pageSize);
+    }
+
+    var query = function (pageIndex, pageSize) {
+        if ($('[name=btnQuery]').length <= 0) {
+            sortQuery(pageIndex, pageSize);
+        }
+        pageIndex = pageIndex == undefined ? $("#hidPageIndex").val() : pageIndex;
+        pageSize = pageSize == undefined ? $("#selPageSize").val() : pageSize;
+        var $form = $('[name=btnQuery]').parents('form:first');
+        if (!daishu.form.beforeSubmit($form)) {
+            return;
+        }
+
+        var option = {
+            $form: $form,
+            data: { pageIndex: pageIndex, pageSize: pageSize },
+            dataType: 'HTML',
+            success: function (result) {
+                $('#contentList').html(result);
+                setCurrentOrderBy();
+            }
+        };
+        daishu.form.ajaxSubmit(option);
+    }
+
+    var sortQuery = function (pageIndex, pageSize) {
+        pageIndex = pageIndex == undefined ? $("#hidPageIndex").val() : pageIndex;
+        pageSize = pageSize == undefined ? $("#selPageSize").val() : pageSize;
+        var $form = $('[name=btnSortQuery]').parents('form:first');
+        if (!daishu.form.beforeSubmit($form)) {
+            return;
+        }
+
+        var option = {
+            $form: $form,
+            data: { pageIndex: pageIndex, pageSize: pageSize },
+            dataType: 'HTML',
+            success: function (result) {
+                $('#contentList').html(result);
+                setSort && setSort();
+            }
+        };
+        daishu.form.ajaxSubmit(option);
+    }
+</script>

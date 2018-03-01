@@ -11,3 +11,16 @@ C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Model\obj\Debug\EPS.Model.csprojR
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Model\obj\Debug\EPS.Model.csproj.CoreCompileInputs.cache
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Model\obj\Debug\EPS.Model.dll
 C:\Users\王一鹤\Desktop\EPS\project\EPS\EPS.Model\obj\Debug\EPS.Model.pdb
+E:\project\EPS\EPS.Model\bin\Debug\EPS.Model.dll.config
+E:\project\EPS\EPS.Model\bin\Debug\EPS.Model.dll
+E:\project\EPS\EPS.Model\bin\Debug\EPS.Model.pdb
+E:\project\EPS\EPS.Model\bin\Debug\EntityFramework.dll
+E:\project\EPS\EPS.Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\project\EPS\EPS.Model\bin\Debug\EntityFramework.xml
+E:\project\EPS\EPS.Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\project\EPS\EPS.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\project\EPS\EPS.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.csprojResolveAssemblyReference.cache
+E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.csproj.CoreCompileInputs.cache
+E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.dll
+E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.pdb

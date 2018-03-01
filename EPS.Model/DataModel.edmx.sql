@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/02/2018 17:38:49
+-- Date Created: 03/01/2018 11:34:40
 -- Generated from EDMX file: E:\project\EPS\EPS.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -138,7 +138,9 @@ CREATE TABLE [dbo].[PatrolScheme] (
     [PatrolRouteId] int  NOT NULL,
     [SchemeDate] datetime  NOT NULL,
     [StartDate] datetime  NOT NULL,
-    [EndDate] datetime  NOT NULL
+    [EndDate] datetime  NOT NULL,
+    [IsCompleted] bit  NOT NULL,
+    [Remark] nvarchar(max)  NULL
 );
 GO
 

@@ -25,7 +25,7 @@ namespace EPS.UI.Portal.Controllers
         /// 创建时间：2018/2/4 3:00
         /// 修改者：
         /// 修改时间：
-        public ActionResult CompanyDepartmentGroupEmployee()
+        public ActionResult CompanyDepartmentGroupEmployee(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0)
         {
             var companyList = companyService.GetElementList().Result;
             if (companyList == null)
@@ -33,12 +33,26 @@ namespace EPS.UI.Portal.Controllers
                 return PartialView();
             }
 
-            ViewBag.CompanyList = companyList.Select(u => new SelectListItem
+            var selectList = companyList.Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString()
             }).ToList();
 
+            if (companyId <= 0)
+            {
+                selectList.Insert(0, new SelectListItem { Text = "请选择公司", Value = "0", Selected = true });
+            }
+            else
+            {
+                var selectedItem = selectList.Find(u => u.Value == companyId.ToString());
+                if (selectedItem != null)
+                {
+                    selectedItem.Selected = true;
+                }
+            }
+
+            ViewBag.CompanyList = selectList;
             return PartialView();
         }
 
@@ -148,7 +162,7 @@ namespace EPS.UI.Portal.Controllers
         /// 创建时间：2018/2/13 16:10
         /// 修改者：
         /// 修改时间：
-        public ActionResult PatrolRoute()
+        public ActionResult PatrolRoute(int patrolRouteId = 0)
         {
             var patrolRouteList = patrolRouteService.GetElementList().Result;
             if (patrolRouteList == null)
@@ -156,12 +170,25 @@ namespace EPS.UI.Portal.Controllers
                 return PartialView();
             }
 
-            ViewBag.PatrolRouteList = patrolRouteList.Select(u => new SelectListItem
+            var selectList = patrolRouteList.Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString()
             }).ToList();
 
+            if (patrolRouteId <= 0)
+            {
+                selectList.Insert(0, new SelectListItem { Text = "请选择巡检路线", Value = "0", Selected = true });
+            }
+            else
+            {
+                var item = selectList.Find(u => u.Value == patrolRouteId.ToString());
+                if (item != null)
+                {
+                    item.Selected = true;
+                }
+            }
+            ViewBag.PatrolRouteList = selectList;
             return PartialView();
         }
 

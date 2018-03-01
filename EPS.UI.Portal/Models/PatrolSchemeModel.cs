@@ -18,7 +18,7 @@ namespace EPS.UI.Portal.Models
 
         public int EmployeeId { get; set; }
 
-        public string EmployeeName { get; set; }
+        public EmployeeModel Employee { get; set; }
 
         public DateTime SchemeDate { get; set; }
 
@@ -27,5 +27,9 @@ namespace EPS.UI.Portal.Models
         public DateTime EndDate { get; set; }
 
         public string DateRange { get; set; }
+
+        public bool IsCompleted { get; set; }
+
+        public string Remark { get; set; }
     }
 }
