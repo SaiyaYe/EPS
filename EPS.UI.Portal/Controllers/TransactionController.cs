@@ -18,6 +18,11 @@ namespace EPS.UI.Portal.Controllers
         IPatrolReportService patrolReportService = new PatrolReportService();
         IEmployeeService employeeService = new EmployeeService();
 
+        public ActionResult SchemeList()
+        {
+            return View();
+        }
+
         /// <summary>
         /// Schemes the list.
         /// </summary>
@@ -26,12 +31,12 @@ namespace EPS.UI.Portal.Controllers
         /// 创建时间：2018/1/31 10:03
         /// 修改者：
         /// 修改时间：
-        public ActionResult SchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolRouteId = 0, int pageIndex = 1, int pagesize = 0)
+        public ActionResult _SchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolRouteId = 0, int pageIndex = 1, int pagesize = 0)
         {
             List<PatrolSchemeModel> modelList = new List<PatrolSchemeModel>();
 
             pagesize = pagesize == 0 ? ControllerCommon.PageSize : pagesize;
-            var result = patrolSchemeService.GetPatrolSchemeList(companyId, departmentId, groupId, employeeId, patrolRouteId);
+            var result = patrolSchemeService.GetPatrolSchemeList(companyId, departmentId, groupId, employeeId, patrolRouteId, pagesize, pageIndex);
             List<PatrolScheme> patrolSchemeList = result.Result;
             foreach (var item in patrolSchemeList)
             {
@@ -62,7 +67,7 @@ namespace EPS.UI.Portal.Controllers
             GetPaginationModel(modelList.Count, result.TotalCount, pageIndex, pagesize);
 
             ViewBag.Model = modelList;
-            return View();
+            return PartialView();
         }
 
         public ActionResult PatrolReportList()

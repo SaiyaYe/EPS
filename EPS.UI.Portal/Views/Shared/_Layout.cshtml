@@ -20,12 +20,13 @@
     <!-- AdminLTE Skins -->
     <link rel="stylesheet" href="/AdminLTE-2.4.2/dist/css/skins/skin-blue.min.css">
     <!-- AdminLTE daterangepicker -->
-    <link rel="stylesheet" href="~/wwwroot/components/daterangepicker/daterangepicker.css"/>
+    <link rel="stylesheet" href="~/wwwroot/components/daterangepicker/daterangepicker.css" />
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
+    <script src="/AdminLTE-2.4.2/bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -369,6 +370,24 @@
     @Scripts.Render("~/wwwroot/lib/moment/moment.js")
     @Scripts.Render("~/wwwroot/components/daterangepicker/daterangepicker.js")
     @Scripts.Render("~/wwwroot/lib/AmazeUI/js/amazeui.js")
+    <script src="~/Scripts/jquery.validate.js"></script>
+    @*@Scripts.Render("~/Scripts/jquery.form.js")*@
 </body>
 
 </html>
+
+<script>
+    var queryForm = function () {
+        var pageSize = $("#setPageSize").val();
+        $("#pageSize").val(pageSize);
+        //var url = $("#ajaxForm").attr("Action");
+        //var data = { pageSize: pageSize };
+        //$("#contentList").load(url, data);
+    }
+
+    //var run = function () {
+    //    $("#btnSearch").click(queryForm);
+    //    queryForm();
+    //};
+    //run();
+</script>

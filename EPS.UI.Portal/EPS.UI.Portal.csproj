@@ -7394,6 +7394,10 @@
     <Content Include="AdminLTE-2.4.2\dist\css\adminlte.min.css.map" />
     <Content Include="AdminLTE-2.4.2\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="AdminLTE-2.4.2\plugins\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="wwwroot\components\daterangepicker\daterangepicker.css" />
     <Content Include="wwwroot\components\daterangepicker\daterangepicker.js" />
     <Content Include="wwwroot\css\AdminLTE.min.css" />
@@ -8418,6 +8422,7 @@
     <Content Include="Views\Shared\Pagination.cshtml" />
     <Content Include="App_Code\Pagination.cshtml" />
     <Content Include="Views\Transaction\Set.cshtml" />
+    <Content Include="Views\Transaction\_SchemeList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

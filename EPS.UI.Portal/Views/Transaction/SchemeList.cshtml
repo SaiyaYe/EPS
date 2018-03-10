@@ -1,7 +1,5 @@
 ﻿@using EPS.UI.Portal.Models
 <link href="/wwwroot/lib/layer/theme/default/layer.css" rel="stylesheet" />
-<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
-<script src="/wwwroot/lib/layer/layer.js"></script>
 
 @{
     ViewBag.Title = "SchemeList";
@@ -23,7 +21,7 @@
 <section class="content container-fluid">
     <div class="ibox float-e-margins">
         @*title*@
-        <form class="form-inline" action="@Url.Action("SchemeList")" method="get">
+        <form action="@Url.Action("_SchemeList")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#contentList" id="form0" method="get">
             <div style="float:left">
                 @Html.Action("CompanyDepartmentGroupEmployee", "Select")
             </div>
@@ -31,117 +29,48 @@
                 @Html.Action("PatrolRoute", "Select")
                 @*&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp*@
             </div>
-            @*<div style="float:left">
-                <label style="font-weight:lighter">巡检开始时间</label>
-                <div class="input-group">
-                    @Html.Partial("Component/DateRangeSelection")
-                </div>
+            <div style="float:left">
+                @*<label style="font-weight:lighter">巡检开始时间</label>
+                    <div class="input-group">
+                        @Html.Partial("Component/DateRangeSelection")
+                    </div>*@
             </div>
             <div style="float:left">
-                <label style="font-weight:lighter">&nbsp巡检结束时间</label>
-                <div class="input-group">
-                    @Html.Partial("Component/DateRangeSelection")
-                </div>
-            </div>*@
-
-
+                @*<label style="font-weight:lighter">&nbsp巡检结束时间</label>
+                    <div class="input-group">
+                        @Html.Partial("Component/DateRangeSelection")
+                    </div>*@
+            </div>
             <div style="float:left">
                 &nbsp<button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
             </div>
             @Html.ActionLink("添加", "AddScheme", "Transaction", new { }, new { @class = "btn btn-success", style = "float:right" })
-            <div style="clear:both">
-            </div>
+            <input id="pageSize" name="pageSize" type="hidden" />
+            <input id="pageIndex" name="pageIndex" type="hidden" />
+            <div style="clear:both"></div>
         </form>
 
         @*table*@
         <div class="box">
-            @*table-body*@
-            <div class="box-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>计划编号</th>
-                            <th>计划制定人</th>
-                            <th>巡检路线</th>
-                            <th>计划时间</th>
-                            <th>巡检开始时间</th>
-                            <th>巡检结束时间</th>
-                            <th>是否完成</th>
-                            <th>备注</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var patrolScheme in patrolSchemeList)
-                        {
-                            <tr>
-                                <td>@patrolScheme.Number<input type="hidden" name="id" class="schemeId" value=@patrolScheme.Id /></td>
-                                <td>@patrolScheme.Employee.Name<input type="hidden" name="employeeId" value=@patrolScheme.EmployeeId /></td>
-                                <td>@patrolScheme.PatrolRouteName<input type="hidden" name="patrolRouteId" value=@patrolScheme.PatrolRouteId /></td>
-                                <td>@patrolScheme.SchemeDate.ToString("yyyy-MM-dd")</td>
-                                <td>@patrolScheme.StartDate.ToString("yyyy-MM-dd")</td>
-                                <td>@patrolScheme.EndDate.ToString("yyyy-MM-dd")</td>
-                                <td>@(patrolScheme.IsCompleted == true ? "已完成" : "未完成")</td>
-                                <td>@patrolScheme.Remark</td>
-                                <td>
-                                    @Html.ActionLink("修改", "UpdateScheme", "Transaction", new { schemeId = patrolScheme.Id }, new { @class = "btn btn-primary" })
-                                    <button class="btn btn-danger btn_Delete" id=@patrolScheme.Id value="删除">删除</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+            <div id="contentList">
 
-            @*pagination*@
-            <div class="text-right">
-                <div class="pagination">
-                    @{
-                        var pageModel = ViewBag.PageModel == null ? null : (PaginationModel)ViewBag.PageModel;
-                    }
-                    @Html.Partial("Pagination", pageModel)
-                </div>
             </div>
         </div>
     </div>
 </section>
 
-<script>
-    $(function () {
-        //点击删除按钮
-        $('.btn_Delete').click(function () {
-            var schemeId = $(this).attr('id')
-            console.log(schemeId)
-            layer.alert('确定要删除吗', {
-                //skin: 'layui-layer-molv',   //样式类名  自定义样式
-                closeBtn: 1,                // 是否显示关闭按钮
-                anim: 1,                    //动画类型
-                btn: ['确定', '取消'],      //按钮
-                icon: 3,                    // icon
-                yes: function () {
-                    layer.msg('按钮1')
 
-                    $.ajax({
-                        url: '/Transaction/DeleteSchemeById',
-                        type: 'post',
-                        async: false,
-                        data: { schemeId: schemeId },
-                        success: function (result) {
-                            if (!result.State) {
-                                layer.alert("删除失败", { icon: 2 });
-                            }
-                            else {
-                                setTimeout(function () {
-                                    window.location = window.location.href;
-                                }, 1);
-                                layer.alert("删除成功", { icon: 1 });
-                            }
-                        }
-                    })
-                },
-                btn2: function () {
-                }
-            });
-        })
-    });
+<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
+<script src="/wwwroot/lib/layer/layer.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script>
+
+    $(function () {
+        var pageSize = $("#setPageSize").val()
+        $("#pageSize").val(pageSize)
+
+        var search = $("#btnSearch")
+        search.click()
+    })
 </script>
