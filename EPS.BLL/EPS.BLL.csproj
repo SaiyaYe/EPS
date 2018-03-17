@@ -44,6 +44,7 @@
     <Compile Include="DepartmentService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="GroupService.cs" />
+    <Compile Include="PatrolPointService.cs" />
     <Compile Include="PatrolRouteService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="MenuService.cs" />

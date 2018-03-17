@@ -22,6 +22,7 @@
     <EntitySet Name="PatrolPoint" EntityType="DataModel.Store.PatrolPoint" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PatrolRoute" EntityType="DataModel.Store.PatrolRoute" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PatrolDefect" EntityType="DataModel.Store.PatrolDefect" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatrolPoint_PatrolRoute" EntityType="DataModel.Store.PatrolPoint_PatrolRoute" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CompanyDepartment" Association="DataModel.Store.CompanyDepartment">
       <End Role="Company" EntitySet="Company" />
       <End Role="Department" EntitySet="Department" />
@@ -70,10 +71,6 @@
       <End Role="PatrolPoint" EntitySet="PatrolPoint" />
       <End Role="PatrolReport" EntitySet="PatrolReport" />
     </AssociationSet>
-    <AssociationSet Name="DictionaryPatrolReport" Association="DataModel.Store.DictionaryPatrolReport">
-      <End Role="Dictionary" EntitySet="Dictionary" />
-      <End Role="PatrolReport" EntitySet="PatrolReport" />
-    </AssociationSet>
     <AssociationSet Name="PatrolRoutePatrolReport" Association="DataModel.Store.PatrolRoutePatrolReport">
       <End Role="PatrolRoute" EntitySet="PatrolRoute" />
       <End Role="PatrolReport" EntitySet="PatrolReport" />
@@ -85,6 +82,26 @@
     <AssociationSet Name="DictionaryPatrolDefect" Association="DataModel.Store.DictionaryPatrolDefect">
       <End Role="Dictionary" EntitySet="Dictionary" />
       <End Role="PatrolDefect" EntitySet="PatrolDefect" />
+    </AssociationSet>
+    <AssociationSet Name="PatrolReportEmployee" Association="DataModel.Store.PatrolReportEmployee">
+      <End Role="PatrolReport" EntitySet="PatrolReport" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="CountyPatrolPoint" Association="DataModel.Store.CountyPatrolPoint">
+      <End Role="County" EntitySet="County" />
+      <End Role="PatrolPoint" EntitySet="PatrolPoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatrolPoint_PatrolRoute_PatrolPoint" Association="DataModel.Store.FK_PatrolPoint_PatrolRoute_PatrolPoint">
+      <End Role="PatrolPoint" EntitySet="PatrolPoint" />
+      <End Role="PatrolPoint_PatrolRoute" EntitySet="PatrolPoint_PatrolRoute" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatrolPoint_PatrolRoute_PatrolRoute" Association="DataModel.Store.FK_PatrolPoint_PatrolRoute_PatrolRoute">
+      <End Role="PatrolRoute" EntitySet="PatrolRoute" />
+      <End Role="PatrolPoint_PatrolRoute" EntitySet="PatrolPoint_PatrolRoute" />
+    </AssociationSet>
+    <AssociationSet Name="PatrolPointDictionary" Association="DataModel.Store.PatrolPointDictionary">
+      <End Role="PatrolPoint" EntitySet="PatrolPoint" />
+      <End Role="Dictionary" EntitySet="Dictionary" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Company">
@@ -184,13 +201,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DefectTypeId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="EmergenceId" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Village" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DefectTypeId" Type="int" Nullable="false" />
+    <Property Name="EmergenceId" Type="int" Nullable="false" />
     <Property Name="PatrolPointId" Type="int" Nullable="false" />
     <Property Name="PatrolRouteId" Type="int" Nullable="false" />
     <Property Name="ReportTime" Type="datetime" Nullable="false" />
-    <Property Name="Dictionary_Id" Type="int" Nullable="false" />
+    <Property Name="ReportEmployeeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Province">
     <Key>
@@ -221,10 +237,11 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PoleTowerNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Type" Type="int" Nullable="false" />
-    <Property Name="Longitude" Type="float" Nullable="true" />
-    <Property Name="Latitude" Type="float" Nullable="true" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
     <Property Name="CreateTime" Type="datetime" Nullable="true" />
+    <Property Name="CountyId" Type="int" Nullable="false" />
+    <Property Name="PatrolPointTypeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PatrolRoute">
     <Key>
@@ -240,6 +257,14 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DefectTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatrolPoint_PatrolRoute">
+    <Key>
+      <PropertyRef Name="PatrolPoint_Id" />
+      <PropertyRef Name="PatrolRoute_Id" />
+    </Key>
+    <Property Name="PatrolPoint_Id" Type="int" Nullable="false" />
+    <Property Name="PatrolRoute_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="CompanyDepartment">
     <End Role="Company" Type="DataModel.Store.Company" Multiplicity="1" />
@@ -385,18 +410,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="DictionaryPatrolReport">
-    <End Role="Dictionary" Type="DataModel.Store.Dictionary" Multiplicity="1" />
-    <End Role="PatrolReport" Type="DataModel.Store.PatrolReport" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Dictionary">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PatrolReport">
-        <PropertyRef Name="Dictionary_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="PatrolRoutePatrolReport">
     <End Role="PatrolRoute" Type="DataModel.Store.PatrolRoute" Multiplicity="1" />
     <End Role="PatrolReport" Type="DataModel.Store.PatrolReport" Multiplicity="*" />
@@ -430,6 +443,66 @@
       </Principal>
       <Dependent Role="PatrolDefect">
         <PropertyRef Name="DefectTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatrolReportEmployee">
+    <End Role="PatrolReport" Type="DataModel.Store.PatrolReport" Multiplicity="*" />
+    <End Role="Employee" Type="DataModel.Store.Employee" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatrolReport">
+        <PropertyRef Name="ReportEmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CountyPatrolPoint">
+    <End Role="County" Type="DataModel.Store.County" Multiplicity="1" />
+    <End Role="PatrolPoint" Type="DataModel.Store.PatrolPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="County">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatrolPoint">
+        <PropertyRef Name="CountyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatrolPointDictionary">
+    <End Role="PatrolPoint" Type="DataModel.Store.PatrolPoint" Multiplicity="*" />
+    <End Role="Dictionary" Type="DataModel.Store.Dictionary" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Dictionary">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatrolPoint">
+        <PropertyRef Name="PatrolPointTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatrolPoint_PatrolRoute_PatrolPoint">
+    <End Role="PatrolPoint" Type="DataModel.Store.PatrolPoint" Multiplicity="1" />
+    <End Role="PatrolPoint_PatrolRoute" Type="DataModel.Store.PatrolPoint_PatrolRoute" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatrolPoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatrolPoint_PatrolRoute">
+        <PropertyRef Name="PatrolPoint_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatrolPoint_PatrolRoute_PatrolRoute">
+    <End Role="PatrolPoint_PatrolRoute" Type="DataModel.Store.PatrolPoint_PatrolRoute" Multiplicity="*" />
+    <End Role="PatrolRoute" Type="DataModel.Store.PatrolRoute" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PatrolRoute">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatrolPoint_PatrolRoute">
+        <PropertyRef Name="PatrolRoute_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -500,10 +573,6 @@
             <End Role="PatrolPoint" EntitySet="PatrolPoint" />
             <End Role="PatrolReport" EntitySet="PatrolReport" />
           </AssociationSet>
-          <AssociationSet Name="DictionaryPatrolReport" Association="DataModel.DictionaryPatrolReport">
-            <End Role="Dictionary" EntitySet="Dictionary" />
-            <End Role="PatrolReport" EntitySet="PatrolReport" />
-          </AssociationSet>
           <EntitySet Name="PatrolRoute" EntityType="DataModel.PatrolRoute" />
           <AssociationSet Name="PatrolRoutePatrolReport" Association="DataModel.PatrolRoutePatrolReport">
             <End Role="PatrolRoute" EntitySet="PatrolRoute" />
@@ -518,7 +587,23 @@
             <End Role="Dictionary" EntitySet="Dictionary" />
             <End Role="PatrolDefect" EntitySet="PatrolDefect" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="PatrolReportEmployee" Association="DataModel.PatrolReportEmployee">
+            <End Role="PatrolReport" EntitySet="PatrolReport" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="CountyPatrolPoint" Association="DataModel.CountyPatrolPoint">
+            <End Role="County" EntitySet="County" />
+            <End Role="PatrolPoint" EntitySet="PatrolPoint" />
+          </AssociationSet>
+          <AssociationSet Name="PatrolPoint_PatrolRoute" Association="DataModel.PatrolPoint_PatrolRoute">
+            <End Role="PatrolPoint" EntitySet="PatrolPoint" />
+            <End Role="PatrolRoute" EntitySet="PatrolRoute" />
+          </AssociationSet>
+          <AssociationSet Name="PatrolPointDictionary" Association="DataModel.PatrolPointDictionary">
+            <End Role="PatrolPoint" EntitySet="PatrolPoint" />
+            <End Role="Dictionary" EntitySet="Dictionary" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="Id" />
@@ -564,8 +649,8 @@
           <Property Name="Code" Type="String" Nullable="false" />
           <Property Name="Type" Type="String" Nullable="false" />
           <NavigationProperty Name="AcquisitionRecord" Relationship="DataModel.AcquisitionRecordDictionary" FromRole="Dictionary" ToRole="AcquisitionRecord" />
-          <NavigationProperty Name="PatrolReport" Relationship="DataModel.DictionaryPatrolReport" FromRole="Dictionary" ToRole="PatrolReport" />
           <NavigationProperty Name="PatrolDefect" Relationship="DataModel.DictionaryPatrolDefect" FromRole="Dictionary" ToRole="PatrolDefect" />
+          <NavigationProperty Name="PatrolPoint" Relationship="DataModel.PatrolPointDictionary" FromRole="Dictionary" ToRole="PatrolPoint" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -640,6 +725,7 @@
           <NavigationProperty Name="Company" Relationship="DataModel.EmployeeCompany" FromRole="Employee" ToRole="Company" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AcquisitionRecord" Relationship="DataModel.EmployeeAcquisitionRecord" FromRole="Employee" ToRole="AcquisitionRecord" />
+          <NavigationProperty Name="PatrolReport" Relationship="DataModel.PatrolReportEmployee" FromRole="Employee" ToRole="PatrolReport" />
         </EntityType>
         <Association Name="GroupEmployee">
           <End Type="DataModel.Group" Role="Group" Multiplicity="1" />
@@ -745,15 +831,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DefectTypeId" Type="String" Nullable="false" />
-          <Property Name="EmergenceId" Type="String" Nullable="false" />
-          <Property Name="Village" Type="String" Nullable="true" />
+          <Property Name="DefectTypeId" Type="Int32" Nullable="false" />
+          <Property Name="EmergenceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PatrolPoint" Relationship="DataModel.PatrolPointPatrolReport" FromRole="PatrolReport" ToRole="PatrolPoint" />
           <Property Name="PatrolPointId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Dictionary" Relationship="DataModel.DictionaryPatrolReport" FromRole="PatrolReport" ToRole="Dictionary" />
           <NavigationProperty Name="PatrolRoute" Relationship="DataModel.PatrolRoutePatrolReport" FromRole="PatrolReport" ToRole="PatrolRoute" />
           <Property Name="PatrolRouteId" Type="Int32" Nullable="false" />
           <Property Name="ReportTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="DataModel.PatrolReportEmployee" FromRole="PatrolReport" ToRole="Employee" />
+          <Property Name="ReportEmployeeId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="EmployeeAcquisitionRecord">
           <End Type="DataModel.Employee" Role="Employee" Multiplicity="1" />
@@ -793,6 +879,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="City" Relationship="DataModel.CityCounty" FromRole="County" ToRole="City" />
           <Property Name="CityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PatrolPoint" Relationship="DataModel.CountyPatrolPoint" FromRole="County" ToRole="PatrolPoint" />
         </EntityType>
         <Association Name="ProvinceCity">
           <End Type="DataModel.Province" Role="Province" Multiplicity="1" />
@@ -824,15 +911,15 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PoleTowerNumber" Type="String" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" >
-            <Documentation>
-              <LongDescription>巡检点的类型</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Name="Longitude" Type="Double" Nullable="true" />
-          <Property Name="Latitude" Type="Double" Nullable="true" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
           <NavigationProperty Name="PatrolReport" Relationship="DataModel.PatrolPointPatrolReport" FromRole="PatrolPoint" ToRole="PatrolReport" />
           <Property Name="CreateTime" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="County" Relationship="DataModel.CountyPatrolPoint" FromRole="PatrolPoint" ToRole="County" />
+          <Property Name="CountyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PatrolRoute" Relationship="DataModel.PatrolPoint_PatrolRoute" FromRole="PatrolPoint" ToRole="PatrolRoute" />
+          <NavigationProperty Name="PatrolPointType" Relationship="DataModel.PatrolPointDictionary" FromRole="PatrolPoint" ToRole="Dictionary" />
+          <Property Name="PatrolPointTypeId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="PatrolPointPatrolReport">
           <End Type="DataModel.PatrolPoint" Role="PatrolPoint" Multiplicity="1" />
@@ -846,10 +933,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DictionaryPatrolReport">
-          <End Type="DataModel.Dictionary" Role="Dictionary" Multiplicity="1" />
-          <End Type="DataModel.PatrolReport" Role="PatrolReport" Multiplicity="*" />
-        </Association>
         <EntityType Name="PatrolRoute">
           <Key>
             <PropertyRef Name="Id" />
@@ -858,6 +941,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="PatrolReport" Relationship="DataModel.PatrolRoutePatrolReport" FromRole="PatrolRoute" ToRole="PatrolReport" />
           <NavigationProperty Name="PatrolScheme" Relationship="DataModel.PatrolRoutePatrolScheme" FromRole="PatrolRoute" ToRole="PatrolScheme" />
+          <NavigationProperty Name="PatrolPoint" Relationship="DataModel.PatrolPoint_PatrolRoute" FromRole="PatrolRoute" ToRole="PatrolPoint" />
         </EntityType>
         <Association Name="PatrolRoutePatrolReport">
           <End Type="DataModel.PatrolRoute" Role="PatrolRoute" Multiplicity="1" />
@@ -889,7 +973,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <NavigationProperty Name="Dictionary" Relationship="DataModel.DictionaryPatrolDefect" FromRole="PatrolDefect" ToRole="Dictionary" />
+          <NavigationProperty Name="DefectType" Relationship="DataModel.DictionaryPatrolDefect" FromRole="PatrolDefect" ToRole="Dictionary" />
           <Property Name="DefectTypeId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="DictionaryPatrolDefect">
@@ -904,7 +988,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="PatrolReportEmployee">
+          <End Type="DataModel.PatrolReport" Role="PatrolReport" Multiplicity="*" />
+          <End Type="DataModel.Employee" Role="Employee" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatrolReport">
+              <PropertyRef Name="ReportEmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CountyPatrolPoint">
+          <End Type="DataModel.County" Role="County" Multiplicity="1" />
+          <End Type="DataModel.PatrolPoint" Role="PatrolPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="County">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatrolPoint">
+              <PropertyRef Name="CountyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PatrolPoint_PatrolRoute">
+          <End Type="DataModel.PatrolPoint" Role="PatrolPoint" Multiplicity="*" />
+          <End Type="DataModel.PatrolRoute" Role="PatrolRoute" Multiplicity="*" />
+        </Association>
+        <Association Name="PatrolPointDictionary">
+          <End Type="DataModel.PatrolPoint" Role="PatrolPoint" Multiplicity="*" />
+          <End Type="DataModel.Dictionary" Role="Dictionary" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Dictionary">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatrolPoint">
+              <PropertyRef Name="PatrolPointTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1017,10 +1141,10 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DefectTypeId" ColumnName="DefectTypeId" />
           <ScalarProperty Name="EmergenceId" ColumnName="EmergenceId" />
-          <ScalarProperty Name="Village" ColumnName="Village" />
           <ScalarProperty Name="PatrolPointId" ColumnName="PatrolPointId" />
           <ScalarProperty Name="PatrolRouteId" ColumnName="PatrolRouteId" />
           <ScalarProperty Name="ReportTime" ColumnName="ReportTime" />
+          <ScalarProperty Name="ReportEmployeeId" ColumnName="ReportEmployeeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1055,10 +1179,11 @@
         <MappingFragment StoreEntitySet="PatrolPoint">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PoleTowerNumber" ColumnName="PoleTowerNumber" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CountyId" ColumnName="CountyId" />
+          <ScalarProperty Name="PatrolPointTypeId" ColumnName="PatrolPointTypeId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1079,12 +1204,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="DictionaryPatrolReport" TypeName="DataModel.DictionaryPatrolReport" StoreEntitySet="PatrolReport">
-      <EndProperty Name="Dictionary">
-        <ScalarProperty Name="Id" ColumnName="Dictionary_Id" />
+    <AssociationSetMapping Name="PatrolPoint_PatrolRoute" TypeName="DataModel.PatrolPoint_PatrolRoute" StoreEntitySet="PatrolPoint_PatrolRoute">
+      <EndProperty Name="PatrolPoint">
+        <ScalarProperty Name="Id" ColumnName="PatrolPoint_Id" />
       </EndProperty>
-      <EndProperty Name="PatrolReport">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+      <EndProperty Name="PatrolRoute">
+        <ScalarProperty Name="Id" ColumnName="PatrolRoute_Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

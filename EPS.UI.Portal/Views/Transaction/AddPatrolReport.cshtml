@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "添加巡检报告";
+}
+<!-- jQuery 3 -->
+@*<script src="/AdminLTE-2.4.2/bower_components/jquery/dist/jquery.min.js"></script>*@
+@*<script src="~/wwwroot/lib/jquery/dist/jquery.min.js"></script>*@
+<script src="~/wwwroot/lib/jquery/dist/jquery.js"></script>
+<!-- Bootstrap 3.3.7 -->
+@*<script src="/AdminLTE-2.4.2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>*@
+@*<script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
+<script src="~/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+@*<link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
+<link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<!-- bootstrap datepicker -->
+<script src="/AdminLTE-2.4.2/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<section class="content-header">
+    <h1>
+        添加巡检报告
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>电力巡检业务</li>
+        <li><a href="SchemeList">巡检报告</a></li>
+        <li class="active">添加巡检报告</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
+
+<section class="container body-content">
+    <form role="form" method="post" action="/Transaction/AddScheme" class="form-horizontal col-lg-12">
+        <div class="box-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">计划编号</label><br />
+                <input class="input-group col-lg-10" id="Number" name="Number">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">计划制定人</label><br />
+                @Html.Action("CompanyDepartmentGroupEmployee", "Select")
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">巡检路线</label><br />
+                @Html.Action("PatrolRoute", "Select")
+            </div>
+            <div class="form-group">
+                <label>巡检时间</label>
+                <div class="input-group col-lg-10">
+                    @Html.Partial("Component/DateRangeSelection")
+                </div>
+            </div>
+
+        </div>
+        <!-- /.box-body -->
+        <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-check"></i>确定</button>
+        <a href="SchemeList" class="btn btn-default btn-lg"><i class="fa fa-close"></i>返回</a>
+    </form>
+</section>

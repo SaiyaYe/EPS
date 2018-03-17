@@ -1,30 +1,11 @@
-﻿
-@*<select name="ddlTest" id="ddlTest">
-    <option value="0">巡检部</option>
-    <option value="1">抢修部</option>
-</select>
-
-<select name="ddlTest" id="ddlTest">
-    <option value="0">巡检一组</option>
-    <option value="1">巡检二组</option>
-    <option value="2">抢修一组</option>
-    <option value="3">抢修二组</option>
-</select>
-
-<select name="ddlTest" id="ddlTest">
-    <option value="0">线路一</option>
-    <option value="1">线路二</option>
-    <option value="1">线路三</option>
-</select>*@
-
-<section class="content-header">
+﻿<section class="content-header">
     <h1>
-        巡检报告
+        巡检点
     </h1>
     <ol class="breadcrumb">
         <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
         <li>电力巡检业务</li>
-        <li class="active">巡检报告</li>
+        <li class="active">巡检点</li>
     </ol>
     <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
 </section>
@@ -32,17 +13,14 @@
 <section class="content container-fluid">
     <div class="ibox float-e-margins">
         @*title*@
-        <form action="@Url.Action("_PatrolReportList")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#contentList" id="form0" method="get">
-            <div style="float:left">
-                @Html.Action("CompanyDepartmentGroupEmployee", "Select")
-            </div>
+        <form action="@Url.Action("_PatrolPointList")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#contentList" id="form0" method="get">
             <div style="float:left">
                 @Html.Action("PatrolRoute", "Select")
             </div>
             <div style="float:left">
                 &nbsp<button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
             </div>
-            @Html.ActionLink("添加", "AddPatrolReport", "Transaction", new { }, new { @class = "btn btn-success", style = "float:right" })
+            @Html.ActionLink("添加", "AddPatrolPoint", "Transaction", new { }, new { @class = "btn btn-success", style = "float:right" })
             <input id="pageSize" name="pageSize" type="hidden" />
             <input id="pageIndex" name="pageIndex" type="hidden" />
             <div style="clear:both"></div>

@@ -20,24 +20,27 @@
         <AssociationConnector Association="DataModel.UserEmployee" />
         <AssociationConnector Association="DataModel.EmployeeDepartment" />
         <AssociationConnector Association="DataModel.EmployeeCompany" />
-        <EntityTypeShape EntityType="DataModel.AcquisitionRecord" Width="1.5" PointX="7.875" PointY="4.25" />
+        <EntityTypeShape EntityType="DataModel.AcquisitionRecord" Width="1.5" PointX="7.875" PointY="4.375" />
         <AssociationConnector Association="DataModel.AcquisitionRecordDictionary" />
-        <EntityTypeShape EntityType="DataModel.PatrolReport" Width="1.5" PointX="2.875" PointY="4.25" />
+        <EntityTypeShape EntityType="DataModel.PatrolReport" Width="1.5" PointX="3.125" PointY="4.5" />
         <AssociationConnector Association="DataModel.EmployeeAcquisitionRecord" />
-        <EntityTypeShape EntityType="DataModel.Province" Width="1.5" PointX="8.875" PointY="10.125" />
-        <EntityTypeShape EntityType="DataModel.City" Width="1.5" PointX="6.875" PointY="10.125" />
-        <EntityTypeShape EntityType="DataModel.County" Width="1.5" PointX="4.875" PointY="10.125" />
+        <EntityTypeShape EntityType="DataModel.Province" Width="1.5" PointX="8.875" PointY="11" />
+        <EntityTypeShape EntityType="DataModel.City" Width="1.5" PointX="6.875" PointY="11" />
+        <EntityTypeShape EntityType="DataModel.County" Width="1.5" PointX="4.875" PointY="11" />
         <AssociationConnector Association="DataModel.ProvinceCity" />
         <AssociationConnector Association="DataModel.CityCounty" />
-        <EntityTypeShape EntityType="DataModel.PatrolPoint" Width="1.5" PointX="0.5" PointY="5.75" />
+        <EntityTypeShape EntityType="DataModel.PatrolPoint" Width="1.5" PointX="0.5" PointY="8.125" />
         <AssociationConnector Association="DataModel.PatrolPointPatrolReport" />
-        <AssociationConnector Association="DataModel.DictionaryPatrolReport" />
         <EntityTypeShape EntityType="DataModel.PatrolRoute" Width="1.5" PointX="0.5" PointY="3.75" />
         <AssociationConnector Association="DataModel.PatrolRoutePatrolReport" />
         <AssociationConnector Association="DataModel.PatrolRoutePatrolScheme" />
         <EntityTypeShape EntityType="DataModel.PatrolDefect" Width="1.5" PointX="10.625" PointY="4.625" />
         <AssociationConnector Association="DataModel.DictionaryPatrolDefect" />
-      </Diagram>
+        <AssociationConnector Association="DataModel.PatrolReportEmployee" />
+        <AssociationConnector Association="DataModel.CountyPatrolPoint" />
+        <AssociationConnector Association="DataModel.PatrolPoint_PatrolRoute" />
+        <AssociationConnector Association="DataModel.PatrolPointDictionary" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

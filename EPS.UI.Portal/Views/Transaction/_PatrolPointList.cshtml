@@ -1,0 +1,89 @@
+﻿@using EPS.UI.Portal.Models
+@{
+    ViewBag.Title = "PatrolReportList";
+    List<PatrolPointModel> patrolPointList = ViewBag.Model as List<PatrolPointModel>;
+}
+
+@*table-body*@
+<div class="box-body">
+    <table id="example2" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>杆塔号</th>
+                <th>经度</th>
+                <th>纬度</th>
+                <th>巡检点类型</th>
+                <th>创建时间</th>
+                <th>所在省</th>
+                <th>所在市</th>
+                <th>所在县</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var patrolPoint in patrolPointList)
+            {
+            <tr>
+                <td>@patrolPoint.PoleTowerNumber<input type="hidden" name="patrolRouteId" value=@patrolPoint.Id /></td>
+                <td>@patrolPoint.Longitude</td>
+                <td>@patrolPoint.Latitude</td>
+                <td>@patrolPoint.PatrolPointType.Type</td>
+                <td>@(patrolPoint.CreateTime == null ? "暂无" : patrolPoint.CreateTime.Value.ToString("yyyy-MM-dd"))</td>
+                <td>@patrolPoint.County.City.Province.Name</td>
+                <td>@patrolPoint.County.City.Name</td>
+                <td>@patrolPoint.County.Name</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@*pagination*@
+<div class="text-right">
+    <div class="pagination">
+        @{
+            var pageModel = ViewBag.PageModel == null ? null : (PaginationModel)ViewBag.PageModel;
+        }
+        @Html.Partial("Pagination", pageModel)
+    </div>
+</div>
+
+<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        //点击删除按钮
+        $('.btn_Delete').click(function () {
+            var schemeId = $(this).attr('id')
+            console.log(schemeId)
+            layer.alert('确定要删除吗', {
+                //skin: 'layui-layer-molv',   //样式类名  自定义样式
+                closeBtn: 1,                // 是否显示关闭按钮
+                anim: 1,                    //动画类型
+                btn: ['确定', '取消'],      //按钮
+                icon: 3,                    // icon
+                yes: function () {
+                    layer.msg('按钮1')
+
+                    $.ajax({
+                        url: '/Transaction/DeleteSchemeById',
+                        type: 'post',
+                        async: false,
+                        data: { schemeId: schemeId },
+                        success: function (result) {
+                            if (!result.State) {
+                                layer.alert("删除失败", { icon: 2 });
+                            }
+                            else {
+                                setTimeout(function () {
+                                    window.location = window.location.href;
+                                }, 1);
+                                layer.alert("删除成功", { icon: 1 });
+                            }
+                        }
+                    })
+                },
+                btn2: function () {
+                }
+            });
+        })
+    });
+</script>

@@ -51,6 +51,7 @@
     <Compile Include="IEmployeeDal.cs" />
     <Compile Include="IGroupDal.cs" />
     <Compile Include="IMenuDal.cs" />
+    <Compile Include="IPatrolPointDal.cs" />
     <Compile Include="IPatrolReportDal.cs" />
     <Compile Include="IPatrolRouteDal.cs" />
     <Compile Include="IPatrolSchemeDal.cs" />

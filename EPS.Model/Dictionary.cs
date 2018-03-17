@@ -18,8 +18,8 @@ namespace EPS.Model
         public Dictionary()
         {
             this.AcquisitionRecord = new HashSet<AcquisitionRecord>();
-            this.PatrolReport = new HashSet<PatrolReport>();
             this.PatrolDefect = new HashSet<PatrolDefect>();
+            this.PatrolPoint = new HashSet<PatrolPoint>();
         }
     
         public int Id { get; set; }
@@ -29,8 +29,8 @@ namespace EPS.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AcquisitionRecord> AcquisitionRecord { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PatrolReport> PatrolReport { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatrolDefect> PatrolDefect { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatrolPoint> PatrolPoint { get; set; }
     }
 }

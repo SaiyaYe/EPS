@@ -159,15 +159,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
+    <Compile Include="Models\CountyModel.cs" />
     <Compile Include="Models\DateRangeModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\DictionaryModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\PaginationModel.cs" />
+    <Compile Include="Models\PatrolPointModel.cs" />
     <Compile Include="Models\PatrolReportModel.cs" />
     <Compile Include="Models\PatrolSchemeModel.cs" />
+    <Compile Include="Models\ProvinceModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8423,6 +8428,11 @@
     <Content Include="App_Code\Pagination.cshtml" />
     <Content Include="Views\Transaction\Set.cshtml" />
     <Content Include="Views\Transaction\_SchemeList.cshtml" />
+    <Content Include="Views\Transaction\_PatrolReportList.cshtml" />
+    <Content Include="Views\Transaction\AddPatrolReport.cshtml" />
+    <Content Include="Views\Transaction\UpdatePatrolReport.cshtml" />
+    <Content Include="Views\Transaction\PatrolPointList.cshtml" />
+    <Content Include="Views\Transaction\_PatrolPointList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

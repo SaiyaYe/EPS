@@ -18,6 +18,6 @@ namespace EPS.Model
         public string Name { get; set; }
         public int DefectTypeId { get; set; }
     
-        public virtual Dictionary Dictionary { get; set; }
+        public virtual Dictionary DefectType { get; set; }
     }
 }

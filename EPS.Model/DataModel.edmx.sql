@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/01/2018 11:34:40
+-- Date Created: 03/17/2018 23:45:08
 -- Generated from EDMX file: E:\project\EPS\EPS.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -53,9 +53,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PatrolPointPatrolReport]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_PatrolPointPatrolReport];
 GO
-IF OBJECT_ID(N'[dbo].[FK_DictionaryPatrolReport]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_DictionaryPatrolReport];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PatrolRoutePatrolReport]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_PatrolRoutePatrolReport];
 GO
@@ -64,6 +61,12 @@ IF OBJECT_ID(N'[dbo].[FK_PatrolRoutePatrolScheme]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_DictionaryPatrolDefect]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatrolDefect] DROP CONSTRAINT [FK_DictionaryPatrolDefect];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PatrolReportEmployee]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_PatrolReportEmployee];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CountyPatrolPoint]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatrolPoint] DROP CONSTRAINT [FK_CountyPatrolPoint];
 GO
 
 -- --------------------------------------------------
@@ -218,13 +221,12 @@ GO
 -- Creating table 'PatrolReport'
 CREATE TABLE [dbo].[PatrolReport] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DefectTypeId] nvarchar(max)  NOT NULL,
-    [EmergenceId] nvarchar(max)  NOT NULL,
-    [Village] nvarchar(max)  NULL,
+    [DefectTypeId] int  NOT NULL,
+    [EmergenceId] int  NOT NULL,
     [PatrolPointId] int  NOT NULL,
     [PatrolRouteId] int  NOT NULL,
     [ReportTime] datetime  NOT NULL,
-    [Dictionary_Id] int  NOT NULL
+    [ReportEmployeeId] int  NOT NULL
 );
 GO
 
@@ -255,10 +257,11 @@ GO
 CREATE TABLE [dbo].[PatrolPoint] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [PoleTowerNumber] nvarchar(max)  NOT NULL,
-    [Type] int  NOT NULL,
-    [Longitude] float  NULL,
-    [Latitude] float  NULL,
-    [CreateTime] datetime  NULL
+    [Longitude] float  NOT NULL,
+    [Latitude] float  NOT NULL,
+    [CreateTime] datetime  NULL,
+    [CountyId] int  NOT NULL,
+    [PatrolPointTypeId] int  NOT NULL
 );
 GO
 
@@ -274,6 +277,13 @@ CREATE TABLE [dbo].[PatrolDefect] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [DefectTypeId] int  NOT NULL
+);
+GO
+
+-- Creating table 'PatrolPoint_PatrolRoute'
+CREATE TABLE [dbo].[PatrolPoint_PatrolRoute] (
+    [PatrolPoint_Id] int  NOT NULL,
+    [PatrolRoute_Id] int  NOT NULL
 );
 GO
 
@@ -375,6 +385,12 @@ GO
 ALTER TABLE [dbo].[PatrolDefect]
 ADD CONSTRAINT [PK_PatrolDefect]
     PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [PatrolPoint_Id], [PatrolRoute_Id] in table 'PatrolPoint_PatrolRoute'
+ALTER TABLE [dbo].[PatrolPoint_PatrolRoute]
+ADD CONSTRAINT [PK_PatrolPoint_PatrolRoute]
+    PRIMARY KEY CLUSTERED ([PatrolPoint_Id], [PatrolRoute_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -561,21 +577,6 @@ ON [dbo].[PatrolReport]
     ([PatrolPointId]);
 GO
 
--- Creating foreign key on [Dictionary_Id] in table 'PatrolReport'
-ALTER TABLE [dbo].[PatrolReport]
-ADD CONSTRAINT [FK_DictionaryPatrolReport]
-    FOREIGN KEY ([Dictionary_Id])
-    REFERENCES [dbo].[Dictionary]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_DictionaryPatrolReport'
-CREATE INDEX [IX_FK_DictionaryPatrolReport]
-ON [dbo].[PatrolReport]
-    ([Dictionary_Id]);
-GO
-
 -- Creating foreign key on [PatrolRouteId] in table 'PatrolReport'
 ALTER TABLE [dbo].[PatrolReport]
 ADD CONSTRAINT [FK_PatrolRoutePatrolReport]
@@ -619,6 +620,75 @@ GO
 CREATE INDEX [IX_FK_DictionaryPatrolDefect]
 ON [dbo].[PatrolDefect]
     ([DefectTypeId]);
+GO
+
+-- Creating foreign key on [ReportEmployeeId] in table 'PatrolReport'
+ALTER TABLE [dbo].[PatrolReport]
+ADD CONSTRAINT [FK_PatrolReportEmployee]
+    FOREIGN KEY ([ReportEmployeeId])
+    REFERENCES [dbo].[Employee]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PatrolReportEmployee'
+CREATE INDEX [IX_FK_PatrolReportEmployee]
+ON [dbo].[PatrolReport]
+    ([ReportEmployeeId]);
+GO
+
+-- Creating foreign key on [CountyId] in table 'PatrolPoint'
+ALTER TABLE [dbo].[PatrolPoint]
+ADD CONSTRAINT [FK_CountyPatrolPoint]
+    FOREIGN KEY ([CountyId])
+    REFERENCES [dbo].[County]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CountyPatrolPoint'
+CREATE INDEX [IX_FK_CountyPatrolPoint]
+ON [dbo].[PatrolPoint]
+    ([CountyId]);
+GO
+
+-- Creating foreign key on [PatrolPoint_Id] in table 'PatrolPoint_PatrolRoute'
+ALTER TABLE [dbo].[PatrolPoint_PatrolRoute]
+ADD CONSTRAINT [FK_PatrolPoint_PatrolRoute_PatrolPoint]
+    FOREIGN KEY ([PatrolPoint_Id])
+    REFERENCES [dbo].[PatrolPoint]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [PatrolRoute_Id] in table 'PatrolPoint_PatrolRoute'
+ALTER TABLE [dbo].[PatrolPoint_PatrolRoute]
+ADD CONSTRAINT [FK_PatrolPoint_PatrolRoute_PatrolRoute]
+    FOREIGN KEY ([PatrolRoute_Id])
+    REFERENCES [dbo].[PatrolRoute]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PatrolPoint_PatrolRoute_PatrolRoute'
+CREATE INDEX [IX_FK_PatrolPoint_PatrolRoute_PatrolRoute]
+ON [dbo].[PatrolPoint_PatrolRoute]
+    ([PatrolRoute_Id]);
+GO
+
+-- Creating foreign key on [PatrolPointTypeId] in table 'PatrolPoint'
+ALTER TABLE [dbo].[PatrolPoint]
+ADD CONSTRAINT [FK_PatrolPointDictionary]
+    FOREIGN KEY ([PatrolPointTypeId])
+    REFERENCES [dbo].[Dictionary]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PatrolPointDictionary'
+CREATE INDEX [IX_FK_PatrolPointDictionary]
+ON [dbo].[PatrolPoint]
+    ([PatrolPointTypeId]);
 GO
 
 -- --------------------------------------------------

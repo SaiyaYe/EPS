@@ -20,6 +20,7 @@ namespace EPS.Model
             this.PatrolScheme = new HashSet<PatrolScheme>();
             this.User = new HashSet<User>();
             this.AcquisitionRecord = new HashSet<AcquisitionRecord>();
+            this.PatrolReport = new HashSet<PatrolReport>();
         }
     
         public int Id { get; set; }
@@ -40,5 +41,7 @@ namespace EPS.Model
         public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AcquisitionRecord> AcquisitionRecord { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatrolReport> PatrolReport { get; set; }
     }
 }

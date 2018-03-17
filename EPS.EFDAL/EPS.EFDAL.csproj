@@ -54,6 +54,7 @@
     <Compile Include="GroupDal.cs" />
     <Compile Include="MenuDal.cs" />
     <Compile Include="CompanyDal.cs" />
+    <Compile Include="PatrolPointDal.cs" />
     <Compile Include="PatrolReportDal.cs" />
     <Compile Include="PatrolRouteDal.cs" />
     <Compile Include="PatrolSchemeDal.cs" />

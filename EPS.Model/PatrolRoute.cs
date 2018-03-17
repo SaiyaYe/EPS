@@ -19,6 +19,7 @@ namespace EPS.Model
         {
             this.PatrolReport = new HashSet<PatrolReport>();
             this.PatrolScheme = new HashSet<PatrolScheme>();
+            this.PatrolPoint = new HashSet<PatrolPoint>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace EPS.Model
         public virtual ICollection<PatrolReport> PatrolReport { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatrolScheme> PatrolScheme { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PatrolPoint> PatrolPoint { get; set; }
     }
 }

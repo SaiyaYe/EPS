@@ -46,6 +46,7 @@
     <Compile Include="IEmployeeService.cs" />
     <Compile Include="IGroupService.cs" />
     <Compile Include="IMenuService.cs" />
+    <Compile Include="IPatrolPointService.cs" />
     <Compile Include="IPatrolReportService.cs" />
     <Compile Include="IPatrolRouteService.cs" />
     <Compile Include="IPatrolSchemeService.cs" />

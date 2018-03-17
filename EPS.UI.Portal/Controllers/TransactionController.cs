@@ -14,17 +14,27 @@ namespace EPS.UI.Portal.Controllers
 
     public class TransactionController : BaseController
     {
+        IPatrolPointService patrolPointService = new PatrolPointService();
         IPatrolSchemeService patrolSchemeService = new PatrolSchemeService();
         IPatrolReportService patrolReportService = new PatrolReportService();
         IEmployeeService employeeService = new EmployeeService();
 
+        #region 巡检计划
+        /// <summary>
+        /// 计划列表
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/10 15:56
+        /// 修改者：
+        /// 修改时间：
         public ActionResult SchemeList()
         {
             return View();
         }
 
         /// <summary>
-        /// Schemes the list.
+        /// 分部计划列表
         /// </summary>
         /// <returns></returns>
         /// 创建者：叶烨星
@@ -70,31 +80,8 @@ namespace EPS.UI.Portal.Controllers
             return PartialView();
         }
 
-        public ActionResult PatrolReportList()
-        {
-            List<PatrolReport> patrolReportList = patrolReportService.GetElementList().Result;
-            List<PatrolReportModel> modelList = new List<PatrolReportModel>();
-
-            foreach (var item in patrolReportList)
-            {
-                PatrolReportModel model = new PatrolReportModel()
-                {
-
-                    PoleTowerName = item.PatrolPoint.PoleTowerNumber,
-                    DefectCode = item.Dictionary.Code,
-                    DefectType = item.Dictionary.Type,
-                    PatrolRouteName = item.PatrolRoute.Name,
-                    ReportTime = item.ReportTime,
-                };
-                modelList.Add(model);
-            }
-
-            ViewBag.Model = modelList;
-            return View();
-        }
-
         /// <summary>
-        /// Adds the scheme.
+        /// 添加巡检计划页面
         /// </summary>
         /// <returns></returns>
         /// 创建者：叶烨星
@@ -107,7 +94,7 @@ namespace EPS.UI.Portal.Controllers
         }
 
         /// <summary>
-        /// Adds the scheme.
+        /// 添加巡检计划
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns></returns>
@@ -137,7 +124,7 @@ namespace EPS.UI.Portal.Controllers
         }
 
         /// <summary>
-        /// Deletes the scheme by id
+        /// 根据id删除巡检计划
         /// </summary>
         /// <param name="schemeId">The scheme id</param>
         /// <returns></returns>
@@ -153,7 +140,7 @@ namespace EPS.UI.Portal.Controllers
         }
 
         /// <summary>
-        /// Updates the scheme.
+        /// 更新巡检计划页面
         /// </summary>
         /// <param name="schemeId">The scheme id</param>
         /// <returns></returns>
@@ -187,7 +174,7 @@ namespace EPS.UI.Portal.Controllers
         }
 
         /// <summary>
-        /// Updates the scheme.
+        /// 更新巡检计划
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns></returns>
@@ -211,7 +198,255 @@ namespace EPS.UI.Portal.Controllers
             var result = patrolSchemeService.UpdateScheme(patrolScheme);
             return RedirectToAction("SchemeList");
         }
+        #endregion
 
+        #region 巡检结果上报
+        /// <summary>
+        /// 巡检报告列表
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/10 16:03
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult PatrolReportList()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 分部巡检报告列表
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/10 15:56
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult _PatrolReportList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolPointId = 0, int patrolRouteId = 0, int pageIndex = 1, int pagesize = 0)
+        {
+            List<PatrolReportModel> modelList = new List<PatrolReportModel>();
+
+            pagesize = pagesize == 0 ? ControllerCommon.PageSize : pagesize;
+            var result = patrolReportService.GetPatrolReportList(companyId, departmentId, groupId, employeeId, patrolPointId, patrolRouteId, pageIndex, pagesize);
+            List<PatrolReport> patrolReportList = result.Result;
+            foreach (var item in patrolReportList)
+            {
+                PatrolReportModel model = new PatrolReportModel()
+                {
+                    PatrolPointId = item.PatrolPoint.Id,
+                    //DefectCode = item.Dictionary.Code,
+                    //DefectType = item.Dictionary.Type,
+                    PatrolRouteName = item.PatrolRoute.Name,
+                    ReportTime = item.ReportTime,
+                };
+                modelList.Add(model);
+            }
+
+            GetPaginationModel(modelList.Count, result.TotalCount, pageIndex, pagesize);
+            ViewBag.Model = modelList;
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 添加巡检报告页面
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/10 16:29
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult AddPatrolReport()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加巡检报告
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/13 19:03
+        /// 修改者：
+        /// 修改时间：
+        [HttpPost]
+        public ActionResult AddPatrolReport(PatrolReportModel model)
+        {
+            PatrolReport patrolReport = new PatrolReport()
+            {
+                ReportEmployeeId = model.ReportEmployeeId,
+                PatrolRouteId = model.PatrolRouteId,
+                ReportTime = DateTime.Now,
+                //Dictionary = new Dictionary
+                //{
+                //    Code = model.DefectCode,
+                //    Type = model.DefectType
+                //}
+            };
+            var result = patrolReportService.Add(patrolReport);
+            if (!result.State)
+            {
+                return Content(result.Message);
+            }
+
+            return RedirectToAction("PatrolReportList");
+        }
+
+        /// <summary>
+        /// 根据id删除巡检计划
+        /// </summary>
+        /// <param name="schemeId">The scheme id</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/1 16:45
+        /// 修改者：
+        /// 修改时间：
+        [HttpPost]
+        public ActionResult DeletePatrolReportById(int PatrolReportId)
+        {
+            var result = patrolReportService.DeleteById(PatrolReportId);
+            return Json(result);
+        }
+
+        /// <summary>
+        /// 更新巡检报告页面
+        /// </summary>
+        /// <param name="patrolReportId">巡检报告id</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/2/1 17:11
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult UpdatePatrolReport(int patrolReportId)
+        {
+            PatrolReport patrolReport = patrolReportService.Find(patrolReportId).Result;
+            PatrolReportModel model = new PatrolReportModel
+            {
+                Id = patrolReport.Id,
+                ReportEmployeeId = patrolReport.ReportEmployeeId,
+                Employee = new EmployeeModel
+                {
+                    Id = patrolReport.ReportEmployeeId,
+                    Name = patrolReport.Employee.Name,
+                    CompanyId = patrolReport.Employee.CompanyId,
+                    DepartmentId = patrolReport.Employee.DepartmentId,
+                    GroupId = patrolReport.Employee.GroupId
+                },
+                PatrolPointId = patrolReport.PatrolPointId,
+                PatrolPointNumber = patrolReport.PatrolPoint.PoleTowerNumber,
+                PatrolRouteId = patrolReport.PatrolRouteId,
+                PatrolRouteName = patrolReport.PatrolRoute.Name,
+                ReportTime = patrolReport.ReportTime
+            };
+            return View(model);
+        }
+
+
+        /// <summary>
+        /// 更新巡检报告
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/10 16:44
+        /// 修改者：
+        /// 修改时间：
+        [HttpPost]
+        public ActionResult UpdatePatrolReport(PatrolReportModel model)
+        {
+            PatrolReport patrolReport = new PatrolReport
+            {
+                Id = model.Id,
+                PatrolPointId = model.PatrolPointId,
+                PatrolRouteId = model.PatrolRouteId,
+                ReportEmployeeId = model.ReportEmployeeId,
+                DefectTypeId = model.DefectTypeId,
+                ReportTime = model.ReportTime,
+            };
+            var result = patrolReportService.UpdatePatrolReport(patrolReport);
+            return RedirectToAction("PatrolReportList");
+        }
+        #endregion
+
+        #region 巡检点设置
+        /// <summary>
+        /// 巡检点列表
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/17 20:26
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult PatrolPointList()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 分部巡检点列表
+        /// </summary>
+        /// <param name="PatrolRouteId">巡检路线id</param>
+        /// <param name="pageSize">页容量</param>
+        /// <param name="pageIndex">页码号</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/17 23:26
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult _PatrolPointList(int PatrolRouteId = 0, int pageSize = 0, int pageIndex = 1)
+        {
+            List<PatrolPointModel> modelList = new List<PatrolPointModel>();
+
+            pageSize = pageSize == 0 ? ControllerCommon.PageSize : pageSize;
+            var result = patrolPointService.GetPatrolPointList(PatrolRouteId, pageSize, pageIndex);
+            List<PatrolPoint> patrolPointList = result.Result;
+
+            foreach (var item in patrolPointList)
+            {
+                PatrolPointModel model = new PatrolPointModel()
+                {
+                    Id = item.Id,
+                    PoleTowerNumber = item.PoleTowerNumber,
+                    PatrolPointTypeId = item.PatrolPointTypeId,
+                    PatrolPointType = new DictionaryModel
+                    {
+                        Id = item.PatrolPointTypeId,
+                        Code = item.PatrolPointType.Code,
+                        Type = item.PatrolPointType.Type
+                    },
+                    CountyId = item.CountyId,
+                    County = new CountyModel
+                    {
+                        Id = item.CountyId,
+                        Name = item.County.Name,
+                        CityId = item.County.CityId,
+                        City = new CityModel
+                        {
+                            Id = item.County.CityId,
+                            Name = item.County.City.Name,
+                            ProvinceId = item.County.City.ProvinceId,
+                            Province = new ProvinceModel
+                            {
+                                Id = item.County.City.ProvinceId,
+                                Name = item.County.City.Province.Name
+                            }
+                        }
+                    },
+                    CreateTime = item.CreateTime,
+                    Latitude = item.Latitude,
+                    Longitude = item.Longitude
+                };
+                modelList.Add(model);
+            }
+
+            GetPaginationModel(modelList.Count, result.TotalCount, pageIndex, pageSize);
+
+            ViewBag.Model = modelList;
+            return PartialView();
+
+        }
+
+        #endregion
         public ActionResult Set()
         {
             return View();
