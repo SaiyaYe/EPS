@@ -1,4 +1,5 @@
 ﻿using EPS.BLL;
+using EPS.IBLL;
 using EPS.Model;
 using EPS.UI.Portal.Models;
 using System;
@@ -18,9 +19,14 @@ namespace EPS.UI.Portal.Controllers
     /// </summary>
     public class SystemManagementController : BaseController
     {
-        EmployeeService bll = new EmployeeService();
-        DepartmentService departmentBll = new DepartmentService();
-        GroupService groupBll = new GroupService();
+        [Ninject.Inject]
+        IEmployeeService EmployeeService { get; set; }
+
+        [Ninject.Inject]
+        IDepartmentService DepartmentService { get; set; }
+
+        [Ninject.Inject]
+        IGroupService GroupService { get; set; }
 
         /// <summary>
         /// Employees the list.
@@ -32,7 +38,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult EmployeeList()
         {
-            List<Employee> employeeList = bll.GetElementList().Result;
+            List<Employee> employeeList = EmployeeService.GetElementList().Result;
             List<EmployeeModel> modelList = new List<EmployeeModel>();
 
             foreach (var item in employeeList)
@@ -66,7 +72,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult DepartmentList()
         {
-            List<Department> departmentList = departmentBll.GetElementList().Result;
+            List<Department> departmentList = DepartmentService.GetElementList().Result;
             List<DepartmentModel> modelList = new List<DepartmentModel>();
 
             foreach (var item in departmentList)
@@ -96,7 +102,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult GroupList()
         {
-            List<Group> employeeList = groupBll.GetElementList().Result;
+            List<Group> employeeList = GroupService.GetElementList().Result;
             List<GroupModel> modelList = new List<GroupModel>();
 
             foreach (var item in employeeList)

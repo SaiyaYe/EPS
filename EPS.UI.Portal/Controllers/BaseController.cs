@@ -1,4 +1,5 @@
 ﻿using EPS.BLL;
+using EPS.IBLL;
 using EPS.Model;
 using EPS.UI.Portal.Models;
 using System;
@@ -11,11 +12,12 @@ namespace EPS.UI.Portal.Controllers
 {
     public class BaseController : Controller
     {
-        MenuService bll = new MenuService();
+        [Ninject.Inject]
+        public IMenuService MenuService { get; set; }
 
         public BaseController()
         {
-            List<Menu> menuList = bll.GetElementList().Result;
+            List<Menu> menuList = MenuService.GetElementList().Result;
             List<MenuModel> modelList = new List<MenuModel>();
             foreach (var menu in menuList)
             {

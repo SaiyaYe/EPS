@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/17/2018 23:45:08
+-- Date Created: 03/18/2018 01:18:36
 -- Generated from EDMX file: E:\project\EPS\EPS.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -68,6 +68,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CountyPatrolPoint]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatrolPoint] DROP CONSTRAINT [FK_CountyPatrolPoint];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PatrolPoint_PatrolRoute_PatrolPoint]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatrolPoint_PatrolRoute] DROP CONSTRAINT [FK_PatrolPoint_PatrolRoute_PatrolPoint];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PatrolPoint_PatrolRoute_PatrolRoute]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatrolPoint_PatrolRoute] DROP CONSTRAINT [FK_PatrolPoint_PatrolRoute_PatrolRoute];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PatrolPointDictionary]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatrolPoint] DROP CONSTRAINT [FK_PatrolPointDictionary];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -120,6 +129,9 @@ IF OBJECT_ID(N'[dbo].[PatrolRoute]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PatrolDefect]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PatrolDefect];
+GO
+IF OBJECT_ID(N'[dbo].[PatrolPoint_PatrolRoute]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PatrolPoint_PatrolRoute];
 GO
 
 -- --------------------------------------------------
@@ -221,12 +233,12 @@ GO
 -- Creating table 'PatrolReport'
 CREATE TABLE [dbo].[PatrolReport] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DefectTypeId] int  NOT NULL,
-    [EmergenceId] int  NOT NULL,
     [PatrolPointId] int  NOT NULL,
     [PatrolRouteId] int  NOT NULL,
     [ReportTime] datetime  NOT NULL,
-    [ReportEmployeeId] int  NOT NULL
+    [ReportEmployeeId] int  NOT NULL,
+    [DefectTypeId] int  NOT NULL,
+    [DefectLevelId] int  NOT NULL
 );
 GO
 
@@ -689,6 +701,36 @@ GO
 CREATE INDEX [IX_FK_PatrolPointDictionary]
 ON [dbo].[PatrolPoint]
     ([PatrolPointTypeId]);
+GO
+
+-- Creating foreign key on [DefectTypeId] in table 'PatrolReport'
+ALTER TABLE [dbo].[PatrolReport]
+ADD CONSTRAINT [FK_PatrolReportDictionary]
+    FOREIGN KEY ([DefectTypeId])
+    REFERENCES [dbo].[Dictionary]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PatrolReportDictionary'
+CREATE INDEX [IX_FK_PatrolReportDictionary]
+ON [dbo].[PatrolReport]
+    ([DefectTypeId]);
+GO
+
+-- Creating foreign key on [DefectLevelId] in table 'PatrolReport'
+ALTER TABLE [dbo].[PatrolReport]
+ADD CONSTRAINT [FK_DefectLevelId]
+    FOREIGN KEY ([DefectLevelId])
+    REFERENCES [dbo].[Dictionary]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DefectLevelId'
+CREATE INDEX [IX_FK_DefectLevelId]
+ON [dbo].[PatrolReport]
+    ([DefectLevelId]);
 GO
 
 -- --------------------------------------------------

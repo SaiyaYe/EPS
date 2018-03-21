@@ -1,6 +1,4 @@
-﻿using EPS.Common;
-using EPS.IDAL;
-using EPS.Model;
+﻿using EPS.IDAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPS.EFDAL
 {
-    public class PatrolSchemeDal : BaseDal<PatrolScheme>, IPatrolSchemeDal
+    public class DictionaryDal : BaseDal<Model.Dictionary>, IDictionaryDal
     {
     }
 }

@@ -20,7 +20,6 @@ E:\project\EPS\EPS.Model\bin\Debug\EntityFramework.xml
 E:\project\EPS\EPS.Model\bin\Debug\EntityFramework.SqlServer.xml
 E:\project\EPS\EPS.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
 E:\project\EPS\EPS.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
-E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.csprojResolveAssemblyReference.cache
 E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.csproj.CoreCompileInputs.cache
 E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.dll
 E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.pdb

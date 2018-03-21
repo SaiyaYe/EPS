@@ -1,4 +1,5 @@
 ﻿using EPS.BLL;
+using EPS.IBLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ namespace EPS.UI.Portal.Controllers
 {
     public class LoginController : Controller
     {
-        UserService bll = new UserService();
+        [Ninject.Inject]
+        public IUserService UserService { get; set; }
 
         public ActionResult Index()
         {
@@ -21,7 +23,7 @@ namespace EPS.UI.Portal.Controllers
         {
             username = username.Trim();
             password = password.Trim();
-            var result = bll.Login(username, password);
+            var result = UserService.Login(username, password);
             return Json(result);
         }
     }

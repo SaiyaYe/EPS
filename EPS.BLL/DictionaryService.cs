@@ -1,15 +1,13 @@
-﻿using EPS.Common;
-using EPS.IDAL;
-using EPS.Model;
+﻿using EPS.IBLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EPS.EFDAL
+namespace EPS.BLL
 {
-    public class UserDal : BaseDal<User>, IUserDal
+    public class DictionaryService : BaseService<Model.Dictionary>, IDictionaryService
     {
     }
 }

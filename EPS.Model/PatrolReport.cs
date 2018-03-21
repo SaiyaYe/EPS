@@ -15,15 +15,17 @@ namespace EPS.Model
     public partial class PatrolReport
     {
         public int Id { get; set; }
-        public int DefectTypeId { get; set; }
-        public int EmergenceId { get; set; }
         public int PatrolPointId { get; set; }
         public int PatrolRouteId { get; set; }
         public System.DateTime ReportTime { get; set; }
         public int ReportEmployeeId { get; set; }
+        public int DefectTypeId { get; set; }
+        public int DefectLevelId { get; set; }
     
         public virtual PatrolPoint PatrolPoint { get; set; }
         public virtual PatrolRoute PatrolRoute { get; set; }
-        public virtual Employee Employee { get; set; }
+        public virtual Employee ReportEmployee { get; set; }
+        public virtual Dictionary DefectType { get; set; }
+        public virtual Dictionary DefectLevel { get; set; }
     }
 }

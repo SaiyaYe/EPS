@@ -1,5 +1,5 @@
 ﻿@using EPS.UI.Portal.Models
-@model PatrolSchemeModel
+@model PatrolReportModel
 @{
     ViewBag.Title = "UpdatePatrolReport";
 }
@@ -25,14 +25,6 @@
             @Html.HiddenFor(model => model.Id)
 
             <div class="form-group">
-                <span class="control-label col-md-2" style="font-weight:bold">计划编号</span>
-                <div class="input-group col-md-7">
-                    @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
                 <span class="control-label col-md-2" style="font-weight:bold">巡检路线</span>
                 <div class="input-group col-md-7">
                     @Html.Action("PatrolRoute", "Select", new { patrolRouteId = Model.PatrolRouteId })
@@ -40,31 +32,18 @@
             </div>
 
             <div class="form-group">
-                <span class="control-label col-md-2" style="font-weight:bold">员工</span>
+                <span class="control-label col-md-2" style="font-weight:bold">巡检员</span>
                 <div class="input-group col-md-7">
-                    @Html.Action("CompanyDepartmentGroupEmployee", "Select", new { companyId = Model.Employee.CompanyId, departmentId = Model.Employee.DepartmentId, groupId = Model.Employee.GroupId, employeeId = Model.EmployeeId })
+                    @Html.Action("CompanyDepartmentGroupEmployee", "Select", new { companyId = Model.ReportEmployee.CompanyId, departmentId = Model.ReportEmployee.DepartmentId, groupId = Model.ReportEmployee.GroupId, employeeId = Model.ReportEmployeeId })
                 </div>
             </div>
 
             @*<div class="form-group">
-                    <span class="control-label col-md-2" style="font-weight:bold">巡检开始日期</span>
-                    <div class="input-group col-md-7">
-                        @Html.Partial("Component/DateSelection", new DateRangeModel { StartDate = Model.StartDate.ToString("yyyy-MM-dd") })
-                    </div>
-                </div>*@
-
-            <div class="form-group">
-                <span class="control-label col-md-2" style="font-weight:bold">巡检开始日期</span>
+                <span class="control-label col-md-2" style="font-weight:bold">报告日期</span>
                 <div class="input-group col-md-7">
                     @Html.Partial("Component/DateRangeSelection", new DateRangeModel { StartDate = Model.StartDate.ToString("MM/dd/yyyy"), EndDate = Model.EndDate.ToString("MM/dd/yyyy") })
                 </div>
             </div>
-            @*<div class="form-group">
-                    <span class="control-label col-md-2" style="font-weight:bold">巡检结束日期</span>
-                    <div class="input-group col-md-7">
-                        @Html.Partial("Component/DateSelection", new DateRangeModel { StartDate = Model.EndDate.ToString("MM/dd/yyyy") })
-                    </div>
-                </div>*@
 
             <div class="form-group">
                 <span class="control-label col-md-2" style="font-weight:bold">备注</span>
@@ -72,7 +51,7 @@
                     @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

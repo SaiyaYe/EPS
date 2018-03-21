@@ -103,6 +103,14 @@
       <End Role="PatrolPoint" EntitySet="PatrolPoint" />
       <End Role="Dictionary" EntitySet="Dictionary" />
     </AssociationSet>
+    <AssociationSet Name="PatrolReportDictionary" Association="DataModel.Store.PatrolReportDictionary">
+      <End Role="PatrolReport" EntitySet="PatrolReport" />
+      <End Role="Dictionary" EntitySet="Dictionary" />
+    </AssociationSet>
+    <AssociationSet Name="DefectLevelId" Association="DataModel.Store.DefectLevelId">
+      <End Role="PatrolReport" EntitySet="PatrolReport" />
+      <End Role="Dictionary" EntitySet="Dictionary" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Company">
     <Key>
@@ -201,12 +209,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="DefectTypeId" Type="int" Nullable="false" />
-    <Property Name="EmergenceId" Type="int" Nullable="false" />
     <Property Name="PatrolPointId" Type="int" Nullable="false" />
     <Property Name="PatrolRouteId" Type="int" Nullable="false" />
     <Property Name="ReportTime" Type="datetime" Nullable="false" />
     <Property Name="ReportEmployeeId" Type="int" Nullable="false" />
+    <Property Name="DefectTypeId" Type="int" Nullable="false" />
+    <Property Name="DefectLevelId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Province">
     <Key>
@@ -482,6 +490,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="PatrolReportDictionary">
+    <End Role="PatrolReport" Type="DataModel.Store.PatrolReport" Multiplicity="*" />
+    <End Role="Dictionary" Type="DataModel.Store.Dictionary" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Dictionary">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatrolReport">
+        <PropertyRef Name="DefectTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DefectLevelId">
+    <End Role="PatrolReport" Type="DataModel.Store.PatrolReport" Multiplicity="*" />
+    <End Role="Dictionary" Type="DataModel.Store.Dictionary" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Dictionary">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatrolReport">
+        <PropertyRef Name="DefectLevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PatrolPoint_PatrolRoute_PatrolPoint">
     <End Role="PatrolPoint" Type="DataModel.Store.PatrolPoint" Multiplicity="1" />
     <End Role="PatrolPoint_PatrolRoute" Type="DataModel.Store.PatrolPoint_PatrolRoute" Multiplicity="*" />
@@ -603,6 +635,14 @@
             <End Role="PatrolPoint" EntitySet="PatrolPoint" />
             <End Role="Dictionary" EntitySet="Dictionary" />
           </AssociationSet>
+          <AssociationSet Name="PatrolReportDictionary" Association="DataModel.PatrolReportDictionary">
+            <End Role="PatrolReport" EntitySet="PatrolReport" />
+            <End Role="Dictionary" EntitySet="Dictionary" />
+          </AssociationSet>
+          <AssociationSet Name="DefectLevelId" Association="DataModel.DefectLevelId">
+            <End Role="PatrolReport" EntitySet="PatrolReport" />
+            <End Role="Dictionary" EntitySet="Dictionary" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Company">
           <Key>
@@ -651,6 +691,7 @@
           <NavigationProperty Name="AcquisitionRecord" Relationship="DataModel.AcquisitionRecordDictionary" FromRole="Dictionary" ToRole="AcquisitionRecord" />
           <NavigationProperty Name="PatrolDefect" Relationship="DataModel.DictionaryPatrolDefect" FromRole="Dictionary" ToRole="PatrolDefect" />
           <NavigationProperty Name="PatrolPoint" Relationship="DataModel.PatrolPointDictionary" FromRole="Dictionary" ToRole="PatrolPoint" />
+          <NavigationProperty Name="PatrolReport" Relationship="DataModel.PatrolReportDictionary" FromRole="Dictionary" ToRole="PatrolReport" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -831,15 +872,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DefectTypeId" Type="Int32" Nullable="false" />
-          <Property Name="EmergenceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PatrolPoint" Relationship="DataModel.PatrolPointPatrolReport" FromRole="PatrolReport" ToRole="PatrolPoint" />
           <Property Name="PatrolPointId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PatrolRoute" Relationship="DataModel.PatrolRoutePatrolReport" FromRole="PatrolReport" ToRole="PatrolRoute" />
           <Property Name="PatrolRouteId" Type="Int32" Nullable="false" />
           <Property Name="ReportTime" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="DataModel.PatrolReportEmployee" FromRole="PatrolReport" ToRole="Employee" />
+          <NavigationProperty Name="ReportEmployee" Relationship="DataModel.PatrolReportEmployee" FromRole="PatrolReport" ToRole="Employee" />
           <Property Name="ReportEmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DefectType" Relationship="DataModel.PatrolReportDictionary" FromRole="PatrolReport" ToRole="Dictionary" />
+          <Property Name="DefectTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DefectLevel" Relationship="DataModel.DefectLevelId" FromRole="PatrolReport" ToRole="Dictionary" />
+          <Property Name="DefectLevelId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="EmployeeAcquisitionRecord">
           <End Type="DataModel.Employee" Role="Employee" Multiplicity="1" />
@@ -1028,6 +1071,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PatrolReportDictionary">
+          <End Type="DataModel.PatrolReport" Role="PatrolReport" Multiplicity="*" />
+          <End Type="DataModel.Dictionary" Role="Dictionary" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Dictionary">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatrolReport">
+              <PropertyRef Name="DefectTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DefectLevelId">
+          <End Type="DataModel.PatrolReport" Role="PatrolReport" Multiplicity="*" />
+          <End Type="DataModel.Dictionary" Role="Dictionary" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Dictionary">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatrolReport">
+              <PropertyRef Name="DefectLevelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1139,12 +1206,12 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.PatrolReport)">
         <MappingFragment StoreEntitySet="PatrolReport">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DefectTypeId" ColumnName="DefectTypeId" />
-          <ScalarProperty Name="EmergenceId" ColumnName="EmergenceId" />
           <ScalarProperty Name="PatrolPointId" ColumnName="PatrolPointId" />
           <ScalarProperty Name="PatrolRouteId" ColumnName="PatrolRouteId" />
           <ScalarProperty Name="ReportTime" ColumnName="ReportTime" />
           <ScalarProperty Name="ReportEmployeeId" ColumnName="ReportEmployeeId" />
+          <ScalarProperty Name="DefectTypeId" ColumnName="DefectTypeId" />
+          <ScalarProperty Name="DefectLevelId" ColumnName="DefectLevelId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

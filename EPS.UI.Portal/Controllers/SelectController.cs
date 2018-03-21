@@ -11,11 +11,23 @@ namespace EPS.UI.Portal.Controllers
 {
     public class SelectController : Controller
     {
-        ICompanyService companyService = new CompanyService();
-        IDepartmentService departmentService = new DepartmentService();
-        IGroupService groupService = new GroupService();
-        IEmployeeService employeeService = new EmployeeService();
-        IPatrolRouteService patrolRouteService = new PatrolRouteService();
+        [Ninject.Inject]
+        public ICompanyService CompanyService { get; set; }
+
+        [Ninject.Inject]
+        public IDepartmentService DepartmentService { get; set; }
+
+        [Ninject.Inject]
+        public IGroupService GroupService { get; set; }
+
+        [Ninject.Inject]
+        public IEmployeeService EmployeeService { get; set; }
+
+        [Ninject.Inject]
+        public IPatrolRouteService PatrolRouteService { get; set; }
+
+        [Ninject.Inject]
+        public IDictionaryService DictionaryService { get; set; }
 
         /// <summary>
         /// 公司部门小组员工选项控件
@@ -28,7 +40,7 @@ namespace EPS.UI.Portal.Controllers
         public ActionResult CompanyDepartmentGroupEmployee(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0)
         {
             //公司
-            var companyList = companyService.GetElementList().Result;
+            var companyList = CompanyService.GetElementList().Result;
             if (companyList == null)
             {
                 return PartialView();
@@ -59,7 +71,7 @@ namespace EPS.UI.Portal.Controllers
             ViewBag.CompanyList = selectCompanyList;
 
             //部门
-            var departmentList = departmentService.Where(u => u.CompanyId == companyId).Result;
+            var departmentList = DepartmentService.Where(u => u.CompanyId == companyId).Result;
             var selectDepartmentList = departmentList.Select(u => new SelectListItem
             {
                 Text = u.Name,
@@ -84,7 +96,7 @@ namespace EPS.UI.Portal.Controllers
             ViewBag.DepartmentList = selectDepartmentList;
 
             //小组
-            var groupList = groupService.Where(u => u.DepartmentId == departmentId).Result;
+            var groupList = GroupService.Where(u => u.DepartmentId == departmentId).Result;
             var selectGroupList = groupList.Select(u => new SelectListItem
             {
                 Text = u.Name,
@@ -108,7 +120,7 @@ namespace EPS.UI.Portal.Controllers
             ViewBag.GroupList = selectGroupList;
 
             //员工
-            var employeeList = employeeService.Where(u => u.GroupId == groupId).Result;
+            var employeeList = EmployeeService.Where(u => u.GroupId == groupId).Result;
             var selectEmployeeList = employeeList.Select(u => new SelectListItem
             {
                 Text = u.Name,
@@ -144,7 +156,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult CompanyChange(int companyId = 0)
         {
-            var departmentList = departmentService.Where(u => u.Id == companyId).Result;
+            var departmentList = DepartmentService.Where(u => u.Id == companyId).Result;
             if (departmentList == null)
             {
                 return PartialView("component/SelectOptions", new List<SelectListItem>());
@@ -176,7 +188,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult DepartmentChange(int departmentId = 0)
         {
-            var groupList = groupService.Where(u => u.DepartmentId == departmentId).Result;
+            var groupList = GroupService.Where(u => u.DepartmentId == departmentId).Result;
             if (groupList == null)
             {
                 return PartialView("component/SelectOptions", new List<SelectListItem>());
@@ -209,7 +221,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult GroupChange(int groupId = 0)
         {
-            var employeeList = employeeService.Where(u => u.GroupId == groupId).Result;
+            var employeeList = EmployeeService.Where(u => u.GroupId == groupId).Result;
             if (employeeList == null)
             {
                 return PartialView("component/SelectOptions", new List<SelectListItem>());
@@ -232,7 +244,7 @@ namespace EPS.UI.Portal.Controllers
         }
 
         /// <summary>
-        /// 巡检计划
+        /// 巡检路线
         /// </summary>
         /// <returns></returns>
         /// 创建者：叶烨星
@@ -241,7 +253,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult PatrolRoute(int patrolRouteId = 0)
         {
-            var patrolRouteList = patrolRouteService.GetElementList().Result;
+            var patrolRouteList = PatrolRouteService.GetElementList().Result;
             if (patrolRouteList == null)
             {
                 return PartialView();
@@ -267,6 +279,86 @@ namespace EPS.UI.Portal.Controllers
                 }
             }
             ViewBag.PatrolRouteList = selectList;
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 缺陷类型
+        /// </summary>
+        /// <param name="defectTypeId">缺陷类型id</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/18 1:58
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult DefectType(int defectTypeId = 0)
+        {
+            var defectTypeList = DictionaryService.Where(u => u.Code.StartsWith("D1")).Result;
+            if (defectTypeList == null)
+            {
+                return PartialView();
+            }
+
+            var selectList = defectTypeList.Select(u => new SelectListItem
+            {
+                Text = u.Type,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectList.Insert(0, new SelectListItem { Text = "请选择缺陷类型", Value = "0" });
+
+            if (defectTypeId <= 0)
+            {
+                selectList[0].Selected = true;
+            }
+            else
+            {
+                var item = selectList.Find(u => u.Value == defectTypeId.ToString());
+                if (item != null)
+                {
+                    item.Selected = true;
+                }
+            }
+            ViewBag.DefectTypeList = selectList;
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 缺陷等级
+        /// </summary>
+        /// <param name="defectLevelId">缺陷等级id</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/18 2:09
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult DefectLevel(int defectLevelId = 0)
+        {
+            var defectLevelList = DictionaryService.Where(u => u.Code.StartsWith("D2")).Result;
+            if (defectLevelList == null)
+            {
+                return PartialView();
+            }
+
+            var selectList = defectLevelList.Select(u => new SelectListItem
+            {
+                Text = u.Type,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectList.Insert(0, new SelectListItem { Text = "请选择缺陷类型", Value = "0" });
+
+            if (defectLevelId <= 0)
+            {
+                selectList[0].Selected = true;
+            }
+            else
+            {
+                var item = selectList.Find(u => u.Value == defectLevelId.ToString());
+                if (item != null)
+                {
+                    item.Selected = true;
+                }
+            }
+            ViewBag.DefectLevelList = selectList;
             return PartialView();
         }
 

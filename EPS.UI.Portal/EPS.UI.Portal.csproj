@@ -58,6 +58,18 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.3.0\lib\net45\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.WebHost.3.3.0\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.3.0\lib\net45\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -173,6 +185,7 @@
     <Compile Include="Models\PatrolReportModel.cs" />
     <Compile Include="Models\PatrolSchemeModel.cs" />
     <Compile Include="Models\ProvinceModel.cs" />
+    <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8433,6 +8446,8 @@
     <Content Include="Views\Transaction\UpdatePatrolReport.cshtml" />
     <Content Include="Views\Transaction\PatrolPointList.cshtml" />
     <Content Include="Views\Transaction\_PatrolPointList.cshtml" />
+    <Content Include="Views\Select\DefectType.cshtml" />
+    <Content Include="Views\Select\DefectLevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -8466,9 +8481,21 @@
       <Project>{17e18178-3dcb-4655-a1e4-9bb2253b61b5}</Project>
       <Name>EPS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EPS.DALFactory\EPS.DALFactory.csproj">
+      <Project>{97e36671-cf3f-45b1-bbd1-46dde9b45eaf}</Project>
+      <Name>EPS.DALFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPS.EFDAL\EPS.EFDAL.csproj">
+      <Project>{a8e890a7-b8fd-42bd-ab3d-117fa509c46a}</Project>
+      <Name>EPS.EFDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EPS.IBll\EPS.IBLL.csproj">
       <Project>{1C61E665-3774-4F7F-AE4B-4480797AF9DF}</Project>
       <Name>EPS.IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPS.IDAL\EPS.IDAL.csproj">
+      <Project>{c4a40f75-72bc-4b54-8134-10c9e3d18c04}</Project>
+      <Name>EPS.IDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
       <Project>{7e09a44e-8531-48dd-ba50-7ceb857587a4}</Project>

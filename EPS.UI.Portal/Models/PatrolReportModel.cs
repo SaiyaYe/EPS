@@ -12,9 +12,11 @@ namespace EPS.UI.Portal.Models
 
         public int DefectTypeId { get; set; }
 
-        public string DefectCode { get; set; }
+        public DictionaryModel DefectType { get; set; }
 
-        public string DefectType { get; set; }
+        public int DefectLevelId { get; set; }
+
+        public DictionaryModel DefectLevel { get; set; }
 
         public int PatrolRouteId { get; set; }
 
@@ -22,12 +24,12 @@ namespace EPS.UI.Portal.Models
 
         public int PatrolPointId { get; set; }
 
-        public string PatrolPointNumber { get; set; }
+        public PatrolPointModel PatrolPoint { get; set; }
 
         public DateTime ReportTime { get; set; }
 
         public int ReportEmployeeId { get; set; }
 
-        public EmployeeModel Employee { get; set; }
+        public EmployeeModel ReportEmployee { get; set; }
     }
 }

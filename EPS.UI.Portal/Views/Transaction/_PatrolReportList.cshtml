@@ -9,11 +9,13 @@
     <table id="example2" class="table table-bordered table-hover">
         <thead>
             <tr>
-                <th>计划路线名</th>
+                <th>巡检线路</th>
                 <th>杆塔号</th>
-                <th>缺陷编码</th>
                 <th>缺陷类别</th>
+                <th>缺陷程度</th>
                 <th>巡检时间</th>
+                <th>巡检员</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -21,12 +23,15 @@
             {
                 <tr>
                     <td>@patrolReport.PatrolRouteName<input type="hidden" name="patrolRouteId" value=@patrolReport.PatrolRouteId /></td>
-                    <td>@patrolReport.PatrolPointNumber</td>
-                    <td>@patrolReport.DefectCode</td>
-                    <td>@patrolReport.DefectType</td>
+                    <td>@patrolReport.PatrolPoint.PoleTowerNumber</td>
+                    <td>@patrolReport.DefectType.Type</td>
+                    <td>@patrolReport.DefectLevel.Type</td>
                     <td>@patrolReport.ReportTime.ToString("yyyy-MM-dd")</td>
-
-                    @*<td>@patrolReport.DefectType<input type="hidden" name="defectTypeId" value=@patrolReport.DefectTypeId /></td>*@
+                    <td>@patrolReport.ReportEmployee.Name</td>
+                    <td>
+                        @Html.ActionLink("修改", "UpdatePatrolReport", "Transaction", new { patrolReportId = patrolReport.Id }, new { @class = "btn btn-primary" })
+                        <button class="btn btn-danger btn_Delete" id=@patrolReport.Id value="删除">删除</button>
+                    </td>
                 </tr>
             }
         </tbody>

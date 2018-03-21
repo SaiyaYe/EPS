@@ -20,8 +20,6 @@ namespace EPS.BLL
     /// <seealso cref="EPS.BLL.BaseService{EPS.Model.PatrolReport}" />
     public class PatrolReportService : BaseService<PatrolReport>, IPatrolReportService
     {
-        IPatrolReportDal dal = DbFactory.GetDal<PatrolReport>(typeof(PatrolReport).Name) as IPatrolReportDal;
-
         /// <summary>
         /// 获取巡检报告列表
         /// </summary>
@@ -40,27 +38,27 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResultList<PatrolReport> GetPatrolReportList(int companyId, int departmentId, int groupId, int employeeId, int patrolPointId, int patrolRouteId, int pageIndex, int pageSize)
         {
-            var query = dal.Query();
+            var query = DbSession.EntityQueryable<PatrolReport>().Query();
             if (companyId > 0)
             {
-                query = query.Where(u => u.Employee.CompanyId == companyId);
+                query = query.Where(u => u.ReportEmployee.CompanyId == companyId);
             }
 
             if (departmentId > 0)
             {
-                query = query.Where(u => u.Employee.DepartmentId == departmentId);
+                query = query.Where(u => u.ReportEmployee.DepartmentId == departmentId);
             }
 
             if (groupId > 0)
             {
-                query = query.Where(u => u.Employee.GroupId == groupId);
+                query = query.Where(u => u.ReportEmployee.GroupId == groupId);
             }
 
             if (employeeId > 0)
             {
                 query = query.Where(u => u.ReportEmployeeId == employeeId);
             }
-            
+
             if (patrolPointId > 0)
             {
                 query = query.Where(u => u.PatrolPointId == patrolRouteId);
@@ -95,7 +93,27 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<bool> UpdatePatrolReport(PatrolReport patrolReport)
         {
-            return dal.UpdatePatrolReport(patrolReport);
+            var model = DbSession.EntityQueryable<PatrolReport>().Find(patrolReport.Id).Result;
+            if (model == null)
+            {
+                return new ServiceResult<bool>
+                {
+                    State = false,
+                    Message = "找不到该巡检计划"
+                };
+            }
+            //model.Number = scheme.Number;
+            //model.PatrolRouteId = scheme.PatrolRouteId;
+            //model.EmployeeId = scheme.EmployeeId;
+            //model.StartDate = scheme.StartDate;
+            //model.EndDate = scheme.EndDate;
+
+            DbSession.SaveChanges();
+            return new ServiceResult<bool>()
+            {
+                Result = true,
+                State = true
+            };
         }
     }
 }

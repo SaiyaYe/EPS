@@ -13,8 +13,6 @@ namespace EPS.BLL
 {
     public class PatrolPointService : BaseService<PatrolPoint>, IPatrolPointService
     {
-        IPatrolPointDal dal = DbFactory.GetDal<PatrolPoint>(typeof(PatrolPoint).Name) as IPatrolPointDal;
-        IPatrolRouteDal patrolRouteDal = DbFactory.GetDal<PatrolRoute>(typeof(PatrolRoute).Name) as IPatrolRouteDal;
         /// <summary>
         /// 获取巡检点
         /// </summary>
@@ -26,11 +24,11 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResultList<PatrolPoint> GetPatrolPointList(int patrolRouteId = 0, int pageSize = 0, int pageIndex = 1)
         {
-            var query = dal.Query();
+            var query = DbSession.EntityQueryable<PatrolPoint>().Query();
 
             if (patrolRouteId > 0)
             {
-                var patrolPointList = patrolRouteDal.Find(patrolRouteId).Result.PatrolPoint;
+                var patrolPointList = DbSession.EntityQueryable<PatrolRoute>().Find(patrolRouteId).Result.PatrolPoint;
                 var patrolPointIdList = patrolPointList.Select(u => u.Id);
                 query = query.Where(u => patrolPointIdList.Contains(u.Id));
             }

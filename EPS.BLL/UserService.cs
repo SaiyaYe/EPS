@@ -13,8 +13,6 @@ namespace EPS.BLL
 {
     public class UserService : BaseService<User>, IUserService
     {
-        UserDal dal = DbFactory.GetDal<User>(typeof(User).Name) as UserDal;
-
         /// <summary>
         /// 登录
         /// </summary>
@@ -27,7 +25,30 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<bool> Login(string username, string password)
         {
-            return dal.Login(username, password);
+            User user = DbSession.EntityQueryable<User>().Where(u => u.UserName == username).FirstOrDefault();
+            if (user == null)
+            {
+                return new ServiceResult<bool>
+                {
+                    State = false,
+                    Message = "用户名不存在"
+                };
+            }
+
+            if (user.Password != password)
+            {
+                return new ServiceResult<bool>
+                {
+                    State = false,
+                    Message = "密码错误"
+                };
+            }
+
+            return new ServiceResult<bool>
+            {
+                Result = true,
+                State = true
+            };
         }
     }
 }

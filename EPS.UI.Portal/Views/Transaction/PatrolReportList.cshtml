@@ -40,6 +40,12 @@
                 @Html.Action("PatrolRoute", "Select")
             </div>
             <div style="float:left">
+                @Html.Action("DefectType", "Select")
+            </div>
+            <div style="float:left">
+                @Html.Action("DefectLevel", "Select")
+            </div>
+            <div style="float:left">
                 &nbsp<button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
             </div>
             @Html.ActionLink("添加", "AddPatrolReport", "Transaction", new { }, new { @class = "btn btn-success", style = "float:right" })

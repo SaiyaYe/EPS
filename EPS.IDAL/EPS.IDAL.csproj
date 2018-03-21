@@ -48,6 +48,7 @@
     <Compile Include="ICompanyDal.cs" />
     <Compile Include="IDbSession.cs" />
     <Compile Include="IDepartmentDal.cs" />
+    <Compile Include="IDictionaryDal.cs" />
     <Compile Include="IEmployeeDal.cs" />
     <Compile Include="IGroupDal.cs" />
     <Compile Include="IMenuDal.cs" />

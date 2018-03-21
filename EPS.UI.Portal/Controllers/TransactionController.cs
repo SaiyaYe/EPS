@@ -14,10 +14,17 @@ namespace EPS.UI.Portal.Controllers
 
     public class TransactionController : BaseController
     {
-        IPatrolPointService patrolPointService = new PatrolPointService();
-        IPatrolSchemeService patrolSchemeService = new PatrolSchemeService();
-        IPatrolReportService patrolReportService = new PatrolReportService();
-        IEmployeeService employeeService = new EmployeeService();
+        [Ninject.Inject]
+        public IPatrolPointService PatrolPointService { get; set; }
+
+        [Ninject.Inject]
+        public IPatrolSchemeService PatrolSchemeService { get; set; }
+
+        [Ninject.Inject]
+        public IPatrolReportService PatrolReportService { get; set; }
+
+        [Ninject.Inject]
+        public IEmployeeService EmployeeService { get; set; }
 
         #region 巡检计划
         /// <summary>
@@ -46,7 +53,7 @@ namespace EPS.UI.Portal.Controllers
             List<PatrolSchemeModel> modelList = new List<PatrolSchemeModel>();
 
             pagesize = pagesize == 0 ? ControllerCommon.PageSize : pagesize;
-            var result = patrolSchemeService.GetPatrolSchemeList(companyId, departmentId, groupId, employeeId, patrolRouteId, pagesize, pageIndex);
+            var result = PatrolSchemeService.GetPatrolSchemeList(companyId, departmentId, groupId, employeeId, patrolRouteId, pagesize, pageIndex);
             List<PatrolScheme> patrolSchemeList = result.Result;
             foreach (var item in patrolSchemeList)
             {
@@ -114,7 +121,7 @@ namespace EPS.UI.Portal.Controllers
                 StartDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[0].Trim()),
                 EndDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[1].Trim()),
             };
-            var result = patrolSchemeService.Add(patrolScheme);
+            var result = PatrolSchemeService.Add(patrolScheme);
             if (!result.State)
             {
                 return Content(result.Message);
@@ -135,7 +142,7 @@ namespace EPS.UI.Portal.Controllers
         [HttpPost]
         public ActionResult DeleteSchemeById(int schemeId, FormCollection fc = null)
         {
-            var result = patrolSchemeService.DeleteById(schemeId);
+            var result = PatrolSchemeService.DeleteById(schemeId);
             return Json(result);
         }
 
@@ -150,7 +157,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult UpdateScheme(int schemeId)
         {
-            PatrolScheme scheme = patrolSchemeService.Find(schemeId).Result;
+            PatrolScheme scheme = PatrolSchemeService.Find(schemeId).Result;
             PatrolSchemeModel model = new PatrolSchemeModel
             {
                 Id = scheme.Id,
@@ -195,7 +202,7 @@ namespace EPS.UI.Portal.Controllers
                 StartDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[0].Trim()),
                 EndDate = DateTime.Parse(model.DateRange.Split(new char[] { '-' })[0].Trim())
             };
-            var result = patrolSchemeService.UpdateScheme(patrolScheme);
+            var result = PatrolSchemeService.UpdateScheme(patrolScheme);
             return RedirectToAction("SchemeList");
         }
         #endregion
@@ -227,17 +234,59 @@ namespace EPS.UI.Portal.Controllers
             List<PatrolReportModel> modelList = new List<PatrolReportModel>();
 
             pagesize = pagesize == 0 ? ControllerCommon.PageSize : pagesize;
-            var result = patrolReportService.GetPatrolReportList(companyId, departmentId, groupId, employeeId, patrolPointId, patrolRouteId, pageIndex, pagesize);
+            var result = PatrolReportService.GetPatrolReportList(companyId, departmentId, groupId, employeeId, patrolPointId, patrolRouteId, pageIndex, pagesize);
             List<PatrolReport> patrolReportList = result.Result;
             foreach (var item in patrolReportList)
             {
                 PatrolReportModel model = new PatrolReportModel()
                 {
+                    Id = item.Id,
                     PatrolPointId = item.PatrolPoint.Id,
-                    //DefectCode = item.Dictionary.Code,
-                    //DefectType = item.Dictionary.Type,
+                    PatrolPoint = new PatrolPointModel
+                    {
+                        Id = item.PatrolPoint.Id,
+                        PoleTowerNumber = item.PatrolPoint.PoleTowerNumber,
+                        Latitude = item.PatrolPoint.Latitude,
+                        Longitude = item.PatrolPoint.Longitude,
+                        CountyId = item.PatrolPoint.CountyId,
+                        County = new CountyModel
+                        {
+                            Id = item.PatrolPoint.CountyId,
+                            Name = item.PatrolPoint.County.Name,
+                            CityId = item.PatrolPoint.County.CityId,
+                            City = new CityModel
+                            {
+                                Id = item.PatrolPoint.County.CityId,
+                                Name = item.PatrolPoint.County.City.Name,
+                                ProvinceId = item.PatrolPoint.County.City.ProvinceId,
+                                Province = new ProvinceModel
+                                {
+                                    Id = item.PatrolPoint.County.City.ProvinceId,
+                                    Name = item.PatrolPoint.County.City.Province.Name
+                                },
+                            },
+                        }
+                    },
+                    DefectType = new DictionaryModel
+                    {
+                        Code = item.DefectType.Code,
+                        Type = item.DefectType.Type
+                    },
+                    DefectLevelId = item.DefectLevelId,
+                    DefectLevel = new DictionaryModel
+                    {
+                        Code = item.DefectLevel.Code,
+                        Type = item.DefectLevel.Type
+                    },
+                    ReportEmployeeId = item.ReportEmployeeId,
+                    ReportEmployee = new EmployeeModel
+                    {
+                        Id = item.ReportEmployee.Id,
+                        Name = item.ReportEmployee.Name
+                    },
                     PatrolRouteName = item.PatrolRoute.Name,
                     ReportTime = item.ReportTime,
+
                 };
                 modelList.Add(model);
             }
@@ -283,7 +332,7 @@ namespace EPS.UI.Portal.Controllers
                 //    Type = model.DefectType
                 //}
             };
-            var result = patrolReportService.Add(patrolReport);
+            var result = PatrolReportService.Add(patrolReport);
             if (!result.State)
             {
                 return Content(result.Message);
@@ -304,7 +353,7 @@ namespace EPS.UI.Portal.Controllers
         [HttpPost]
         public ActionResult DeletePatrolReportById(int PatrolReportId)
         {
-            var result = patrolReportService.DeleteById(PatrolReportId);
+            var result = PatrolReportService.DeleteById(PatrolReportId);
             return Json(result);
         }
 
@@ -319,21 +368,24 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult UpdatePatrolReport(int patrolReportId)
         {
-            PatrolReport patrolReport = patrolReportService.Find(patrolReportId).Result;
+            PatrolReport patrolReport = PatrolReportService.Find(patrolReportId).Result;
             PatrolReportModel model = new PatrolReportModel
             {
                 Id = patrolReport.Id,
                 ReportEmployeeId = patrolReport.ReportEmployeeId,
-                Employee = new EmployeeModel
+                ReportEmployee = new EmployeeModel
                 {
                     Id = patrolReport.ReportEmployeeId,
-                    Name = patrolReport.Employee.Name,
-                    CompanyId = patrolReport.Employee.CompanyId,
-                    DepartmentId = patrolReport.Employee.DepartmentId,
-                    GroupId = patrolReport.Employee.GroupId
+                    Name = patrolReport.ReportEmployee.Name,
+                    CompanyId = patrolReport.ReportEmployee.CompanyId,
+                    DepartmentId = patrolReport.ReportEmployee.DepartmentId,
+                    GroupId = patrolReport.ReportEmployee.GroupId
                 },
                 PatrolPointId = patrolReport.PatrolPointId,
-                PatrolPointNumber = patrolReport.PatrolPoint.PoleTowerNumber,
+                PatrolPoint = new PatrolPointModel
+                {
+                    PoleTowerNumber = patrolReport.PatrolPoint.PoleTowerNumber
+                },
                 PatrolRouteId = patrolReport.PatrolRouteId,
                 PatrolRouteName = patrolReport.PatrolRoute.Name,
                 ReportTime = patrolReport.ReportTime
@@ -363,7 +415,7 @@ namespace EPS.UI.Portal.Controllers
                 DefectTypeId = model.DefectTypeId,
                 ReportTime = model.ReportTime,
             };
-            var result = patrolReportService.UpdatePatrolReport(patrolReport);
+            var result = PatrolReportService.UpdatePatrolReport(patrolReport);
             return RedirectToAction("PatrolReportList");
         }
         #endregion
@@ -398,7 +450,7 @@ namespace EPS.UI.Portal.Controllers
             List<PatrolPointModel> modelList = new List<PatrolPointModel>();
 
             pageSize = pageSize == 0 ? ControllerCommon.PageSize : pageSize;
-            var result = patrolPointService.GetPatrolPointList(PatrolRouteId, pageSize, pageIndex);
+            var result = PatrolPointService.GetPatrolPointList(PatrolRouteId, pageSize, pageIndex);
             List<PatrolPoint> patrolPointList = result.Result;
 
             foreach (var item in patrolPointList)
@@ -447,6 +499,7 @@ namespace EPS.UI.Portal.Controllers
         }
 
         #endregion
+
         public ActionResult Set()
         {
             return View();

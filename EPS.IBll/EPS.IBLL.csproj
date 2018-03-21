@@ -43,6 +43,7 @@
     <Compile Include="IBaseService.cs" />
     <Compile Include="ICompanyService.cs" />
     <Compile Include="IDepartmentService.cs" />
+    <Compile Include="IDictionaryService.cs" />
     <Compile Include="IEmployeeService.cs" />
     <Compile Include="IGroupService.cs" />
     <Compile Include="IMenuService.cs" />

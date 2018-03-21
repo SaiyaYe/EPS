@@ -1,11 +1,11 @@
 ﻿using EPS.Common;
-using EPS.EFDAL;
 using EPS.IDAL;
 using EPS.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +24,21 @@ namespace EPS.DALFactory
         //public IGroupDal GroupDal { get { return DbFactory.GetDal<Group>(typeof(Group).Name) as IGroupDal; } }
         #endregion
 
-        //public IQueryable<TEntity> EntityQueryable<TEntity>(OrmStrategy strategy, bool cache) where TEntity : class, new()
-        //{
-        //    var alias = DataSource.GetDataSource(strategy, Operation.Read);
-        //    return cache ? this.OpenSession(alias).Query<TEntity>() : this.OpenStatelessSession(alias).Query<TEntity>();
-        //}
+        /// <summary>
+        /// 查询实体
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/20 9:53
+        /// 修改者：
+        /// 修改时间：
+        public IBaseDal<TEntity> EntityQueryable<TEntity>() where TEntity : class, new()
+        {
+            string dalName = typeof(TEntity).Name;
+            string assemblyName = System.Configuration.ConfigurationManager.AppSettings["DalAssemblyName"];
+            return Assembly.Load(assemblyName).CreateInstance(assemblyName + "." + dalName + "Dal") as IBaseDal<TEntity>;
+        }
 
         /// <summary>
         /// 获取当前上下文
@@ -38,7 +48,7 @@ namespace EPS.DALFactory
         /// 创建时间：2018/2/11 22:20
         /// 修改者：
         /// 修改时间：
-        public static DbContext GetCurrentContext()
+        public static DbContext GetCurrentDbContext()
         {
             DbContext db = CallContext.GetData("DbContext") as DbContext;
             if (db == null)
@@ -60,7 +70,7 @@ namespace EPS.DALFactory
         /// 修改时间：
         public ServiceResult<bool> SaveChanges()
         {
-            DbContext db = DbContextFactory.GetCurrentDbContext();
+            DbContext db = GetCurrentDbContext();
             try
             {
                 db.SaveChanges();

@@ -16,6 +16,8 @@ namespace EPS.UI.Portal
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //注册Ninject容器
+            DependencyResolver.SetResolver(new NinjectDependencyResolver());
         }
     }
 }

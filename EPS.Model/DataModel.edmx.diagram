@@ -22,7 +22,7 @@
         <AssociationConnector Association="DataModel.EmployeeCompany" />
         <EntityTypeShape EntityType="DataModel.AcquisitionRecord" Width="1.5" PointX="7.875" PointY="4.375" />
         <AssociationConnector Association="DataModel.AcquisitionRecordDictionary" />
-        <EntityTypeShape EntityType="DataModel.PatrolReport" Width="1.5" PointX="3.125" PointY="4.5" />
+        <EntityTypeShape EntityType="DataModel.PatrolReport" Width="1.5" PointX="2.75" PointY="4.5" />
         <AssociationConnector Association="DataModel.EmployeeAcquisitionRecord" />
         <EntityTypeShape EntityType="DataModel.Province" Width="1.5" PointX="8.875" PointY="11" />
         <EntityTypeShape EntityType="DataModel.City" Width="1.5" PointX="6.875" PointY="11" />
@@ -40,6 +40,8 @@
         <AssociationConnector Association="DataModel.CountyPatrolPoint" />
         <AssociationConnector Association="DataModel.PatrolPoint_PatrolRoute" />
         <AssociationConnector Association="DataModel.PatrolPointDictionary" />
+        <AssociationConnector Association="DataModel.PatrolReportDictionary" />
+        <AssociationConnector Association="DataModel.DefectLevelId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

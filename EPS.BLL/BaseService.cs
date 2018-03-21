@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace EPS.BLL
 {
-    public class BaseService<T> where T : class, new()
+    public abstract class BaseService<T> where T : class, new()
     {
-        IBaseDal<T> dal = DbFactory.GetDal<T>(typeof(T).Name);
+        //IBaseDal<T> dal = DbFactory.GetDal<T>(typeof(T).Name);
 
         public IDbSession DbSession
         {
@@ -31,7 +31,7 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<T> Find(int id)
         {
-            return dal.Find(id);
+            return DbSession.EntityQueryable<T>().Find(id);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace EPS.BLL
         {
             return new ServiceResultList<T>
             {
-                Result = dal.Query().ToList(),
+                Result = DbSession.EntityQueryable<T>().Query().ToList(),
                 State = true
             };
         }
@@ -64,7 +64,7 @@ namespace EPS.BLL
         {
             return new ServiceResultList<T>
             {
-                Result = dal.Where(whereLambda).ToList(),
+                Result = DbSession.EntityQueryable<T>().Where(whereLambda).ToList(),
                 State = true
             };
         }
@@ -80,7 +80,7 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<bool> Add(T element)
         {
-            dal.Add(element);
+            DbSession.EntityQueryable<T>().Add(element);
             return DbSession.SaveChanges();
         }
 
@@ -95,7 +95,7 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<bool> DeleteById(int id)
         {
-            var result = dal.DeleteById(id);
+            var result = DbSession.EntityQueryable<T>().DeleteById(id);
             if (!result.State)
             {
                 return new ServiceResult<bool>

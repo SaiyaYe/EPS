@@ -13,8 +13,6 @@ namespace EPS.BLL
 {
     public class PatrolSchemeService : BaseService<PatrolScheme>, IPatrolSchemeService
     {
-        IPatrolSchemeDal dal = DbFactory.GetDal<PatrolScheme>(typeof(PatrolScheme).Name) as IPatrolSchemeDal;
-
         /// <summary>
         /// 获取巡检计划列表
         /// </summary>
@@ -31,7 +29,7 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResultList<PatrolScheme> GetPatrolSchemeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolRouteId = 0, int pageSize = 15, int pageIndex = 1)
         {
-            var query = dal.Query();
+            var query = DbSession.EntityQueryable<PatrolScheme>().Query();
             if (companyId > 0)
             {
                 query = query.Where(u => u.Employee.CompanyId == companyId);
@@ -81,7 +79,27 @@ namespace EPS.BLL
         /// 修改时间：
         public ServiceResult<bool> UpdateScheme(PatrolScheme scheme)
         {
-            return dal.UpdateScheme(scheme);
+            var model = DbSession.EntityQueryable<PatrolScheme>().Find(scheme.Id).Result;
+            if (model == null)
+            {
+                return new ServiceResult<bool>
+                {
+                    State = false,
+                    Message = "找不到该巡检计划"
+                };
+            }
+            model.Number = scheme.Number;
+            model.PatrolRouteId = scheme.PatrolRouteId;
+            model.EmployeeId = scheme.EmployeeId;
+            model.StartDate = scheme.StartDate;
+            model.EndDate = scheme.EndDate;
+
+            DbSession.SaveChanges();
+            return new ServiceResult<bool>()
+            {
+                Result = true,
+                State = true
+            };
         }
     }
 }
