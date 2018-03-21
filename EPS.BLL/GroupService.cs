@@ -10,5 +10,6 @@ namespace EPS.BLL
 {
     public class GroupService : BaseService<Group>, IGroupService
     {
+        public int i = 1;
     }
 }
