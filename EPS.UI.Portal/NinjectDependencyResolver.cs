@@ -38,7 +38,6 @@ namespace EPS.UI.Portal
         /// 修改时间：
         private void AddBindings()
         {
-            //kernel.Bind<IProductRepository>().To<EFProductRepository>();
             kernel.Bind<IMenuService>().To<MenuService>();
             kernel.Bind<IDictionaryService>().To<DictionaryService>();
             kernel.Bind<IUserService>().To<UserService>();
@@ -49,10 +48,6 @@ namespace EPS.UI.Portal
             kernel.Bind<IPatrolPointService>().To<PatrolPointService>();
             kernel.Bind<IPatrolRouteService>().To<PatrolRouteService>();
             kernel.Bind<IPatrolSchemeService>().To<PatrolSchemeService>();
-            kernel.Bind<IPatrolReportService>().To<PatrolReportService>();
-
-            
-            kernel.Bind<IPatrolReportService>().To<PatrolReportService>();
             kernel.Bind<IPatrolReportService>().To<PatrolReportService>();
         }
     }

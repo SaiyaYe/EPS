@@ -12,8 +12,8 @@ namespace EPS.UI.Portal.Controllers
 {
     public class BaseController : Controller
     {
-        [Ninject.Inject]
-        public IMenuService MenuService { get; set; }
+        //[Ninject.Inject]
+        public IMenuService MenuService = new MenuService();//{ get; set; }
 
         public BaseController()
         {
