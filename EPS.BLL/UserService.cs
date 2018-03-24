@@ -23,12 +23,12 @@ namespace EPS.BLL
         /// 创建时间：2018/2/13 11:09
         /// 修改者：
         /// 修改时间：
-        public ServiceResult<bool> Login(string username, string password)
+        public ServiceResult<User> Login(string username, string password)
         {
             User user = DbSession.EntityQueryable<User>().Where(u => u.UserName == username).FirstOrDefault();
             if (user == null)
             {
-                return new ServiceResult<bool>
+                return new ServiceResult<User>
                 {
                     State = false,
                     Message = "用户名不存在"
@@ -37,16 +37,16 @@ namespace EPS.BLL
 
             if (user.Password != password)
             {
-                return new ServiceResult<bool>
+                return new ServiceResult<User>
                 {
                     State = false,
                     Message = "密码错误"
                 };
             }
 
-            return new ServiceResult<bool>
+            return new ServiceResult<User>
             {
-                Result = true,
+                Result = user,
                 State = true
             };
         }

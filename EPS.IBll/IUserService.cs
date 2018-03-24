@@ -20,6 +20,6 @@ namespace EPS.IBLL
         /// 创建时间：2018/2/13 11:09
         /// 修改者：
         /// 修改时间：
-        ServiceResult<bool> Login(string username, string password);
+        ServiceResult<User> Login(string username, string password);
     }
 }

@@ -180,10 +180,6 @@ E:\project\EPS\EPS.UI.Portal\bin\Microsoft.ApplicationInsights.dll
 E:\project\EPS\EPS.UI.Portal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\project\EPS\EPS.UI.Portal\bin\Microsoft.Web.Infrastructure.dll
 E:\project\EPS\EPS.UI.Portal\bin\Newtonsoft.Json.dll
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.dll
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.Web.Common.dll
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.Web.Common.WebHost.dll
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.Web.Mvc.dll
 E:\project\EPS\EPS.UI.Portal\bin\System.Web.Helpers.dll
 E:\project\EPS\EPS.UI.Portal\bin\System.Web.Mvc.dll
 E:\project\EPS\EPS.UI.Portal\bin\System.Web.Optimization.dll
@@ -204,10 +200,6 @@ E:\project\EPS\EPS.UI.Portal\bin\EPS.Model.dll.config
 E:\project\EPS\EPS.UI.Portal\bin\EntityFramework.xml
 E:\project\EPS\EPS.UI.Portal\bin\EntityFramework.SqlServer.xml
 E:\project\EPS\EPS.UI.Portal\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.xml
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.Web.Common.xml
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.Web.Common.WebHost.xml
-E:\project\EPS\EPS.UI.Portal\bin\Ninject.Web.Mvc.xml
 E:\project\EPS\EPS.UI.Portal\bin\System.Web.Helpers.xml
 E:\project\EPS\EPS.UI.Portal\bin\System.Web.Mvc.xml
 E:\project\EPS\EPS.UI.Portal\bin\System.Web.Optimization.xml
