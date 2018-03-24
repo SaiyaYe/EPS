@@ -24,7 +24,7 @@ namespace EPS.UI.Portal.Controllers
             username = username.Trim();
             password = password.Trim();
             var result = UserService.Login(username, password);
-            return Json(result);
+            return Json(new { result.State, result.Message });
         }
     }
 }
