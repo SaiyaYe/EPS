@@ -38,3 +38,8 @@ E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.dll
 E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.pdb
 E:\project\EPS\EPS.EFDAL\bin\Debug\Newtonsoft.Json.dll
 E:\project\EPS\EPS.EFDAL\bin\Debug\Newtonsoft.Json.xml
+E:\project\EPS\EPS.EFDAL\bin\Debug\NPOI.OOXML.dll
+E:\project\EPS\EPS.EFDAL\bin\Debug\NPOI.dll
+E:\project\EPS\EPS.EFDAL\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\project\EPS\EPS.EFDAL\bin\Debug\NPOI.OpenXml4Net.dll
+E:\project\EPS\EPS.EFDAL\bin\Debug\ICSharpCode.SharpZipLib.dll

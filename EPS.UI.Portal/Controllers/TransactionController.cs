@@ -5,6 +5,7 @@ using EPS.Model;
 using EPS.UI.Portal.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -204,6 +205,20 @@ namespace EPS.UI.Portal.Controllers
             };
             var result = PatrolSchemeService.UpdateScheme(patrolScheme);
             return RedirectToAction("SchemeList");
+        }
+
+        /// <summary>
+        /// 导出Word报表
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/24 17:06
+        /// 修改者：
+        /// 修改时间：
+        public FileResult ExportWord()
+        {
+            MemoryStream stream = NpoiOperator.ExportWordStream();
+            return File(stream, "application/ms-word", "wordtest.docx");
         }
         #endregion
 

@@ -38,3 +38,8 @@ E:\project\EPS\EPS.BLL\obj\Debug\EPS.BLL.dll
 E:\project\EPS\EPS.BLL\obj\Debug\EPS.BLL.pdb
 E:\project\EPS\EPS.BLL\bin\Debug\Newtonsoft.Json.dll
 E:\project\EPS\EPS.BLL\bin\Debug\Newtonsoft.Json.xml
+E:\project\EPS\EPS.BLL\bin\Debug\NPOI.OOXML.dll
+E:\project\EPS\EPS.BLL\bin\Debug\NPOI.dll
+E:\project\EPS\EPS.BLL\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\project\EPS\EPS.BLL\bin\Debug\NPOI.OpenXml4Net.dll
+E:\project\EPS\EPS.BLL\bin\Debug\ICSharpCode.SharpZipLib.dll

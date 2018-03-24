@@ -11,3 +11,8 @@ E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.csproj.CoreCompileInputs.cache
 E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.dll
 E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.pdb
 E:\project\EPS\EPS.Common\bin\Debug\Newtonsoft.Json.dll
+E:\project\EPS\EPS.Common\bin\Debug\NPOI.dll
+E:\project\EPS\EPS.Common\bin\Debug\NPOI.OOXML.dll
+E:\project\EPS\EPS.Common\bin\Debug\NPOI.OpenXml4Net.dll
+E:\project\EPS\EPS.Common\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\project\EPS\EPS.Common\bin\Debug\ICSharpCode.SharpZipLib.dll

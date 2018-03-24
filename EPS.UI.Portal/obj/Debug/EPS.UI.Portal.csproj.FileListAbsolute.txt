@@ -230,3 +230,8 @@ E:\project\EPS\EPS.UI.Portal\obj\Debug\EPS.UI.Portal.pdb
 E:\project\EPS\EPS.UI.Portal\bin\EPS.UI.Portal.dll.config
 E:\project\EPS\EPS.UI.Portal\bin\EPS.UI.Portal.dll
 E:\project\EPS\EPS.UI.Portal\bin\EPS.UI.Portal.pdb
+E:\project\EPS\EPS.UI.Portal\bin\NPOI.OOXML.dll
+E:\project\EPS\EPS.UI.Portal\bin\NPOI.dll
+E:\project\EPS\EPS.UI.Portal\bin\NPOI.OpenXmlFormats.dll
+E:\project\EPS\EPS.UI.Portal\bin\NPOI.OpenXml4Net.dll
+E:\project\EPS\EPS.UI.Portal\bin\ICSharpCode.SharpZipLib.dll

@@ -34,9 +34,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\AIERXUAN\Desktop\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>C:\Users\AIERXUAN\Desktop\Algorithm\Algorithm\Sorting\bin\Release\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>C:\Users\AIERXUAN\Desktop\Algorithm\Algorithm\Sorting\bin\Release\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>C:\Users\AIERXUAN\Desktop\Algorithm\Algorithm\Sorting\bin\Release\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>C:\Users\AIERXUAN\Desktop\Algorithm\Algorithm\Sorting\bin\Release\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +60,8 @@
   <ItemGroup>
     <Compile Include="ControllerCommon.cs" />
     <Compile Include="Extend.cs" />
+    <Compile Include="NpoiMemoryStream.cs" />
+    <Compile Include="NpoiOperator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceResult.cs" />
     <Compile Include="ServiceResultList.cs" />
