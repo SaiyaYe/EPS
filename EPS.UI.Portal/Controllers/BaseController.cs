@@ -1,4 +1,5 @@
 ﻿using EPS.BLL;
+using EPS.Common;
 using EPS.IBLL;
 using EPS.Model;
 using EPS.UI.Portal.Models;
@@ -42,8 +43,20 @@ namespace EPS.UI.Portal.Controllers
             }
 
             ViewBag.nav = modelList;
+            ViewBag.UserSession = UserSession;
         }
 
+        /// <summary>
+        /// 分页模型
+        /// </summary>
+        /// <param name="currentCount">当前获取的数据条数</param>
+        /// <param name="totalCount">数据总条数</param>
+        /// <param name="pageIndex">页码号</param>
+        /// <param name="pageSize">页容量</param>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/24 10:15
+        /// 修改者：
+        /// 修改时间：
         protected void GetPaginationModel(int currentCount, int totalCount, int pageIndex, int pageSize = 15)
         {
             var pageModel = new PaginationModel()
@@ -55,6 +68,26 @@ namespace EPS.UI.Portal.Controllers
                 PageSize = pageSize
             };
             ViewBag.PageModel = pageModel;
+        }
+
+        /// <summary>
+        /// 用户会话
+        /// </summary>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/24 10:17
+        /// 修改者：
+        /// 修改时间：
+        public UserSession UserSession
+        {
+            get
+            {
+                if (System.Web.HttpContext.Current.Session[ControllerCommon.UserSessionKey] == null)
+                {
+                    return new UserSession();
+                }
+
+                return System.Web.HttpContext.Current.Session[ControllerCommon.UserSessionKey].ToString().Deserialize<UserSession>();
+            }
         }
     }
 }

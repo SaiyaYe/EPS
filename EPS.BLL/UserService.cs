@@ -44,6 +44,15 @@ namespace EPS.BLL
                 };
             }
 
+            if (!user.Available)
+            {
+                return new ServiceResult<User>
+                {
+                    State = false,
+                    Message = "该用户已被冻结"
+                };
+            }
+
             return new ServiceResult<User>
             {
                 Result = user,

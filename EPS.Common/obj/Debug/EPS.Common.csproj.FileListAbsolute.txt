@@ -10,3 +10,4 @@ E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.csprojResolveAssemblyReference.ca
 E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.csproj.CoreCompileInputs.cache
 E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.dll
 E:\project\EPS\EPS.Common\obj\Debug\EPS.Common.pdb
+E:\project\EPS\EPS.Common\bin\Debug\Newtonsoft.Json.dll

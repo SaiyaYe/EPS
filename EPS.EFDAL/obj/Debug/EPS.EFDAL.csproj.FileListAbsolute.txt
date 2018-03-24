@@ -36,3 +36,5 @@ E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.csprojResolveAssemblyReference.cach
 E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.csproj.CoreCompileInputs.cache
 E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.dll
 E:\project\EPS\EPS.EFDAL\obj\Debug\EPS.EFDAL.pdb
+E:\project\EPS\EPS.EFDAL\bin\Debug\Newtonsoft.Json.dll
+E:\project\EPS\EPS.EFDAL\bin\Debug\Newtonsoft.Json.xml
