@@ -344,7 +344,7 @@ namespace EPS.UI.Portal.Controllers
                 Text = u.Type,
                 Value = u.Id.ToString()
             }).ToList();
-            selectList.Insert(0, new SelectListItem { Text = "请选择缺陷类型", Value = "0" });
+            selectList.Insert(0, new SelectListItem { Text = "请选择缺陷程度", Value = "0" });
 
             if (defectLevelId <= 0)
             {
