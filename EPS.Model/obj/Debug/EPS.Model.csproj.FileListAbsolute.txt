@@ -23,3 +23,16 @@ E:\project\EPS\EPS.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.d
 E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.csproj.CoreCompileInputs.cache
 E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.dll
 E:\project\EPS\EPS.Model\obj\Debug\EPS.Model.pdb
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\EPS.Model.dll.config
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\EPS.Model.dll
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\EPS.Model.pdb
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\EntityFramework.dll
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\EntityFramework.xml
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\obj\Debug\EPS.Model.csprojResolveAssemblyReference.cache
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\obj\Debug\EPS.Model.csproj.CoreCompileInputs.cache
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\obj\Debug\EPS.Model.dll
+C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\obj\Debug\EPS.Model.pdb

@@ -504,5 +504,9 @@ namespace EPS.UI.Portal.Controllers
         {
             return View();
         }
+        public ActionResult SetRouteList()
+        {
+            return View();
+        }
     }
 }
