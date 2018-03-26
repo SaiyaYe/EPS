@@ -1,6 +1,7 @@
 ﻿@using EPS.UI.Portal.Models
 @{
     List<MenuModel> menuList = ViewBag.nav as List<MenuModel>;
+    UserSession userSession = ViewBag.UserSession as UserSession;
 }
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,6 @@
     @Scripts.Render("~/wwwroot/components/daterangepicker/daterangepicker.js")
     @Scripts.Render("~/wwwroot/lib/AmazeUI/js/amazeui.js")
     <script src="~/Scripts/jquery.validate.js"></script>
-    @*@Scripts.Render("~/Scripts/jquery.form.js")*@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -172,14 +172,14 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="/AdminLTE-2.4.2/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <img src=@(userSession.PictureUrl != null ? userSession.PictureUrl : "/AdminLTE-2.4.2/dist/img/user2-160x160.jpg") class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="hidden-xs">@userSession.EmployeeName</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="/AdminLTE-2.4.2/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <img src=@(userSession.PictureUrl != null ? userSession.PictureUrl : "/AdminLTE-2.4.2/dist/img/user2-160x160.jpg") class="img-circle" alt="User Image">
                                     <p>
                                         Alexander Pierce - Web Developer
                                         <small>Member since Nov. 2012</small>
@@ -377,19 +377,3 @@
 </body>
 
 </html>
-
-<script>
-    var queryForm = function () {
-        var pageSize = $("#setPageSize").val();
-        $("#pageSize").val(pageSize);
-        //var url = $("#ajaxForm").attr("Action");
-        //var data = { pageSize: pageSize };
-        //$("#contentList").load(url, data);
-    }
-
-    //var run = function () {
-    //    $("#btnSearch").click(queryForm);
-    //    queryForm();
-    //};
-    //run();
-</script>

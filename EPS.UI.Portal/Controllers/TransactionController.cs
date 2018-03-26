@@ -5,6 +5,7 @@ using EPS.Model;
 using EPS.UI.Portal.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -205,6 +206,20 @@ namespace EPS.UI.Portal.Controllers
             var result = PatrolSchemeService.UpdateScheme(patrolScheme);
             return RedirectToAction("SchemeList");
         }
+
+        /// <summary>
+        /// 导出Word报表
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/24 17:06
+        /// 修改者：
+        /// 修改时间：
+        public FileResult ExportWord()
+        {
+            MemoryStream stream = NpoiOperator.ExportWordStream();
+            return File(stream, "application/ms-word", "wordtest.docx");
+        }
         #endregion
 
         #region 巡检结果上报
@@ -249,23 +264,11 @@ namespace EPS.UI.Portal.Controllers
                         Latitude = item.PatrolPoint.Latitude,
                         Longitude = item.PatrolPoint.Longitude,
                         CountyId = item.PatrolPoint.CountyId,
-                        County = new CountyModel
-                        {
-                            Id = item.PatrolPoint.CountyId,
-                            Name = item.PatrolPoint.County.Name,
-                            CityId = item.PatrolPoint.County.CityId,
-                            City = new CityModel
-                            {
-                                Id = item.PatrolPoint.County.CityId,
-                                Name = item.PatrolPoint.County.City.Name,
-                                ProvinceId = item.PatrolPoint.County.City.ProvinceId,
-                                Province = new ProvinceModel
-                                {
-                                    Id = item.PatrolPoint.County.City.ProvinceId,
-                                    Name = item.PatrolPoint.County.City.Province.Name
-                                },
-                            },
-                        }
+                        CountyName = item.PatrolPoint.County.Name,
+                        CityId = item.PatrolPoint.County.CityId,
+                        CityName = item.PatrolPoint.County.City.Name,
+                        ProvinceId = item.PatrolPoint.County.City.ProvinceId,
+                        ProvinceName = item.PatrolPoint.County.City.Province.Name
                     },
                     DefectType = new DictionaryModel
                     {
@@ -467,23 +470,11 @@ namespace EPS.UI.Portal.Controllers
                         Type = item.PatrolPointType.Type
                     },
                     CountyId = item.CountyId,
-                    County = new CountyModel
-                    {
-                        Id = item.CountyId,
-                        Name = item.County.Name,
-                        CityId = item.County.CityId,
-                        City = new CityModel
-                        {
-                            Id = item.County.CityId,
-                            Name = item.County.City.Name,
-                            ProvinceId = item.County.City.ProvinceId,
-                            Province = new ProvinceModel
-                            {
-                                Id = item.County.City.ProvinceId,
-                                Name = item.County.City.Province.Name
-                            }
-                        }
-                    },
+                    CountyName = item.County.Name,
+                    CityId = item.County.CityId,
+                    CityName = item.County.City.Name,
+                    ProvinceId = item.County.City.ProvinceId,
+                    ProvinceName = item.County.City.Province.Name,
                     CreateTime = item.CreateTime,
                     Latitude = item.Latitude,
                     Longitude = item.Longitude

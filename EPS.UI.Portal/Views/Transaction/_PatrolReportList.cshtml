@@ -14,6 +14,7 @@
                 <th>缺陷类别</th>
                 <th>缺陷程度</th>
                 <th>巡检时间</th>
+                <th>巡检地点</th>
                 <th>巡检员</th>
                 <th>操作</th>
             </tr>
@@ -27,6 +28,7 @@
                     <td>@patrolReport.DefectType.Type</td>
                     <td>@patrolReport.DefectLevel.Type</td>
                     <td>@patrolReport.ReportTime.ToString("yyyy-MM-dd")</td>
+                    <td>@(patrolReport.PatrolPoint.ProvinceName + patrolReport.PatrolPoint.CityName + patrolReport.PatrolPoint.CountyName)</td>
                     <td>@patrolReport.ReportEmployee.Name</td>
                     <td>
                         @Html.ActionLink("修改", "UpdatePatrolReport", "Transaction", new { patrolReportId = patrolReport.Id }, new { @class = "btn btn-primary" })
