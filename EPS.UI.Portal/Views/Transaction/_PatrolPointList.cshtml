@@ -28,9 +28,9 @@
                 <td>@patrolPoint.Latitude</td>
                 <td>@patrolPoint.PatrolPointType.Type</td>
                 <td>@(patrolPoint.CreateTime == null ? "暂无" : patrolPoint.CreateTime.Value.ToString("yyyy-MM-dd"))</td>
-                <td>@patrolPoint.County.City.Province.Name</td>
-                <td>@patrolPoint.County.City.Name</td>
-                <td>@patrolPoint.County.Name</td>
+                <td>@patrolPoint.ProvinceName</td>
+                <td>@patrolPoint.CityName</td>
+                <td>@patrolPoint.CountyName</td>
             </tr>
             }
         </tbody>

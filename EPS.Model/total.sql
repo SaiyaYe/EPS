@@ -34,7 +34,7 @@ insert into Menu(Name,ParentId,Link) values('无人机影像中电力问题',4,'')
 insert into Menu(Name,ParentId,Link) values('问题缺陷类型分析',4,'')
 insert into Menu(Name,ParentId,Link) values('问题缺陷空间分布规律',4,'')
 insert into Menu(Name,ParentId,Link) values('问题缺陷时间变化规律',4,'')
-insert into Menu(Name,ParentId,Link) values('线路风险分析',4,'')
+insert into Menu(Name,ParentId,Link) values('线路风险分析',4,'Analysis/RiskAnalysis')
 insert into Menu(Name,ParentId,Link) values('巡检报告',4,'')
 
 insert into Menu(Name,ParentId,Link) values('基础信息',8,'')
