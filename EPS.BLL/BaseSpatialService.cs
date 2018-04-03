@@ -1,5 +1,4 @@
 ﻿using EPS.IBLL;
-using EPS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPS.BLL
 {
-    public class PatrolRouteService : BaseSpatialService<PatrolRoute>, IPatrolRouteService
+    public class BaseSpatialService<T> : BaseService<T>, IBaseSpatialService<T> where T : class, new()
     {
     }
 }

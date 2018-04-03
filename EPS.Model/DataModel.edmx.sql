@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/18/2018 01:18:36
+-- Date Created: 04/03/2018 17:09:13
 -- Generated from EDMX file: E:\project\EPS\EPS.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -76,6 +76,12 @@ IF OBJECT_ID(N'[dbo].[FK_PatrolPoint_PatrolRoute_PatrolRoute]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_PatrolPointDictionary]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatrolPoint] DROP CONSTRAINT [FK_PatrolPointDictionary];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PatrolReportDictionary]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_PatrolReportDictionary];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DefectLevelId]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_DefectLevelId];
 GO
 
 -- --------------------------------------------------
@@ -268,6 +274,7 @@ GO
 -- Creating table 'PatrolPoint'
 CREATE TABLE [dbo].[PatrolPoint] (
     [Id] int IDENTITY(1,1) NOT NULL,
+    [Shape] geography  NOT NULL,
     [PoleTowerNumber] nvarchar(max)  NOT NULL,
     [Longitude] float  NOT NULL,
     [Latitude] float  NOT NULL,
@@ -280,6 +287,7 @@ GO
 -- Creating table 'PatrolRoute'
 CREATE TABLE [dbo].[PatrolRoute] (
     [Id] int IDENTITY(1,1) NOT NULL,
+    [Shape] geography  NOT NULL,
     [Name] nvarchar(max)  NOT NULL
 );
 GO

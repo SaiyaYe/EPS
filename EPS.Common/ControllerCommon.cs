@@ -38,5 +38,22 @@ namespace EPS.Common
         /// 修改者：
         /// 修改时间：
         public const string UserSessionKey = "UserSession";
+
+        /// <summary>
+        /// 空间参考ID
+        /// </summary>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/3/31 17:33
+        /// 修改者：
+        /// 修改时间：
+        public enum SpatialReferenceID
+        {
+            GCS_Beijing_1954 = 4214,
+            GCS_WGS_1984 = 4326,
+            GCS_China_Geodetic_Coordinate_System_2000 = 4490,
+            GCS_New_Beijing = 4555,
+            GCS_Xian_1980 = 4610,
+            WGS_1984_World_Mercator = 3395
+        }
     }
 }

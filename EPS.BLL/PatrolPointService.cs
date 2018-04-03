@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EPS.BLL
 {
-    public class PatrolPointService : BaseService<PatrolPoint>, IPatrolPointService
+    public class PatrolPointService : BaseSpatialService<PatrolPoint>, IPatrolPointService
     {
         /// <summary>
         /// 获取巡检点

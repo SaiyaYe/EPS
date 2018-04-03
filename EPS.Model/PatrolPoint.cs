@@ -22,6 +22,7 @@ namespace EPS.Model
         }
     
         public int Id { get; set; }
+        public System.Data.Entity.Spatial.DbGeography Shape { get; set; }
         public string PoleTowerNumber { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }

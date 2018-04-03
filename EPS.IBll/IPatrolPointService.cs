@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EPS.IBLL
 {
-    public interface IPatrolPointService : IBaseService<PatrolPoint>
+    public interface IPatrolPointService : IBaseSpatialService<PatrolPoint>
     {
         /// <summary>
         /// 获取巡检点

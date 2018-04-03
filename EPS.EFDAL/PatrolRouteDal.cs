@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EPS.EFDAL
 {
-    public class PatrolRouteDal : BaseDal<PatrolRoute>, IPatrolRouteDal
+    public class PatrolRouteDal : BaseSpatialDal<PatrolRoute>, IPatrolRouteDal
     {
     }
 }
