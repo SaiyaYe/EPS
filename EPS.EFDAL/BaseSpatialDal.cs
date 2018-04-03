@@ -12,7 +12,7 @@ namespace EPS.EFDAL
     {
         public DbSpatialServices SpatialService
         {
-            get { return  DbSpatialServices.Default; }
+            get { return DbSpatialServices.Default; }
         }
     }
 }
