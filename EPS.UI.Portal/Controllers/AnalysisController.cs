@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EPS.IBLL;
+using EPS.Model;
+using EPS.UI.Portal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +11,9 @@ namespace EPS.UI.Portal.Controllers
 {
     public class AnalysisController : BaseController
     {
+        [Ninject.Inject]
+        public IPatrolPointService PatrolPointService { get; set; }
+
         /// <summary>
         /// 线路风险分析
         /// </summary>
@@ -18,6 +24,26 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult RiskAnalysis()
         {
+            List<StatisticModel> modelList = new List<StatisticModel>();
+
+            var result = PatrolPointService.PatrolPointStatistic();
+            List<Statistic> statisticList = result.Result;
+
+            foreach (var item in statisticList)
+            {
+                StatisticModel model = new StatisticModel
+                {
+                    Count = item.Count,
+                    Year = item.Year,
+                    Month = item.Month
+                };
+                model.YearMonth = model.GetYearMonth();
+
+                modelList.Add(model);
+            }
+
+            ViewBag.PatrolPointStatisticList = modelList;
+
             return View();
         }
     }

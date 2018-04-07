@@ -45,5 +45,31 @@ namespace EPS.BLL
                 State = true
             };
         }
+
+        /// <summary>
+        /// 巡检点统计
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/4/7 10:36
+        /// 修改者：
+        /// 修改时间：
+        public ServiceResultList<Statistic> PatrolPointStatistic()
+        {
+            var result = from patrolPoint in DbSession.EntityQueryable<PatrolPoint>().Query()
+                         group patrolPoint by new { patrolPoint.CreateTime.Value.Year, patrolPoint.CreateTime.Value.Month } into statistic
+                         select new Statistic
+                         {
+                             Count = statistic.Count(),
+                             Year = statistic.Key.Year,
+                             Month = statistic.Key.Month
+                         };
+
+            return new ServiceResultList<Statistic>
+            {
+                Result = result.OrderBy(u => new { u.Year, u.Month }).ToList(),
+                State = true
+            };
+        }
     }
 }

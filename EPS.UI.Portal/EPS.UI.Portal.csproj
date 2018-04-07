@@ -192,6 +192,7 @@
     <Compile Include="Models\PolygonModel.cs" />
     <Compile Include="Models\PolylineModel.cs" />
     <Compile Include="Models\ProvinceModel.cs" />
+    <Compile Include="Models\StatisticModel.cs" />
     <Compile Include="Models\UserSession.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

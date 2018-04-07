@@ -20,5 +20,15 @@ namespace EPS.IBLL
         /// 修改者：
         /// 修改时间：
         ServiceResultList<PatrolPoint> GetPatrolPointList(int patrolRouteId = 0, int pageSize = 0, int pageIndex = 1);
+
+        /// <summary>
+        /// 巡检点统计
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/4/7 10:36
+        /// 修改者：
+        /// 修改时间：
+        ServiceResultList<Statistic> PatrolPointStatistic();
     }
 }
