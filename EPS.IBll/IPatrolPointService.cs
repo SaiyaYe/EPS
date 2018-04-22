@@ -29,6 +29,6 @@ namespace EPS.IBLL
         /// 创建时间：2018/4/7 10:36
         /// 修改者：
         /// 修改时间：
-        ServiceResultList<Statistic> PatrolPointStatistic();
+        ServiceResultList<Statistic> PatrolPointStatistic(int beginYear = 0, int beginMonth = 0, int endYear = 0, int endMonth = 0);
     }
 }

@@ -6,7 +6,7 @@
     var defectLevelList = ViewBag.DefectLevelList as List<SelectListItem> ?? new List<SelectListItem>();
 }
 
-<select data-am-selected id="patrolRouteSelection" name="patrolRouteId">
+<select data-am-selected id="defectLevelSelection" name="defectLevelId">
     @Html.Partial("component/SelectOptions", defectLevelList)
 </select>
 

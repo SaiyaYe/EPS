@@ -54,10 +54,15 @@ namespace EPS.BLL
         /// 创建时间：2018/4/7 10:36
         /// 修改者：
         /// 修改时间：
-        public ServiceResultList<Statistic> PatrolPointStatistic()
+        public ServiceResultList<Statistic> PatrolPointStatistic(int beginYear = 0, int beginMonth = 0, int endYear = 0, int endMonth = 0)
         {
+            DateTime beginTime = new DateTime(beginYear, beginMonth, 1);
+            DateTime endTime = new DateTime(endYear, endMonth, 1).AddMonths(1);
+
             var result = from patrolPoint in DbSession.EntityQueryable<PatrolPoint>().Query()
+                         where patrolPoint.CreateTime >= beginTime && patrolPoint.CreateTime < endTime
                          group patrolPoint by new { patrolPoint.CreateTime.Value.Year, patrolPoint.CreateTime.Value.Month } into statistic
+
                          select new Statistic
                          {
                              Count = statistic.Count(),

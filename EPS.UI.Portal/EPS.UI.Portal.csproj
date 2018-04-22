@@ -16321,6 +16321,10 @@
     <Content Include="Views\Select\DefectType.cshtml" />
     <Content Include="Views\Select\DefectLevel.cshtml" />
     <Content Include="Views\Transaction\SetRouteList.cshtml" />
+    <Content Include="Views\Analysis\ChartDemo2.cshtml" />
+    <Content Include="Views\Select\Year.cshtml" />
+    <Content Include="Views\Select\Month.cshtml" />
+    <Content Include="Views\Analysis\_RiskAnalysis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
