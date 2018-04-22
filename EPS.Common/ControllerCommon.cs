@@ -55,5 +55,21 @@ namespace EPS.Common
             GCS_Xian_1980 = 4610,
             WGS_1984_World_Mercator = 3395
         }
+
+        public static Dictionary<string, string> Color
+        {
+            get
+            {
+                return new Dictionary<string, string>
+                {
+                    { "red", "#f56954" },
+                    { "orange","#f39c12"},
+                    { "green", "#00a65a" },
+                    { "lightblue", "#00c0ef" },
+                    { "darkblue", "#3c8dbc" },
+                    { "grey", "#d2d6de" },
+                };
+            }
+        }
     }
 }

@@ -44,6 +44,15 @@ namespace EPS.UI.Portal.Models
         public string YearMonth { get; set; }
 
         /// <summary>
+        /// 颜色编码
+        /// </summary>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/4/22 11:31
+        /// 修改者：
+        /// 修改时间：
+        public string ColorCode { get; set; }
+
+        /// <summary>
         /// 通过年份和月份获得年月字符串
         /// </summary>
         /// <returns></returns>

@@ -1,0 +1,55 @@
+﻿<section class="content-header">
+    <h1>
+        圈图demo
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>电力巡检业务</li>
+        <li><a href="SchemeList">巡检计划</a></li>
+        <li class="active">图表展示</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
+
+<section class="content container-fluid">
+    <div class="ibox float-e-margins">
+        @*title*@
+        <form action="@Url.Action("_DonutChartDemo")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#contentList" id="form0" method="get">
+            <div style="float:left">
+                @Html.Action("Year", "Select", new { name = "beginYear" })&nbsp;
+            </div>
+            <div style="float:left">
+                @Html.Action("Month", "Select", new { name = "beginMonth" })&nbsp;
+            </div>
+
+            <div style="float:left">
+                —&nbsp; @Html.Action("Year", "Select", new { name = "endYear" })&nbsp;
+            </div>
+            <div style="float:left">
+                @Html.Action("Month", "Select", new { name = "endMonth" })&nbsp;
+            </div>
+            <div style="float:left">
+                &nbsp<button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
+            </div>
+            <div style="clear:both"></div>
+        </form>
+
+        @*table*@
+        <div class="box">
+            <div id="contentList">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
+<script src="/wwwroot/lib/layer/layer.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script>
+
+    $(function () {
+        var search = $("#btnSearch")
+        search.click()
+    })
+</script>
