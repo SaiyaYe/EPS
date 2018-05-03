@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "SetRouteList";
+}
+
+<link rel="stylesheet" type="text/css" href="~/js_api_3.9/dojo/dijit/themes/claro/claro.css" />
+<link rel="stylesheet" type="text/css" href="~/js_api_3.9/esri/css/esri.css" />
+@*<script>
+    dojoConfig = {
+        baseUrl: "js_api_3.9/dojo/dojo",
+    }
+</script>*@
+<script type="text/javascript" src="~/js_api_3.9/init.js"></script>
+<script type="text/javascript" src="~/mapjs/measure.js"></script>
+<style>
+
+    #mapdiv {
+        position: absolute;
+        left: 320px;
+        top: 110px;
+        width: 1150px;
+        height: 560px;
+        border: 2px solid #000; 
+    }
+   
+    
+
+   
+
+    
+</style>
+<section class="content-header">
+    <h1>
+        巡检计划
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>电力巡检业务</li>
+        <li class="active">地图量测</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
+
+
+<section class="claro">
+    <div id="mapdiv"  >
+        <div style="position:absolute; right:0px; top:0px; z-Index:999;">
+            <div id="titlePane" data-dojo-type="dijit.TitlePane" data-dojo-props="title:'Measurement', closable:'false', open:'false'">
+                <div id="measurementDiv"></div>
+                <span style="font-size:smaller;padding:5px 5px;">Press <b>CTRL</b> to enable snapping.</span>
+            </div>
+        </div>
+    </div>
+
+
+    <button id="select" data-dojo-type="dijit/form/Button" style="width:60px;height:20px">框选</button>
+    <br/>
+    <br/>
+
+    <button id="remove" data-dojo-type="dijit/form/Button" style="width:40px;height:20px">清除结果</button>
+
+</section>
+
+

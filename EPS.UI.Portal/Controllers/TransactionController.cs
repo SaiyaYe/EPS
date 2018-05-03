@@ -495,7 +495,15 @@ namespace EPS.UI.Portal.Controllers
         {
             return View();
         }
-        public ActionResult SetRouteList()
+        public ActionResult Measure()
+        {
+            return View();
+        }
+        public ActionResult SpatialInformationQuery()
+        {
+            return View();
+        }
+        public ActionResult Navigation()
         {
             return View();
         }

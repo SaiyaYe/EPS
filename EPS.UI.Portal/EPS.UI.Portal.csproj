@@ -14089,6 +14089,12 @@
     <Content Include="js_api_3.9\xstyle\shim\var.js" />
     <Content Include="js_api_3.9\xstyle\util\createStyleSheet.js" />
     <Content Include="js_api_3.9\xstyle\xstyle.min.js" />
+    <Content Include="mapjs\images\CircleBlue16.png" />
+    <Content Include="mapjs\images\CircleBlue24.png" />
+    <Content Include="mapjs\images\CircleRed32.png" />
+    <Content Include="mapjs\measure.js" />
+    <Content Include="mapjs\navigation.js" />
+    <Content Include="mapjs\spatialQuery.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -16312,7 +16318,9 @@
     <Content Include="Views\Transaction\_PatrolPointList.cshtml" />
     <Content Include="Views\Select\DefectType.cshtml" />
     <Content Include="Views\Select\DefectLevel.cshtml" />
-    <Content Include="Views\Transaction\SetRouteList.cshtml" />
+    <Content Include="Views\Transaction\Measure.cshtml" />
+    <Content Include="Views\Transaction\SpatialInformationQuery.cshtml" />
+    <Content Include="Views\Transaction\Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

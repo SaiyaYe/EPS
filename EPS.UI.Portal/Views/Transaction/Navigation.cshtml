@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Navigation";
+}
+<link rel="stylesheet" href="~/js_api_3.9/esri/css/esri.css">
+<script src="~/js_api_3.9/init.js"></script>
+<script type="text/javascript" src="~/mapjs/navigation.js"></script>
+<section class="content-header">
+    <h1>
+        巡检计划
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>电力巡检业务</li>
+        <li class="active">最短路径导航</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
+<section class="claro">
+
+    <button onclick="addStops()">增加站点</button>
+    <button onclick="clearStops()">清除站点</button>
+    <button onclick="addBarriers()">增加路障</button>
+    <button onclick="clearBarriers()">清除路障</button>
+    <button onclick="solveRoute()">路径分析</button>
+    <button onclick="clearRoutes()">清除路径</button>
+
+    <br /><br />
+    <div id="map" style="width:1220px; height:560px; border:1px solid #000;"></div>
+
+
+</section>
