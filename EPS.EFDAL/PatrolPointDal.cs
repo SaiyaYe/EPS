@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EPS.EFDAL
 {
-    public class PatrolPointDal : BaseDal<PatrolPoint>, IPatrolPointDal
+    public class PatrolPointDal : BaseSpatialDal<PatrolPoint>, IPatrolPointDal
     {
     }
 }

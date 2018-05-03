@@ -362,5 +362,64 @@ namespace EPS.UI.Portal.Controllers
             return PartialView();
         }
 
+        /// <summary>
+        /// 年份
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/4/21 22:17
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult Year(string name = "year")
+        {
+            int year = DateTime.Now.Year;
+            var yearList = new List<int>();
+
+            for (int i = 0; i < 30; i++)
+            {
+                yearList.Add(year - i);
+            }
+
+            var selectList = yearList.Select(u => new SelectListItem
+            {
+                Text = u.ToString(),
+                Value = u.ToString()
+            }).ToList();
+            selectList.Insert(0, new SelectListItem { Text = "请选择年份", Value = "0" });
+
+            ViewBag.YearList = selectList;
+            ViewBag.Name = name;
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 月份
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/4/21 22:17
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult Month(string name = "month")
+        {
+            var monthList = new List<int>();
+
+            for (int i = 1; i <= 12; i++)
+            {
+                monthList.Add(i);
+            }
+
+            var selectList = monthList.Select(u => new SelectListItem
+            {
+                Text = u.ToString(),
+                Value = u.ToString()
+            }).ToList();
+            selectList.Insert(0, new SelectListItem { Text = "请选择月份", Value = "0" });
+
+            ViewBag.MonthList = selectList;
+            ViewBag.Name = name;
+            return PartialView();
+        }
+
     }
 }

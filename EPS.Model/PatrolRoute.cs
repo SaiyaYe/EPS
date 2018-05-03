@@ -23,6 +23,7 @@ namespace EPS.Model
         }
     
         public int Id { get; set; }
+        public System.Data.Entity.Spatial.DbGeography Shape { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

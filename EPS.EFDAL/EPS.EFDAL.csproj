@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDal.cs" />
+    <Compile Include="BaseSpatialDal.cs" />
     <Compile Include="DbContextFactory.cs" />
     <Compile Include="DepartmentDal.cs" />
     <Compile Include="DictionaryDal.cs" />

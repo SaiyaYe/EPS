@@ -3,3 +3,6 @@ EPS
 obj
 bin
 /EPS.IBll/obj
+/EPS.Model/*.user
+/packages/Microsoft.SqlServer.Types.14.0.314.76
+/packages/Newtonsoft.Json.11.0.1

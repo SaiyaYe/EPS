@@ -34,7 +34,7 @@ insert into Menu(Name,ParentId,Link) values('ÎŞÈË»úÓ°ÏñÖĞµçÁ¦ÎÊÌâ',4,'')
 insert into Menu(Name,ParentId,Link) values('ÎÊÌâÈ±ÏİÀàĞÍ·ÖÎö',4,'')
 insert into Menu(Name,ParentId,Link) values('ÎÊÌâÈ±Ïİ¿Õ¼ä·Ö²¼¹æÂÉ',4,'')
 insert into Menu(Name,ParentId,Link) values('ÎÊÌâÈ±ÏİÊ±¼ä±ä»¯¹æÂÉ',4,'')
-insert into Menu(Name,ParentId,Link) values('ÏßÂ··çÏÕ·ÖÎö',4,'')
+insert into Menu(Name,ParentId,Link) values('ÏßÂ··çÏÕ·ÖÎö',4,'Analysis/RiskAnalysis')
 insert into Menu(Name,ParentId,Link) values('Ñ²¼ì±¨¸æ',4,'')
 
 insert into Menu(Name,ParentId,Link) values('»ù´¡ĞÅÏ¢',8,'')
@@ -94,6 +94,8 @@ insert into [Group](Name,DepartmentId) values('ÏúÊÛ¶ş×é',1)
 insert into [Group](Name,DepartmentId) values('¼¼ÊõÒ»×é',2)
 insert into [Group](Name,DepartmentId) values('¼¼Êõ¶ş×é',2)
 
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('Ò¶ìÇĞÇ',1,1,1,1)
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('ÍõÒ»º×',1,2,1,1)
 insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('¹ùÇåÔ½',1,1,1,1)
 insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('²ÌÅô·É',0,1,1,1)
 insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('ÌïÏşÇà',0,2,1,1)
@@ -103,23 +105,29 @@ insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('À
 insert into [User](UserName,Password,CreateTime,Available,EmployeeId) values('yyx','666','2018-2-2',1,1)
 
 --PatrolRoute
-insert into PatrolRoute(Name) values('ÏßÂ·Ò»')
-insert into PatrolRoute(Name) values('ÏßÂ·¶ş')
-insert into PatrolRoute(Name) values('ÏßÂ·Èı')
+insert into PatrolRoute(Name,Shape) values('ÏßÂ·Ò»',geography::STGeomFromText('LINESTRING(116.63 40.32, 115.33 40.57, 114.82 40.16)', 4326))
+insert into PatrolRoute(Name,Shape) values('ÏßÂ·¶ş',geography::STGeomFromText('LINESTRING(115.33 40.57, 114.82 40.16, 113.59 41.29)', 4326))
+insert into PatrolRoute(Name,Shape) values('ÏßÂ·Èı',geography::STGeomFromText('LINESTRING(115.33 40.57, 114.82 40.16, 112.17 41.84)', 4326))
 
 --PatrolPoint
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId) values('001','120.1','34.1',1,1)
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId) values('002','120.2','34.2',1,1)
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId) values('003','120.3','34.3',2,2)
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId) values('004','120.4','34.4',2,2)
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('001','116.63','40.32',1,1,geography::STGeomFromText('POINT (116.63 40.32)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('002','115.33','40.57',1,1,geography::STGeomFromText('POINT (115.33 40.57)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('003','114.82','40.16',1,1,geography::STGeomFromText('POINT (114.82 40.16)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('004','113.59','41.29',1,1,geography::STGeomFromText('POINT (113.59 41.29)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('005','112.17','41.84',1,1,geography::STGeomFromText('POINT (112.17 41.84)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('006','120.3','34.3',2,2,geography::STGeomFromText('POINT (120.3 34.3)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('007','120.4','34.4',2,2,geography::STGeomFromText('POINT (120.4 34.4)', 4326))
 
 --PatrolPoint_PatrolRoute
 insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(1,1)
 insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(2,1)
+insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(3,1)
 insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(2,2)
 insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(3,2)
+insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(4,2)
 insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(3,3)
 insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(4,3)
+insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(5,3)
 
 --PatrolScheme
 insert into PatrolScheme(Number,EmployeeId,PatrolRouteId,SchemeDate,StartDate,EndDate,IsCompleted) values('1',1,1,'2018-02-01','2018-02-01','2018-03-01',0)

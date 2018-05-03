@@ -1,0 +1,12 @@
+﻿@using EPS.UI.Portal.Models
+<link href="/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="/wwwroot/lib/AmazeUI/css/amazeui.css" rel="stylesheet" />
+
+@{
+    var yearList = ViewBag.YearList as List<SelectListItem> ?? new List<SelectListItem>();
+    string name = ViewBag.Name;
+}
+
+<select data-am-selected id="yearSelection" name="@name">
+    @Html.Partial("component/SelectOptions", yearList)
+</select>

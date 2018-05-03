@@ -490,19 +490,21 @@ namespace EPS.UI.Portal.Controllers
         }
 
         #endregion
-
-        public ActionResult Set()
-        {
+        
+		{
             return View();
         }
+
         public ActionResult Measure()
         {
             return View();
         }
+
         public ActionResult SpatialInformationQuery()
         {
             return View();
         }
+
         public ActionResult Navigation()
         {
             return View();

@@ -244,6 +244,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Shape" Type="geography" Nullable="false" SRID="4326" />
     <Property Name="PoleTowerNumber" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Longitude" Type="float" Nullable="false" />
     <Property Name="Latitude" Type="float" Nullable="false" />
@@ -256,6 +257,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Shape" Type="geography" Nullable="false" SRID="4326" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PatrolDefect">
@@ -953,6 +955,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shape" Type="GeographyPoint" Nullable="false" />
           <Property Name="PoleTowerNumber" Type="String" Nullable="false" />
           <Property Name="Longitude" Type="Double" Nullable="false" />
           <Property Name="Latitude" Type="Double" Nullable="false" />
@@ -981,6 +984,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shape" Type="GeographyLineString" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="PatrolReport" Relationship="DataModel.PatrolRoutePatrolReport" FromRole="PatrolRoute" ToRole="PatrolReport" />
           <NavigationProperty Name="PatrolScheme" Relationship="DataModel.PatrolRoutePatrolScheme" FromRole="PatrolRoute" ToRole="PatrolScheme" />
@@ -1245,6 +1249,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.PatrolPoint)">
         <MappingFragment StoreEntitySet="PatrolPoint">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Shape" ColumnName="Shape" />
           <ScalarProperty Name="PoleTowerNumber" ColumnName="PoleTowerNumber" />
           <ScalarProperty Name="Longitude" ColumnName="Longitude" />
           <ScalarProperty Name="Latitude" ColumnName="Latitude" />
@@ -1258,6 +1263,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.PatrolRoute)">
         <MappingFragment StoreEntitySet="PatrolRoute">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Shape" ColumnName="Shape" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>

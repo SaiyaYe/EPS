@@ -110,6 +110,7 @@
     <Compile Include="Province.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Statistic.cs" />
     <Compile Include="User.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -139,6 +140,7 @@
       <LastGenOutput>DataModel.cs</LastGenOutput>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="total.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

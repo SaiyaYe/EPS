@@ -58,6 +58,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\HashFoo.SqlServer.SpatialTypes.10.0.0.0\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
     </Reference>
@@ -162,6 +165,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AnalysisController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -184,7 +188,11 @@
     <Compile Include="Models\PatrolPointModel.cs" />
     <Compile Include="Models\PatrolReportModel.cs" />
     <Compile Include="Models\PatrolSchemeModel.cs" />
+    <Compile Include="Models\PointModel.cs" />
+    <Compile Include="Models\PolygonModel.cs" />
+    <Compile Include="Models\PolylineModel.cs" />
     <Compile Include="Models\ProvinceModel.cs" />
+    <Compile Include="Models\StatisticModel.cs" />
     <Compile Include="Models\UserSession.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -16309,7 +16317,7 @@
     <Content Include="Views\Shared\Component\DateSelection.cshtml" />
     <Content Include="Views\Shared\Pagination.cshtml" />
     <Content Include="App_Code\Pagination.cshtml" />
-    <Content Include="Views\Transaction\Set.cshtml" />
+    <Content Include="Views\Analysis\RiskAnalysis.cshtml" />
     <Content Include="Views\Transaction\_SchemeList.cshtml" />
     <Content Include="Views\Transaction\_PatrolReportList.cshtml" />
     <Content Include="Views\Transaction\AddPatrolReport.cshtml" />
@@ -16321,6 +16329,13 @@
     <Content Include="Views\Transaction\Measure.cshtml" />
     <Content Include="Views\Transaction\SpatialInformationQuery.cshtml" />
     <Content Include="Views\Transaction\Navigation.cshtml" />
+    <Content Include="Views\Analysis\DonutChartDemo.cshtml" />
+    <Content Include="Views\Select\Year.cshtml" />
+    <Content Include="Views\Select\Month.cshtml" />
+    <Content Include="Views\Analysis\_RiskAnalysis.cshtml" />
+    <Content Include="Views\Analysis\_DonutChartDemo.cshtml" />
+    <Content Include="Views\Analysis\BarChartDemo.cshtml" />
+    <Content Include="Views\Analysis\_BarChartDemo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
