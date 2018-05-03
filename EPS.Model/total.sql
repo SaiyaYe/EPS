@@ -28,6 +28,10 @@ insert into Menu(Name,ParentId,Link) values('创建巡检任务',3,'Transaction/TaskLi
 insert into Menu(Name,ParentId,Link) values('设定巡检路线',3,'Transaction/RouteList')
 insert into Menu(Name,ParentId,Link) values('巡检报告',3,'Transaction/PatrolReportList')
 insert into Menu(Name,ParentId,Link) values('巡检问题处理',3,'Transaction/ProblemHandledList')
+insert into Menu(Name,ParentId,Link) values('巡检问题处理',3,'Transaction/ProblemHandledList')
+insert into Menu(Name,ParentId,Link) values('空间信息查询',3,'Transaction/SpatialInformationQuery')
+insert into Menu(Name,ParentId,Link) values('最短路径导航',3,'Transaction/Navigation')
+insert into Menu(Name,ParentId,Link) values('地图量测',3,'Transaction/Measure')
 
 insert into Menu(Name,ParentId,Link) values('查询',4,'')
 insert into Menu(Name,ParentId,Link) values('无人机影像中电力问题',4,'')

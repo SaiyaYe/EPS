@@ -490,7 +490,7 @@ namespace EPS.UI.Portal.Controllers
         }
 
         #endregion
-        
+        public ActionResult SetRouteList()
 		{
             return View();
         }
