@@ -1,0 +1,52 @@
+﻿@using EPS.UI.Portal.Models
+<link href="/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="/wwwroot/lib/AmazeUI/css/amazeui.css" rel="stylesheet" />
+
+@{
+    var companyList = ViewBag.CompanyList as List<SelectListItem> ?? new List<SelectListItem>();
+    var departmentList = ViewBag.DepartmentList as List<SelectListItem> ?? new List<SelectListItem>();
+    var groupList = ViewBag.GroupList as List<SelectListItem> ?? new List<SelectListItem>();
+   
+}
+<div>
+    <select data-am-selected id="companySelection" name="companyId" onchange="selectChange($(this), $('#departmentSelection'))" data-url="@Url.Action("CompanyChange", "Select", new { companyId = "selectValue" })">
+        @Html.Partial("component/SelectOptions", companyList)
+    </select>
+
+    <select data-am-selected id="departmentSelection" name="departmentId" onchange="selectChange($(this), $('#groupSelection'))" data-url="@Url.Action("DepartmentChange", "Select", new { departmentId = "selectValue" })">
+        @Html.Partial("component/SelectOptions", departmentList)
+    </select>
+
+    <select data-am-selected id="groupSelection" name="groupId" onchange="selectChange($(this), $('#employeeSelection'))" data-url="@Url.Action("GroupChange", "Select", new { groupId = "selectValue" })">
+        @Html.Partial("component/SelectOptions", groupList)
+    </select>
+
+ 
+    <div style="clear:both"></div>
+</div>
+
+<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
+<script src="/wwwroot/lib/bootstrap/dist/js/bootstrap.js"></script>
+@*<script src="/wwwroot/lib/AmazeUI/js/amazeui.js"></script>*@
+@*<script src="/wwwroot/script/select.js"></script>*@
+
+<script>
+    function selectChange($this, $child) {
+
+        var selectValue = $this.val()
+        if (selectValue < 0) {
+            return
+        }
+        var url = $this.attr('data-url').replace('selectValue', selectValue);
+        $.ajax({
+            url: url,
+            type: 'get',
+            data: {},
+            success: function (result) {
+                console.log(result)
+                $child.empty();
+                $child.append($(result));
+            }
+        })
+    }
+</script>

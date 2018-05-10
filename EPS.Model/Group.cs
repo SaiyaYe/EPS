@@ -23,9 +23,12 @@ namespace EPS.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public int DepartmentId { get; set; }
+        public int Number { get; set; }
+        public int CompanyId { get; set; }
     
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employee { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

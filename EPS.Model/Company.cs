@@ -19,14 +19,18 @@ namespace EPS.Model
         {
             this.Department = new HashSet<Department>();
             this.Employee = new HashSet<Employee>();
+            this.Group = new HashSet<Group>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Number { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Group> Group { get; set; }
     }
 }

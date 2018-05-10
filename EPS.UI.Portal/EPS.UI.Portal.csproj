@@ -16336,6 +16336,18 @@
     <Content Include="Views\Analysis\_DonutChartDemo.cshtml" />
     <Content Include="Views\Analysis\BarChartDemo.cshtml" />
     <Content Include="Views\Analysis\_BarChartDemo.cshtml" />
+    <Content Include="Views\SystemManagement\_EmployeeList.cshtml" />
+    <Content Include="Views\SystemManagement\AddEmployee.cshtml" />
+    <Content Include="Views\Select\SetCompanyDepartmentGroup.cshtml" />
+    <Content Include="Views\SystemManagement\UpdateEmployee.cshtml" />
+    <Content Include="Views\SystemManagement\_GroupList.cshtml" />
+    <Content Include="Views\SystemManagement\UpdateGroup.cshtml" />
+    <Content Include="Views\Select\SetCompanyDepartment.cshtml" />
+    <Content Include="Views\Select\SetCompany.cshtml" />
+    <Content Include="Views\SystemManagement\AddGroup.cshtml" />
+    <Content Include="Views\SystemManagement\_DepartmentList.cshtml" />
+    <Content Include="Views\SystemManagement\AddDepartment.cshtml" />
+    <Content Include="Views\SystemManagement\UpdateDepartment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

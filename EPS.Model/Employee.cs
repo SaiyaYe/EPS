@@ -31,6 +31,7 @@ namespace EPS.Model
         public int GroupId { get; set; }
         public int DepartmentId { get; set; }
         public int CompanyId { get; set; }
+        public int Number { get; set; }
     
         public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

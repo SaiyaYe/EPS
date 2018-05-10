@@ -1,4 +1,5 @@
-﻿using EPS.Model;
+﻿using EPS.Common;
+using EPS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace EPS.IBLL
 {
     public interface IDepartmentService : IBaseService<Department>
     {
+        ServiceResultList<Department> GetDepartmentList(int companyId, int departmentId, int pagesize, int pageIndex);
+        ServiceResult<bool> UpdateDepartment(Department department);
     }
 }

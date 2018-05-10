@@ -1,0 +1,61 @@
+﻿@model EPS.UI.Portal.Models.GroupModel
+
+<section class="content-header">
+    <h1>
+        系统管理
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>系统管理</li>
+        <li class="active">更新小组信息</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
+<section class="content container-fluid">
+    <div class="ibox float-e-margins">
+        <form action="/SystemManagement/UpdateGroup" method="post">
+
+            <div class="form-horizontal">
+                <hr />
+                <br />
+                <div class="form-group">
+                    <span class="control-label col-md-2" style="font-weight:bold"></span>
+                    <div class="input-group col-md-7">
+                        <input type="hidden" name="Id" value=@Model.Id />
+
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <span class="control-label col-md-2" style="font-weight:bold">人员编号</span>
+                    <div class="input-group col-md-7">
+                        <input type="text" name="Number" value=@Model.Number />
+
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <span class="control-label col-md-2" style="font-weight:bold">人员姓名</span>
+                    <div class="input-group col-md-7">
+                        <input type="text" name="Name" value=@Model.Name />
+
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <span class="control-label col-md-2" style="font-weight:bold">公司部门</span>
+                    <div class="input-group col-md-7">
+                        @Html.Action("SetCompanyDepartment", "Select", new { companyId = Model.CompanyId, departmentId = Model.DepartmentId })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="保存" class="btn btn-danger btn_Delete" />
+                        @Html.ActionLink("返回", "GroupList", new { }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+</section>

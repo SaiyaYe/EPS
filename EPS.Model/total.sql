@@ -88,22 +88,22 @@ insert into County(Name,CityId) values('二七区',3)
 insert into County(Name,CityId) values('新都区',4)
 
 --organization
-insert into Company(Name) values('阿里巴巴')
+insert into Company(Name,Number) values('阿里巴巴',1)
 
-insert into Department(Name,CompanyId) values('销售部',1)
-insert into Department(Name,CompanyId) values('技术部',1)
+insert into Department(Name,CompanyId,Number) values('销售部',1,1)
+insert into Department(Name,CompanyId,Number) values('技术部',1,2)
 
-insert into [Group](Name,DepartmentId) values('销售一组',1)
-insert into [Group](Name,DepartmentId) values('销售二组',1)
-insert into [Group](Name,DepartmentId) values('技术一组',2)
-insert into [Group](Name,DepartmentId) values('技术二组',2)
+insert into [Group](Name,DepartmentId,Number,CompanyId) values('销售一组',1,1,1)
+insert into [Group](Name,DepartmentId,Number,CompanyId) values('销售二组',1,2,1)
+insert into [Group](Name,DepartmentId,Number,CompanyId) values('技术一组',2,3,1)
+insert into [Group](Name,DepartmentId,Number,CompanyId) values('技术二组',2,4,1)
 
-insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('叶烨星',1,1,1,1)
-insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('王一鹤',1,2,1,1)
-insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('郭清越',1,1,1,1)
-insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('蔡鹏飞',0,1,1,1)
-insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('田晓青',0,2,1,1)
-insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId) values('李博洋',0,2,1,1)
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) values('叶烨星',1,1,1,1,1)
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) values('王一鹤',1,2,1,1,2)
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) values('郭清越',1,1,1,1,3)
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) values('蔡鹏飞',0,1,1,1,4)
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) values('田晓青',0,2,1,1,5)
+insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) values('李博洋',0,2,1,1,6)
 
 --user
 insert into [User](UserName,Password,CreateTime,Available,EmployeeId) values('yyx','666','2018-2-2',1,1)
