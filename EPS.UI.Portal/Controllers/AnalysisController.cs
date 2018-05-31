@@ -151,12 +151,13 @@ namespace EPS.UI.Portal.Controllers
         /// <param name="beginMonth">开始月份</param>
         /// <param name="endYear">结束年份</param>
         /// <param name="endMonth">结束月份</param>
+        /// <param name="barId">赋给柱状图的id</param>
         /// <returns></returns>
         /// 创建者：叶烨星
         /// 创建时间：2018/4/22 11:45
         /// 修改者：
         /// 修改时间：
-        public ActionResult _BarChartDemo(int beginYear = 0, int beginMonth = 0, int endYear = 0, int endMonth = 0)
+        public ActionResult _BarChartDemo(int beginYear = 0, int beginMonth = 0, int endYear = 0, int endMonth = 0, string barId = null)
         {
             List<StatisticModel> modelList = new List<StatisticModel>();
             beginYear = beginYear == 0 ? 1 : beginYear;
@@ -190,9 +191,22 @@ namespace EPS.UI.Portal.Controllers
                 modelList.Add(model);
                 i++;
             }
-            
+
             ViewBag.PatrolPointStatisticList = modelList;
+            ViewBag.Id = barId;
             return PartialView();
         }
+
+        public ActionResult ChinaMapDemo()
+        {
+            return View();
+        }
+
+        public ActionResult BaiduMapDemo()
+        {
+            return View();
+        }
+
+
     }
 }

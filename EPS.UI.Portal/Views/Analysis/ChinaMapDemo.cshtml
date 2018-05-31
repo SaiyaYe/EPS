@@ -1,0 +1,172 @@
+﻿<section class="content-header">
+    <h1>
+        ChinaMapDemo
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>农业业务</li>
+        <li><a href="SchemeList">农业大数据分析</a></li>
+        <li class="active">地图展示</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
+
+<section class="content" style="background-color:#ffffff">
+    <div class="ibox float-e-margins">
+        @*title*@
+        <form action="@Url.Action("_BarChartDemo")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#barchart" data-ajax-success="afterclick" id="form0" method="get">
+            <div style="float:left">
+                <input type="hidden" name="barId" value="bar1" />
+                &nbsp<button id="btnSearch" class="btn btn btn-primary hidden" type="submit"> <i class="fa fa-search"></i> 搜索</button>
+            </div>
+        </form>
+
+        <form action="@Url.Action("_BarChartDemo")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#barchart2" id="form0" method="get">
+            <div style="float:left">
+                <input type="hidden" name="beginYear" value="2018" />
+                <input type="hidden" name="barId" value="bar2" />
+                &nbsp<button id="btnSearch2" class="btn btn btn-primary hidden" type="submit"> <i class="fa fa-search"></i> 搜索</button>
+            </div>
+        </form>
+
+        @*content*@
+        <div id="contentList" class="container-fluid">
+            <div class="row-fluid">
+                @*chart*@
+                <div class="col-md-6" style="height:620px;border-right:ridge">
+                    <!--Sidebar content-->
+                    <!-- BAR CHART -->
+                    <div class="box box-success" style="height:300px">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Bar Chart</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-md-4"></div>
+                            <div id="barchart" class="col-md-8"></div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+
+                    <div class="box box-success" style="height:300px">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Bar Chart</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-md-4"></div>
+                            <div id="barchart2" class="col-md-8"></div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+
+                @*map*@
+                <div class="col-md-6">
+                    <!--Body content-->
+                    <div id="main" style="height:620px;"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="~/wwwroot/js/echarts.min.js"></script>
+<script src="~/wwwroot/js/china.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<script>
+    function randomData() {
+        return Math.round(Math.random() * 500);
+    }
+
+    function afterclick() {
+        var search2 = $("#btnSearch2")
+        search2.click()
+    }
+
+    $(function () {
+        var search = $("#btnSearch")
+        search.click()
+
+        var mydata = [
+            { name: '北京', value: '100' }, { name: '天津', value: randomData() },
+            { name: '上海', value: randomData() }, { name: '重庆', value: randomData() },
+            { name: '河北', value: randomData() }, { name: '河南', value: randomData() },
+            { name: '云南', value: randomData() }, { name: '辽宁', value: randomData() },
+            { name: '黑龙江', value: randomData() }, { name: '湖南', value: randomData() },
+            { name: '安徽', value: randomData() }, { name: '山东', value: randomData() },
+            { name: '新疆', value: randomData() }, { name: '江苏', value: randomData() },
+            { name: '浙江', value: randomData() }, { name: '江西', value: randomData() },
+            { name: '湖北', value: randomData() }, { name: '广西', value: randomData() },
+            { name: '甘肃', value: randomData() }, { name: '山西', value: randomData() },
+            { name: '内蒙古', value: randomData() }, { name: '陕西', value: randomData() },
+            { name: '吉林', value: randomData() }, { name: '福建', value: randomData() },
+            { name: '贵州', value: randomData() }, { name: '广东', value: randomData() },
+            { name: '青海', value: randomData() }, { name: '西藏', value: randomData() },
+            { name: '四川', value: randomData() }, { name: '宁夏', value: randomData() },
+            { name: '海南', value: randomData() }, { name: '台湾', value: randomData() },
+            { name: '香港', value: randomData() }, { name: '澳门', value: randomData() }
+        ];
+
+        var optionMap = {
+            backgroundColor: '#FFFFFF',
+            //title: {
+            //    text: '全国地图大数据',
+            //    subtext: '',
+            //    x: 'center'
+            //},
+            tooltip: {
+                trigger: 'item'
+            },
+
+            //左侧小导航图标
+            visualMap: {
+                show: true,
+                x: 'left',
+                y: 'bottom',
+                splitList: [
+                    { start: 500, end: 600 }, { start: 400, end: 500 },
+                    { start: 300, end: 400 }, { start: 200, end: 300 },
+                    { start: 100, end: 200 }, { start: 0, end: 100 },
+                ],
+                color: ['#2C6F45', '#568B69', '#739F83', '#88AE96', '#B8CDBF', '#cccccc']
+            },
+
+            //配置属性
+            series: [{
+                name: '产量',
+                type: 'map',
+                mapType: 'china',
+                //roam: true,
+                zoom: 1.2,
+                label: {
+                    normal: {
+                        show: false  //省份名称
+                    },
+                    emphasis: {
+                        show: false
+                    }
+                },
+                data: mydata  //数据
+            }]
+        };
+
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(optionMap);
+    })
+    
+    
+</script>
