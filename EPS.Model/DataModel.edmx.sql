@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/03/2018 17:09:13
--- Generated from EDMX file: E:\project\EPS\EPS.Model\DataModel.edmx
+-- Date Created: 05/07/2018 23:45:03
+-- Generated from EDMX file: C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -147,7 +147,8 @@ GO
 -- Creating table 'Company'
 CREATE TABLE [dbo].[Company] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Number] int  NOT NULL
 );
 GO
 
@@ -187,7 +188,8 @@ GO
 CREATE TABLE [dbo].[Department] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [CompanyId] int  NOT NULL
+    [CompanyId] int  NOT NULL,
+    [Number] int  NOT NULL
 );
 GO
 
@@ -195,7 +197,9 @@ GO
 CREATE TABLE [dbo].[Group] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [DepartmentId] int  NOT NULL
+    [DepartmentId] int  NOT NULL,
+    [Number] int  NOT NULL,
+    [CompanyId] int  NOT NULL
 );
 GO
 
@@ -208,7 +212,8 @@ CREATE TABLE [dbo].[Employee] (
     [IsTeamLeader] bit  NOT NULL,
     [GroupId] int  NOT NULL,
     [DepartmentId] int  NOT NULL,
-    [CompanyId] int  NOT NULL
+    [CompanyId] int  NOT NULL,
+    [Number] int  NOT NULL
 );
 GO
 
@@ -739,6 +744,21 @@ GO
 CREATE INDEX [IX_FK_DefectLevelId]
 ON [dbo].[PatrolReport]
     ([DefectLevelId]);
+GO
+
+-- Creating foreign key on [CompanyId] in table 'Group'
+ALTER TABLE [dbo].[Group]
+ADD CONSTRAINT [FK_CompanyGroup]
+    FOREIGN KEY ([CompanyId])
+    REFERENCES [dbo].[Company]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CompanyGroup'
+CREATE INDEX [IX_FK_CompanyGroup]
+ON [dbo].[Group]
+    ([CompanyId]);
 GO
 
 -- --------------------------------------------------

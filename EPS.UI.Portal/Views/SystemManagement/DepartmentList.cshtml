@@ -1,45 +1,57 @@
 ﻿
 @using EPS.UI.Portal.Models
-@{
-    ViewBag.Title = "DepartmentList";
-    List<DepartmentModel> departmentList = ViewBag.Model as List<DepartmentModel>;
-}
+<link href="/wwwroot/lib/layer/theme/default/layer.css" rel="stylesheet" />
 
-<div class="box">
-    @*<div class="box-header">
-            <h3 class="box-title">Hover Data Table</h3>
-        </div>*@
-    <!-- /.box-header -->
-    <div class="box-body">
-        <table id="example2" class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>部门Id</th>
-                    <th>部门名称</th>
-                    <th>公司名称</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var department in departmentList)
-                {
-                    <tr>
-                        <td>@department.Id</td>
-                        <td>@department.Name</td>
-                        <td>@department.CompanyName<input type="hidden" name="companyId" value=@department.CompanyId /></td>
-                    </tr>
-                }
-            </tbody>
-            @*<tfoot>
-                    <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                </tfoot>*@
-        </table>
+<section class="content-header">
+    <h1>
+        系统管理
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li>系统管理</li>
+        <li class="active">部门管理</li>
+    </ol>
+    <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
+</section>
+
+<section class="content container-fluid">
+    <div class="ibox float-e-margins">
+        @*title*@
+        <form action="@Url.Action("_DepartmentList")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#contentList" id="form0" method="get">
+            <div style="float:left">
+                @Html.Action("SetCompanyDepartment", "Select")
+            </div>
+
+            <div style="float:left">
+                &nbsp<button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
+            </div>
+            @Html.ActionLink("添加", "AddDepartment", "SystemManagement", new { }, new { @class = "btn btn-success", style = "float:right" })
+            @Html.ActionLink("导出", "ExportWord", "Transaction", new { }, new { @class = "btn btn-warning", style = "float:right" })
+            <input id="pageSize" name="pageSize" type="hidden" />
+            <input id="pageIndex" name="pageIndex" type="hidden" />
+            <div style="clear:both"></div>
+        </form>
+
+        @*table*@
+        <div class="box">
+            <div id="contentList">
+
+            </div>
+        </div>
     </div>
-    <!-- /.box-body -->
-</div>
+</section>
 
+
+<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
+<script src="/wwwroot/lib/layer/layer.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script>
+
+    $(function () {
+        var pageSize = $("#setPageSize").val()
+        $("#pageSize").val(pageSize)
+
+        var search = $("#btnSearch")
+        search.click()
+    })
+</script>

@@ -111,6 +111,10 @@
       <End Role="PatrolReport" EntitySet="PatrolReport" />
       <End Role="Dictionary" EntitySet="Dictionary" />
     </AssociationSet>
+    <AssociationSet Name="CompanyGroup" Association="DataModel.Store.CompanyGroup">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Company">
     <Key>
@@ -118,6 +122,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PatrolScheme">
     <Key>
@@ -158,6 +163,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Group">
     <Key>
@@ -166,6 +172,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -179,6 +187,7 @@
     <Property Name="GroupId" Type="int" Nullable="false" />
     <Property Name="DepartmentId" Type="int" Nullable="false" />
     <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -516,6 +525,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="CompanyGroup">
+    <End Role="Company" Type="DataModel.Store.Company" Multiplicity="1" />
+    <End Role="Group" Type="DataModel.Store.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PatrolPoint_PatrolRoute_PatrolPoint">
     <End Role="PatrolPoint" Type="DataModel.Store.PatrolPoint" Multiplicity="1" />
     <End Role="PatrolPoint_PatrolRoute" Type="DataModel.Store.PatrolPoint_PatrolRoute" Multiplicity="*" />
@@ -645,6 +666,10 @@
             <End Role="PatrolReport" EntitySet="PatrolReport" />
             <End Role="Dictionary" EntitySet="Dictionary" />
           </AssociationSet>
+          <AssociationSet Name="CompanyGroup" Association="DataModel.CompanyGroup">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Company">
           <Key>
@@ -654,6 +679,8 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="Department" Relationship="DataModel.CompanyDepartment" FromRole="Company" ToRole="Department" />
           <NavigationProperty Name="Employee" Relationship="DataModel.EmployeeCompany" FromRole="Company" ToRole="Employee" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="DataModel.CompanyGroup" FromRole="Company" ToRole="Group" />
         </EntityType>
         <EntityType Name="PatrolScheme">
           <Key>
@@ -715,6 +742,7 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Group" Relationship="DataModel.DepartmentGroup" FromRole="Department" ToRole="Group" />
           <NavigationProperty Name="Employee" Relationship="DataModel.EmployeeDepartment" FromRole="Department" ToRole="Employee" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="CompanyDepartment">
           <End Type="DataModel.Company" Role="Company" Multiplicity="1" />
@@ -737,6 +765,9 @@
           <NavigationProperty Name="Department" Relationship="DataModel.DepartmentGroup" FromRole="Group" ToRole="Department" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="DataModel.GroupEmployee" FromRole="Group" ToRole="Employee" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="DataModel.CompanyGroup" FromRole="Group" ToRole="Company" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="DepartmentGroup">
           <End Type="DataModel.Department" Role="Department" Multiplicity="1" />
@@ -769,6 +800,7 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AcquisitionRecord" Relationship="DataModel.EmployeeAcquisitionRecord" FromRole="Employee" ToRole="AcquisitionRecord" />
           <NavigationProperty Name="PatrolReport" Relationship="DataModel.PatrolReportEmployee" FromRole="Employee" ToRole="PatrolReport" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="GroupEmployee">
           <End Type="DataModel.Group" Role="Group" Multiplicity="1" />
@@ -1099,6 +1131,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="CompanyGroup">
+          <End Type="DataModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="DataModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1110,6 +1154,7 @@
         <MappingFragment StoreEntitySet="Company">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1154,6 +1199,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1163,6 +1209,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1177,6 +1225,7 @@
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -146,6 +146,217 @@ namespace EPS.UI.Portal.Controllers
         }
 
         /// <summary>
+        /// 更改公司部门小组控件
+        /// </summary>
+        /// <param name="companyId">The company identifier.</param>
+        /// <param name="departmentId">The department identifier.</param>
+        /// <param name="groupId">The group identifier.</param>
+        /// <returns>
+        /// </returns>
+        /// 创建者：王一鹤
+        /// 创建日期：2018/5/8 17:11
+        /// 修改人：
+        /// 修改日期：
+        public ActionResult SetCompanyDepartmentGroup(int companyId = 0,int departmentId = 0, int groupId = 0)
+        {
+            var companyList = CompanyService.GetElementList().Result;
+            if (companyList == null)
+            {
+                return PartialView();
+            }
+
+            var selectCompanyList = companyList.Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectCompanyList.Insert(0, new SelectListItem { Text = "请选择公司", Value = "0", Selected = true });
+
+            if (companyId <= 0)
+            {
+                selectCompanyList[0].Selected = true;
+                ViewBag.CompanyList = selectCompanyList;
+                ViewBag.DepartmentList = new List<SelectListItem> { new SelectListItem { Text = "请选择部门", Value = "0", Selected = true } };
+                ViewBag.GroupList = new List<SelectListItem> { new SelectListItem { Text = "请选择小组", Value = "0", Selected = true } };
+                ViewBag.EmployeeList = new List<SelectListItem> { new SelectListItem { Text = "请选择员工", Value = "0", Selected = true } };
+                return PartialView();
+            }
+
+            var selectedCompanyItem = selectCompanyList.Find(u => u.Value == companyId.ToString());
+            if (selectedCompanyItem != null)
+            {
+                selectedCompanyItem.Selected = true;
+            }
+            ViewBag.CompanyList = selectCompanyList;
+
+            //部门
+            var departmentList = DepartmentService.Where(u => u.CompanyId == companyId).Result;
+            var selectDepartmentList = departmentList.Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectDepartmentList.Insert(0, new SelectListItem { Text = "请选择部门", Value = "0", Selected = true });
+
+            if (departmentId <= 0)
+            {
+                selectDepartmentList[0].Selected = true;
+                ViewBag.DepartmentList = selectDepartmentList;
+                ViewBag.GroupList = new List<SelectListItem> { new SelectListItem { Text = "请选择小组", Value = "0", Selected = true } };
+                ViewBag.EmployeeList = new List<SelectListItem> { new SelectListItem { Text = "请选择员工", Value = "0", Selected = true } };
+                return PartialView();
+            }
+
+            var selectedDepartmentItem = selectDepartmentList.Find(u => u.Value == departmentId.ToString());
+            if (selectedDepartmentItem != null)
+            {
+                selectedDepartmentItem.Selected = true;
+            }
+            ViewBag.DepartmentList = selectDepartmentList;
+
+            //小组
+            var groupList = GroupService.Where(u => u.DepartmentId == departmentId).Result;
+            var selectGroupList = groupList.Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectGroupList.Insert(0, new SelectListItem { Text = "请选择部门", Value = "0", Selected = true });
+
+            if (groupId <= 0)
+            {
+                selectGroupList[0].Selected = true;
+                ViewBag.GroupList = selectGroupList;
+                ViewBag.EmployeeList = new List<SelectListItem> { new SelectListItem { Text = "请选择员工", Value = "0", Selected = true } };
+                return PartialView();
+            }
+
+            var selectedGroupItem = selectGroupList.Find(u => u.Value == groupId.ToString());
+            if (selectedGroupItem != null)
+            {
+                selectedGroupItem.Selected = true;
+            }
+            ViewBag.GroupList = selectGroupList;
+            return PartialView();
+        }
+
+        /// <summary>
+        /// 更改公司部门控件
+        /// </summary>
+        /// <param name="companyId">The company identifier.</param>
+        /// <param name="departmentId">The department identifier.</param>
+        /// <returns>
+        /// </returns>
+        /// 创建者：王一鹤
+        /// 创建日期：2018/5/8 17:16
+        /// 修改人：
+        /// 修改日期：
+        public ActionResult SetCompanyDepartment(int companyId = 0, int departmentId = 0)
+        {
+
+            var companyList = CompanyService.GetElementList().Result;
+            if (companyList == null)
+            {
+                return PartialView();
+            }
+
+            var selectCompanyList = companyList.Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectCompanyList.Insert(0, new SelectListItem { Text = "请选择公司", Value = "0", Selected = true });
+
+            if (companyId <= 0)
+            {
+                selectCompanyList[0].Selected = true;
+                ViewBag.CompanyList = selectCompanyList;
+                ViewBag.DepartmentList = new List<SelectListItem> { new SelectListItem { Text = "请选择部门", Value = "0", Selected = true } };
+                ViewBag.GroupList = new List<SelectListItem> { new SelectListItem { Text = "请选择小组", Value = "0", Selected = true } };
+                ViewBag.EmployeeList = new List<SelectListItem> { new SelectListItem { Text = "请选择员工", Value = "0", Selected = true } };
+                return PartialView();
+            }
+
+            var selectedCompanyItem = selectCompanyList.Find(u => u.Value == companyId.ToString());
+            if (selectedCompanyItem != null)
+            {
+                selectedCompanyItem.Selected = true;
+            }
+            ViewBag.CompanyList = selectCompanyList;
+
+            //部门
+            var departmentList = DepartmentService.Where(u => u.CompanyId == companyId).Result;
+            var selectDepartmentList = departmentList.Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectDepartmentList.Insert(0, new SelectListItem { Text = "请选择部门", Value = "0", Selected = true });
+
+            if (departmentId <= 0)
+            {
+                selectDepartmentList[0].Selected = true;
+                ViewBag.DepartmentList = selectDepartmentList;
+                ViewBag.GroupList = new List<SelectListItem> { new SelectListItem { Text = "请选择小组", Value = "0", Selected = true } };
+                ViewBag.EmployeeList = new List<SelectListItem> { new SelectListItem { Text = "请选择员工", Value = "0", Selected = true } };
+                return PartialView();
+            }
+
+            var selectedDepartmentItem = selectDepartmentList.Find(u => u.Value == departmentId.ToString());
+            if (selectedDepartmentItem != null)
+            {
+                selectedDepartmentItem.Selected = true;
+            }
+            ViewBag.DepartmentList = selectDepartmentList;
+
+            return PartialView();
+        }
+        /// <summary>
+        /// 更改公司控件
+        /// </summary>
+        /// <param name="companyId">The company identifier.</param>
+        /// <returns>
+        /// </returns>
+        /// 创建者：王一鹤
+        /// 创建日期：2018/5/8 17:20
+        /// 修改人：
+        /// 修改日期：
+        public ActionResult SetCompany(int companyId = 0)
+        {
+
+            var companyList = CompanyService.GetElementList().Result;
+            if (companyList == null)
+            {
+                return PartialView();
+            }
+
+            var selectCompanyList = companyList.Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            }).ToList();
+            selectCompanyList.Insert(0, new SelectListItem { Text = "请选择公司", Value = "0", Selected = true });
+
+            if (companyId <= 0)
+            {
+                selectCompanyList[0].Selected = true;
+                ViewBag.CompanyList = selectCompanyList;
+                ViewBag.DepartmentList = new List<SelectListItem> { new SelectListItem { Text = "请选择部门", Value = "0", Selected = true } };
+                ViewBag.GroupList = new List<SelectListItem> { new SelectListItem { Text = "请选择小组", Value = "0", Selected = true } };
+                ViewBag.EmployeeList = new List<SelectListItem> { new SelectListItem { Text = "请选择员工", Value = "0", Selected = true } };
+                return PartialView();
+            }
+
+            var selectedCompanyItem = selectCompanyList.Find(u => u.Value == companyId.ToString());
+            if (selectedCompanyItem != null)
+            {
+                selectedCompanyItem.Selected = true;
+            }
+            ViewBag.CompanyList = selectCompanyList;
+            
+            return PartialView();
+        }
+        /// <summary>
         /// 公司改变
         /// </summary>
         /// <param name="companyId">The company identifier.</param>
@@ -156,7 +367,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult CompanyChange(int companyId = 0)
         {
-            var departmentList = DepartmentService.Where(u => u.Id == companyId).Result;
+            var departmentList = DepartmentService.Where(u => u.CompanyId == companyId).Result;
             if (departmentList == null)
             {
                 return PartialView("component/SelectOptions", new List<SelectListItem>());
