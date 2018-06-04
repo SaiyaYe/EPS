@@ -14792,7 +14792,14 @@
     <Content Include="wwwroot\img\user8-128x128.jpg" />
     <Content Include="wwwroot\js\adminlte.js" />
     <Content Include="wwwroot\js\adminlte.min.js" />
+    <Content Include="wwwroot\js\bmap.min.js" />
+    <Content Include="wwwroot\js\bmap\bmap.js" />
+    <Content Include="wwwroot\js\bmap\BMapCoordSys.js" />
+    <Content Include="wwwroot\js\bmap\BMapModel.js" />
+    <Content Include="wwwroot\js\bmap\BMapView.js" />
+    <Content Include="wwwroot\js\china.js" />
     <Content Include="wwwroot\js\demo.js" />
+    <Content Include="wwwroot\js\echarts.min.js" />
     <Content Include="wwwroot\js\pages\dashboard.js" />
     <Content Include="wwwroot\js\pages\dashboard2.js" />
     <Content Include="wwwroot\lib\AmazeUI\css\admin.css" />
@@ -14827,6 +14834,7 @@
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="wwwroot\lib\bootstrap\dist\css\example-fluid-layout.css" />
     <Content Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
     <Content Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
@@ -16116,7 +16124,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -16343,18 +16353,9 @@
     <Content Include="Views\Analysis\_DonutChartDemo.cshtml" />
     <Content Include="Views\Analysis\BarChartDemo.cshtml" />
     <Content Include="Views\Analysis\_BarChartDemo.cshtml" />
-    <Content Include="Views\SystemManagement\_EmployeeList.cshtml" />
-    <Content Include="Views\SystemManagement\AddEmployee.cshtml" />
-    <Content Include="Views\Select\SetCompanyDepartmentGroup.cshtml" />
-    <Content Include="Views\SystemManagement\UpdateEmployee.cshtml" />
-    <Content Include="Views\SystemManagement\_GroupList.cshtml" />
-    <Content Include="Views\SystemManagement\UpdateGroup.cshtml" />
-    <Content Include="Views\Select\SetCompanyDepartment.cshtml" />
-    <Content Include="Views\Select\SetCompany.cshtml" />
-    <Content Include="Views\SystemManagement\AddGroup.cshtml" />
-    <Content Include="Views\SystemManagement\_DepartmentList.cshtml" />
-    <Content Include="Views\SystemManagement\AddDepartment.cshtml" />
-    <Content Include="Views\SystemManagement\UpdateDepartment.cshtml" />
+    <Content Include="Views\Analysis\ChinaMapDemo.cshtml" />
+    <Content Include="Views\Analysis\BaiduMapDemo.cshtml" />
+    <Content Include="wwwroot\js\bmap\README.md" />
     <Content Include="Views\SpaceMapService\SpaceQueryAnalysis.cshtml" />
     <Content Include="Views\SpaceMapService\GeometryTimeChange.cshtml" />
     <Content Include="Views\SpaceMapService\MacroSituationDisplay.cshtml" />

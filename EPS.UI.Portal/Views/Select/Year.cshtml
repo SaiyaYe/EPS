@@ -7,6 +7,6 @@
     string name = ViewBag.Name;
 }
 
-<select data-am-selected id="yearSelection" name="@name">
+<select data-am-selected="{maxHeight: 300}" id="yearSelection" name="@name">
     @Html.Partial("component/SelectOptions", yearList)
 </select>
