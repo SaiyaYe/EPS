@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "GeometryTimeChange";
+}
+<link rel="stylesheet" href="~/js_api_3.9/dojo/dijit/themes/tundra/tundra.css">
+<link rel="stylesheet" href="~/js_api_3.9/esri/css/esri.css">
+<script src="~/js_api_3.9/init.js"></script>
+<script src="~/mapjs/GeometryTimeChange.js"></script>
+<style>
+    #map {
+        width:1300px; 
+        height:630px; 
+        border:1px solid #000;
+        position:absolute
+    }
+
+    #timeSliderDiv {
+        position: absolute;
+        bottom: 20px;
+    }
+
+    .esriControlsBR {
+        display: none;
+    }
+</style>
+<section>
+    <div id="map">
+
+        <div id="timeSliderDiv"></div>
+
+    </div>
+
+</section>

@@ -170,6 +170,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SelectController.cs" />
+    <Compile Include="Controllers\SpaceMapServiceController.cs" />
     <Compile Include="Controllers\SystemManagementController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -14097,12 +14098,21 @@
     <Content Include="js_api_3.9\xstyle\shim\var.js" />
     <Content Include="js_api_3.9\xstyle\util\createStyleSheet.js" />
     <Content Include="js_api_3.9\xstyle\xstyle.min.js" />
+    <Content Include="mapjs\GeometryTimeChange.js" />
     <Content Include="mapjs\images\CircleBlue16.png" />
     <Content Include="mapjs\images\CircleBlue24.png" />
     <Content Include="mapjs\images\CircleRed32.png" />
-    <Content Include="mapjs\measure.js" />
-    <Content Include="mapjs\navigation.js" />
-    <Content Include="mapjs\spatialQuery.js" />
+    <Content Include="mapjs\MacroSituationDisplay.js" />
+    <Content Include="mapjs\SpaceQueryAnalysis.js" />
+    <Content Include="mapjs\thethirdcss\ChartInfoWindow.css" />
+    <Content Include="mapjs\thethirdjs\ChartInfoWindow.js" />
+    <Content Include="mapjs\thethirdjs\echarts.js" />
+    <Content Include="mapjs\thethirdjs\Echarts3Layer.js" />
+    <Content Include="mapjs\thethirdjs\geometryUtils.js" />
+    <Content Include="mapjs\thethirdjs\heatmap.js" />
+    <Content Include="mapjs\thethirdjs\HeatmapLayer.js" />
+    <Content Include="mapjs\thethirdjs\jquery3.3.1.js" />
+    <Content Include="mapjs\thethirdjs\main.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -16336,9 +16346,6 @@
     <Content Include="Views\Transaction\_PatrolPointList.cshtml" />
     <Content Include="Views\Select\DefectType.cshtml" />
     <Content Include="Views\Select\DefectLevel.cshtml" />
-    <Content Include="Views\Transaction\Measure.cshtml" />
-    <Content Include="Views\Transaction\SpatialInformationQuery.cshtml" />
-    <Content Include="Views\Transaction\Navigation.cshtml" />
     <Content Include="Views\Analysis\DonutChartDemo.cshtml" />
     <Content Include="Views\Select\Year.cshtml" />
     <Content Include="Views\Select\Month.cshtml" />
@@ -16349,6 +16356,9 @@
     <Content Include="Views\Analysis\ChinaMapDemo.cshtml" />
     <Content Include="Views\Analysis\BaiduMapDemo.cshtml" />
     <Content Include="wwwroot\js\bmap\README.md" />
+    <Content Include="Views\SpaceMapService\SpaceQueryAnalysis.cshtml" />
+    <Content Include="Views\SpaceMapService\GeometryTimeChange.cshtml" />
+    <Content Include="Views\SpaceMapService\MacroSituationDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

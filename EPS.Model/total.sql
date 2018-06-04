@@ -9,6 +9,7 @@ insert into Menu(Name,ParentId) values('巡检方案案例',0)
 insert into Menu(Name,ParentId) values('遥感影像',0)
 insert into Menu(Name,ParentId) values('设备管理',0)
 insert into Menu(Name,ParentId) values('系统管理',0)
+insert into Menu(Name,ParentId) values('空间地图服务',0)
 
 insert into Menu(Name,ParentId,Link) values('行政边界',1,'')
 insert into Menu(Name,ParentId,Link) values('交通道路',1,'')
@@ -29,9 +30,6 @@ insert into Menu(Name,ParentId,Link) values('设定巡检路线',3,'Transaction/RouteL
 insert into Menu(Name,ParentId,Link) values('巡检报告',3,'Transaction/PatrolReportList')
 insert into Menu(Name,ParentId,Link) values('巡检问题处理',3,'Transaction/ProblemHandledList')
 insert into Menu(Name,ParentId,Link) values('巡检问题处理',3,'Transaction/ProblemHandledList')
-insert into Menu(Name,ParentId,Link) values('空间信息查询',3,'Transaction/SpatialInformationQuery')
-insert into Menu(Name,ParentId,Link) values('最短路径导航',3,'Transaction/Navigation')
-insert into Menu(Name,ParentId,Link) values('地图量测',3,'Transaction/Measure')
 
 insert into Menu(Name,ParentId,Link) values('查询',4,'')
 insert into Menu(Name,ParentId,Link) values('无人机影像中电力问题',4,'')
@@ -49,6 +47,9 @@ insert into Menu(Name,ParentId,Link) values('角色权限',8,'')
 insert into Menu(Name,ParentId,Link) values('用户日志统计',8,'')
 insert into Menu(Name,ParentId,Link) values('系统信息',8,'')
 
+insert into Menu(Name,ParentId,Link) values('空间查询分析',9,'SpaceMapService/SpaceQueryAnalysis')
+insert into Menu(Name,ParentId,Link) values('要素时态变化',9,'SpaceMapService/GeometryTimeChange')
+insert into Menu(Name,ParentId,Link) values('宏观形势展示',9,'SpaceMapService/MacroSituationDisplay')
 --dictionary
 --巡检点类型
 insert into Dictionary(Code,Type) values('P10101','电塔')

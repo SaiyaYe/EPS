@@ -509,5 +509,9 @@ namespace EPS.UI.Portal.Controllers
         {
             return View();
         }
+        public ActionResult ThematicMap()
+        {
+            return View();
+        }
     }
 }
