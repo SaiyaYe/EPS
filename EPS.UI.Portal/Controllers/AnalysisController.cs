@@ -202,6 +202,13 @@ namespace EPS.UI.Portal.Controllers
             return View();
         }
 
+        public ActionResult _ChinaMap()
+        {
+            string path = Server.MapPath("App_Data/2011_trans.xlsx");
+
+            return PartialView();
+        }
+
         public ActionResult BaiduMapDemo()
         {
             return View();

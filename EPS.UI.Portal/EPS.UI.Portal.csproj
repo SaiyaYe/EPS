@@ -14782,7 +14782,11 @@
     <Content Include="wwwroot\img\user8-128x128.jpg" />
     <Content Include="wwwroot\js\adminlte.js" />
     <Content Include="wwwroot\js\adminlte.min.js" />
-    <Content Include="wwwroot\js\bmap.js" />
+    <Content Include="wwwroot\js\bmap.min.js" />
+    <Content Include="wwwroot\js\bmap\bmap.js" />
+    <Content Include="wwwroot\js\bmap\BMapCoordSys.js" />
+    <Content Include="wwwroot\js\bmap\BMapModel.js" />
+    <Content Include="wwwroot\js\bmap\BMapView.js" />
     <Content Include="wwwroot\js\china.js" />
     <Content Include="wwwroot\js\demo.js" />
     <Content Include="wwwroot\js\echarts.min.js" />
@@ -16344,6 +16348,7 @@
     <Content Include="Views\Analysis\_BarChartDemo.cshtml" />
     <Content Include="Views\Analysis\ChinaMapDemo.cshtml" />
     <Content Include="Views\Analysis\BaiduMapDemo.cshtml" />
+    <Content Include="wwwroot\js\bmap\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

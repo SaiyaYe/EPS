@@ -1,11 +1,5 @@
 var echarts = require("echarts");
 
-var BMapCoordSys = require("./BMapCoordSys");
-
-require("./BMapModel");
-
-require("./BMapView");
-
 /*
 * Licensed to the Apache Software Foundation (ASF) under one
 * or more contributor license agreements.  See the NOTICE file
@@ -24,22 +18,30 @@ require("./BMapView");
 * specific language governing permissions and limitations
 * under the License.
 */
+function v2Equal(a, b) {
+  return a && b && a[0] === b[0] && a[1] === b[1];
+}
 
-/**
- * BMap component extension
- */
-echarts.registerCoordinateSystem('bmap', BMapCoordSys); // Action
-
-echarts.registerAction({
-  type: 'bmapRoam',
-  event: 'bmapRoam',
-  update: 'updateLayout'
-}, function (payload, ecModel) {
-  ecModel.eachComponent('bmap', function (bMapModel) {
-    var bmap = bMapModel.getBMap();
-    var center = bmap.getCenter();
-    bMapModel.setCenterAndZoom([center.lng, center.lat], bmap.getZoom());
-  });
+var _default = echarts.extendComponentModel({
+  type: 'bmap',
+  getBMap: function () {
+    // __bmap is injected when creating BMapCoordSys
+    return this.__bmap;
+  },
+  setCenterAndZoom: function (center, zoom) {
+    this.option.center = center;
+    this.option.zoom = zoom;
+  },
+  centerOrZoomChanged: function (center, zoom) {
+    var option = this.option;
+    return !(v2Equal(center, option.center) && zoom === option.zoom);
+  },
+  defaultOption: {
+    center: [104.114129, 37.550339],
+    zoom: 5,
+    mapStyle: {},
+    roam: false
+  }
 });
-var version = '1.0.0';
-exports.version = version;
+
+module.exports = _default;

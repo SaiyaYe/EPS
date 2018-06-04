@@ -114,13 +114,13 @@ insert into PatrolRoute(Name,Shape) values('线路二',geography::STGeomFromText('L
 insert into PatrolRoute(Name,Shape) values('线路三',geography::STGeomFromText('LINESTRING(115.33 40.57, 114.82 40.16, 112.17 41.84)', 4326))
 
 --PatrolPoint
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('001','116.63','40.32',1,1,geography::STGeomFromText('POINT (116.63 40.32)', 4326))
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('002','115.33','40.57',1,1,geography::STGeomFromText('POINT (115.33 40.57)', 4326))
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('003','114.82','40.16',1,1,geography::STGeomFromText('POINT (114.82 40.16)', 4326))
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('004','113.59','41.29',1,1,geography::STGeomFromText('POINT (113.59 41.29)', 4326))
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('005','112.17','41.84',1,1,geography::STGeomFromText('POINT (112.17 41.84)', 4326))
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('006','120.3','34.3',2,2,geography::STGeomFromText('POINT (120.3 34.3)', 4326))
-insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,Shape) values('007','120.4','34.4',2,2,geography::STGeomFromText('POINT (120.4 34.4)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,CreateTime,Shape) values('001','116.63','40.32',1,1,'2017-12-1',geography::STGeomFromText('POINT (116.63 40.32)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,CreateTime,Shape) values('002','115.33','40.57',1,1,'2018-1-1',geography::STGeomFromText('POINT (115.33 40.57)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,CreateTime,Shape) values('003','114.82','40.16',1,1,'2018-1-1',geography::STGeomFromText('POINT (114.82 40.16)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,CreateTime,Shape) values('004','113.59','41.29',1,1,'2018-2-1',geography::STGeomFromText('POINT (113.59 41.29)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,CreateTime,Shape) values('005','112.17','41.84',1,1,'2018-2-1',geography::STGeomFromText('POINT (112.17 41.84)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,CreateTime,Shape) values('006','120.3','34.3',2,2,'2018-3-1',geography::STGeomFromText('POINT (120.3 34.3)', 4326))
+insert into PatrolPoint(PoleTowerNumber,Longitude,Latitude,CountyId,PatrolPointTypeId,CreateTime,Shape) values('007','120.4','34.4',2,2,'2018-4-1',geography::STGeomFromText('POINT (120.4 34.4)', 4326))
 
 --PatrolPoint_PatrolRoute
 insert into [PatrolPoint_PatrolRoute](PatrolPoint_Id,PatrolRoute_Id) values(1,1)

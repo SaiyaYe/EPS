@@ -14,15 +14,15 @@
 <section class="content" style="background-color:#ffffff">
     <div class="ibox float-e-margins">
 
-        <div id="map-wrap" style="height: 500px;">
+        <div id="map-wrap" style="height: 700px;">
             <!-- 这里以后是地图 -->
         </div>
 
     </div>
 </section>
-
 <script src="~/wwwroot/js/echarts.min.js"></script>
-<script src="~/wwwroot/js/china.js"></script>
+<script src="http://api.map.baidu.com/getscript?v=2.0&ak=OlzCQ3hYT6raZYRMEpYWpoxyxy3tOYbC&services=&t=20180529182003"></script>
+<script src="~/wwwroot/js/bmap.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
 <script>
@@ -40,46 +40,96 @@
 
         // mapChart的配置
         var option = {
-            geo: {
-                map: 'china',
-
-                itemStyle: {					// 定义样式
-                    normal: {					// 普通状态下的样式
-                        areaColor: '#323c48',
-                        borderColor: '#111'
-                    },
-                    emphasis: {					// 高亮状态下的样式
-                        areaColor: '#2a333d'
-                    }
+            bmap: {
+                center: [116.307698, 40.056975], // 中心位置坐标
+                zoom: 5, // 地图缩放比例
+                roam: true, // 开启用户缩放
+                mapStyle: {  // 百度地图自定义样式
+                    styleJson: [
+                        // 陆地
+                        {
+                            "featureType": "land",
+                            "elementType": "all",
+                            "stylers": {
+                                "color": "#073763"
+                            }
+                        },
+                        // 水系
+                        {
+                            "featureType": "water",
+                            "elementType": "all",
+                            "stylers": {
+                                "color": "#073763",
+                                "lightness": -54
+                            }
+                        },
+                        // 国道与高速
+                        {
+                            "featureType": "highway",
+                            "elementType": "all",
+                            "stylers": {
+                                "color": "#45818e"
+                            }
+                        },
+                        // 边界线
+                        {
+                            "featureType": "boundary",
+                            "elementType": "all",
+                            "stylers": {
+                                "color": "#ffffff",
+                                "lightness": -62,
+                                "visibility": "on"
+                            }
+                        },
+                        // 行政标注
+                        {
+                            "featureType": "label",
+                            "elementType": "labels.text.fill",
+                            "stylers": {
+                                "color": "#ffffff",
+                                "visibility": "on"
+                            }
+                        },
+                        {
+                            "featureType": "label",
+                            "elementType": "labels.text.stroke",
+                            "stylers": {
+                                "color": "#444444",
+                                "visibility": "on"
+                            }
+                        }
+                    ]
                 }
             },
-
-            backgroundColor: '#404a59',  		// 图表背景色
-
+            visualMap: {	// 视觉映射组件
+                type: 'continuous',
+                min: 0,
+                max: 200,
+                calculable: true,
+                inRange: {
+                    color: ['#50a3ba', '#eac736', '#d94e5d']
+                },
+                textStyle: {
+                    color: '#fff'
+                }
+            },
             series: [
                 {
-                    name: '销量', // series名称
-                    type: 'scatter', // series图表类型
-                    coordinateSystem: 'geo', // series坐标系类型
+                    name: '销量',
+                    type: 'scatter',
+
+                    coordinateSystem: 'bmap', // 坐标系使用bmap
+
                     data: myData
                 }
             ],
 
-            visualMap: {
-                type: 'continuous', // 连续型
-                min: 0,       		// 值域最小值，必须参数
-                max: 200,			// 值域最大值，必须参数
-                calculable: true,	// 是否启用值域漫游
-                inRange: {
-                    color: ['#50a3ba', '#eac736', '#d94e5d']
-                    // 指定数值从低到高时的颜色变化
-                },
-                textStyle: {
-                    color: '#fff'	// 值域控件的文本颜色
-                }
-            }
-    };
+        }
 
-    mapChart.setOption(option);
+        mapChart.setOption(option);
+
+        var bmap = mapChart.getModel().getComponent('bmap').getBMap(); // 百度地图实例
+        bmap.addControl(new BMap.NavigationControl()); // 缩放控件
+        bmap.addControl(new BMap.ScaleControl()); // 比例尺
     })
 </script>
