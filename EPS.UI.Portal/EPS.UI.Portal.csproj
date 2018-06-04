@@ -16359,6 +16359,15 @@
     <Content Include="Views\SpaceMapService\SpaceQueryAnalysis.cshtml" />
     <Content Include="Views\SpaceMapService\GeometryTimeChange.cshtml" />
     <Content Include="Views\SpaceMapService\MacroSituationDisplay.cshtml" />
+    <Content Include="Views\SystemManagement\_DepartmentList.cshtml" />
+    <Content Include="Views\SystemManagement\_EmployeeList.cshtml" />
+    <Content Include="Views\SystemManagement\_GroupList.cshtml" />
+    <Content Include="Views\SystemManagement\AddDepartment.cshtml" />
+    <Content Include="Views\SystemManagement\AddEmployee.cshtml" />
+    <Content Include="Views\SystemManagement\AddGroup.cshtml" />
+    <Content Include="Views\SystemManagement\UpdateDepartment.cshtml" />
+    <Content Include="Views\SystemManagement\UpdateEmployee.cshtml" />
+    <Content Include="Views\SystemManagement\UpdateGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
