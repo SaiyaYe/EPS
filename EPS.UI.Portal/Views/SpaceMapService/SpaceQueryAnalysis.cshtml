@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "SpaceQueryAnalysis";
 }
-<link rel="stylesheet" type="text/css" href="~/js_api_3.9/dojo/dijit/themes/claro/claro.css" />
-<link rel="stylesheet" href="~/js_api_3.9/esri/css/esri.css">
+<link rel="stylesheet" type="text/css" href="~/js_api_3.23/dijit/themes/claro/claro.css" />
+<link rel="stylesheet" href="~/js_api_3.23/esri/css/esri.css">
 <link rel="stylesheet" href="~/mapjs/thethirdcss/ChartInfoWindow.css" />
 <style>
     .esriControlsBR {
@@ -49,6 +49,39 @@
         left: 0px;
         z-index: 1
     }
+    #BasemapToggle {
+    position:absolute;
+        right:0px;
+        top:230px;
+        z-index:1
+
+    }
+    #search {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 6px;
+        left: 80px;
+    }
+    #HomeButton {
+        left: 22px;
+        position: absolute;
+        top: 93px;
+        z-index: 1;
+    }
+    #info {
+        border-style: solid;
+        border-color: black;
+        position: absolute;
+        left: 570px;
+        top: 5px;
+        border-radius: 5px;
+        z-index: 1;
+        background-color: black;
+        color: white;
+        font-size: 15px;
+    }
+
 </style>
 <script type="text/javascript" src="~/mapjs/thethirdjs/jquery3.3.1.js"></script>
 <script src="~/mapjs/thethirdjs/echarts.js"></script>
@@ -62,13 +95,13 @@
 
 </script>
 
-<script src="~/js_api_3.9/init.js"></script>
+<script src="~/js_api_3.23/init.js"></script>
 <script type="text/javascript" src="~/mapjs/thethirdjs/heatmap.js"></script>
 <script src="~/mapjs/SpaceQueryAnalysis.js"></script>
 <section class="claro">
-    <div id="map" >
-
-        <div id="btnbox1" >
+    <div id="map">
+        <div id="BasemapToggle"></div>
+        <div id="btnbox1">
             <button onclick="addStops()" class="btn btn-danger btn_Delete">增加站点</button>
             <button onclick="clearStops()" class="btn btn-danger btn_Delete">清除站点</button>
             <button onclick="addBarriers()" class="btn btn-danger btn_Delete">增加路障</button>
@@ -76,10 +109,10 @@
             <button onclick="solveRoute()" class="btn btn-danger btn_Delete">路径分析</button>
             <button onclick="clearRoutes()" class="btn btn-danger btn_Delete">清除路径</button>
         </div>
-        <div id="grid"  data-dojo-type="dojox/grid/DataGrid" data-dojo-id="gridWidget">
+        <div id="grid" data-dojo-type="dojox/grid/DataGrid" data-dojo-id="gridWidget">
         </div>
 
-        <div id="measure" >
+        <div id="measure">
             <div id="titlePane" data-dojo-type="dijit.TitlePane" data-dojo-props="title:'量测',closable:true,open:false">
                 <div id="measurementDiv"></div>
                 <span style="font-size:smaller;padding:5px 5px;">按住<b>CTRL</b> 可进行捕捉</span>
@@ -91,15 +124,19 @@
             <button id="measureselect" class="btn btn-primary">多点测距</button>
             <button id="deleteresult" class="btn btn-primary">清除图形</button>
         </div>
-        <div id="btnbox3" >
+        <div id="btnbox3">
             <button id="barChart" style="width:126px" class="btn btn-primary">柱状图统计</button> <br />
             <button id="pieChart" style="width:126px" class="btn btn-primary">饼状图统计</button> <br />
             <button id="createHeatMap" style="width:126px" class="btn btn-primary">生成热力图</button> <br />
             <button id="tog" style="width:126px" class="btn btn-primary">关闭/显示热力图</button> <br />
-            <button id="tog1" style="width:126px"  class="btn btn-primary">要素显示控制</button> <br />
+            <button id="tog1" style="width:126px" class="btn btn-primary">要素显示控制</button> <br />
             <button id="initMap" style="width:126px" class="btn btn-primary">清除数据</button>
         </div>
         <div id="heatLayer"></div>
+        <div id="search"></div>
+        <div id="HomeButton"></div>
+        <div id="info"></div>
+      
 
 
     </div>

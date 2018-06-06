@@ -1,13 +1,39 @@
-require(["esri/map","thethirdjs/Echarts3Layer","dojo/domReady!"],function (Map,Echarts3Layer) {
-       var map=new Map("map",{
+require(["esri/map", "esri/basemaps", "esri/dijit/BasemapToggle", "thethirdjs/Echarts3Layer", "esri/dijit/Search", "esri/dijit/HomeButton",
+    "esri/dijit/LocateButton", "esri/geometry/webMercatorUtils", "dojo/domReady!"], function (Map, esriBasemaps, BasemapToggle, Echarts3Layer, Search, HomeButton, LocateButton,webMercatorUtils) {
+    esriBasemaps.delorme = {
+        baseMapLayers: [
+            //中国矢量地图服务  
+            { url: "http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity/MapServer" }
+        ],
+        //缩略图  
+        thumbnailUrl: "../../mapjs/images/topo.jpg",
+        title: "矢量图"
+    };  
+    var map = new Map("map", {
            logo:false,
             basemap:"satellite",
             center: [122.45, 37.75], // longitude, latitude
             zoom: 5,
           
 
-        });
+    });
+    
 
+    var search = new Search({
+        map: map,
+        enableInfoWindow:false
+    }, "search");
+    search.startup();  
+
+    var home = new HomeButton({
+        map: map
+    }, "HomeButton");
+    home.startup();
+       var toggle = new BasemapToggle({
+           map: map,
+           basemap: "delorme"
+       }, "BasemapToggle");
+       toggle.startup();
         map.on('load',function () {
             //eCharts添加到图层
             var overlay=new Echarts3Layer(map,echarts);
@@ -333,5 +359,7 @@ require(["esri/map","thethirdjs/Echarts3Layer","dojo/domReady!"],function (Map,E
             };
             // 使用刚指定的配置项和数据显示图表。
             overlay.setOption(option);
-        });
+       });
+        //经纬度函数
+      
     });

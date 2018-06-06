@@ -1,9 +1,9 @@
 ﻿@{
     ViewBag.Title = "GeometryTimeChange";
 }
-<link rel="stylesheet" href="~/js_api_3.9/dojo/dijit/themes/tundra/tundra.css">
-<link rel="stylesheet" href="~/js_api_3.9/esri/css/esri.css">
-<script src="~/js_api_3.9/init.js"></script>
+<link rel="stylesheet" href="~/js_api_3.23/dijit/themes/tundra/tundra.css">
+<link rel="stylesheet" href="~/js_api_3.23/esri/css/esri.css">
+<script src="~/js_api_3.23/init.js"></script>
 <script src="~/mapjs/GeometryTimeChange.js"></script>
 <style>
     #map {
@@ -17,16 +17,50 @@
         position: absolute;
         bottom: 20px;
     }
+    #BasemapToggle {
+        position: absolute;
+        right: 0px;
+        top: 230px;
+        z-index: 1
+    }
 
     .esriControlsBR {
         display: none;
+    }
+    #search {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 6px;
+        left: 80px;
+    }
+    #HomeButton {
+        left: 22px;
+        position: absolute;
+        top: 93px;
+        z-index: 1;
+    }
+    #info {
+        border-style: solid;
+        border-color:black;
+        position: absolute;
+        left: 570px;
+        top: 5px;
+        border-radius:5px;
+        z-index: 1;
+        background-color: black;
+        color: white;
+        font-size: 15px;
     }
 </style>
 <section>
     <div id="map">
 
         <div id="timeSliderDiv"></div>
-
+        <div id="BasemapToggle"></div>
+        <div id="search"></div>
+        <div id="HomeButton"></div>
+        <span id="info" ></span>
     </div>
 
 </section>

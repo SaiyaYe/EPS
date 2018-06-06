@@ -36,9 +36,13 @@ require(["dojo/parser", "dojo/dom", "dojo/keys", "esri/config", "esri/sniff", "e
         "dojo/_base/window",
         "thethirdjs/ChartInfoWindow",
         "thethirdjs/geometryUtils",
-          "thethirdjs/HeatmapLayer",
-    
-
+    "thethirdjs/HeatmapLayer",
+          "esri/dijit/BasemapToggle",
+          "esri/basemaps",
+    "esri/dijit/Search",
+    "esri/dijit/HomeButton",
+    "esri/dijit/LocateButton",  
+    "esri/geometry/webMercatorUtils",
      "dojox/grid/DataGrid",
         "dijit/form/Button", "dojo/domReady!"],
     function (parser, dom, keys, esriConfig, has, SnappingManager, Measurement, FeatureLayer, SimpleRenderer, GeometryService, ArcGISDynamicMapServiceLayer, registry, on, Map, Extent, SpatialReference, InfoTemplate, ArcGISTiledMapServiceLayer, Graphic, Draw,
@@ -50,11 +54,21 @@ require(["dojo/parser", "dojo/dom", "dojo/keys", "esri/config", "esri/sniff", "e
 
        Measurement,webMercatorUtils,geodesicUtils, Units,Font,Point,DistanceParameters,Polyline,GraphicsLayer,LengthsParameters,TextSymbol,
        domGeometry,
-        array, domConstruct, win, ChartInfoWindow,geometryUrils,HeatmapLayer
+       array, domConstruct, win, ChartInfoWindow, geometryUrils, HeatmapLayer, BasemapToggle, esriBasemaps, Search, HomeButton, LocateButton,webMercatorUtils
 
         ) {
         
-    	 parser.parse();
+        parser.parse();
+        
+        esriBasemaps.delorme = {
+            baseMapLayers: [
+                //中国矢量地图服务  
+                { url: "http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineCommunity/MapServer" }
+            ],
+            //缩略图  
+            thumbnailUrl: "../../mapjs/images/topo.jpg",
+            title: "矢量图"
+        };  
             esriConfig.defaults.geometryService = new GeometryService("http://localhost:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer");
         map = new Map("map",{
                 basemap: "satellite",
@@ -62,6 +76,32 @@ require(["dojo/parser", "dojo/dom", "dojo/keys", "esri/config", "esri/sniff", "e
                 zoom: 12,
                 logo: false
             });
+
+        map.on("load", function () {
+            //after map loads, connect to listen to mouse move & drag events  
+            map.on("mouse-move", showCoordinates);
+            map.on("mouse-drag", showCoordinates);
+        });
+
+        var toggle = new BasemapToggle({
+            map: map,
+            basemap: "delorme"
+        }, "BasemapToggle");
+        toggle.startup();
+
+        var search = new Search({
+            map: map,
+            enableInfoWindow: false
+        }, "search");
+        search.startup();  
+
+        //返回主视图  
+        var home = new HomeButton({
+            map: map
+        }, "HomeButton");
+        home.startup();
+         
+       
 
          var dynamicMap = new ArcGISDynamicMapServiceLayer("http://localhost:6080/arcgis/rest/services/newnew/MapServer");
          dynamicMap.setVisibleLayers([7]);
@@ -690,6 +730,13 @@ function barQuery(geometry){
         function error(e){
             alert(e.message);
         }
+        //显示经纬度函数
+        function showCoordinates(evt) {
+            //the map is in web mercator but display coordinates in geographic (lat, long)  
+            var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);
+            //display mouse coordinates  
+            dom.byId("info").innerHTML = mp.x.toFixed(3) + ", " + mp.y.toFixed(3);
+        }  
 });
 //以下是地图路径导航所需要的函数
 //Begins listening for click events to add stops
