@@ -156,12 +156,12 @@ require(["dojo/parser", "dojo/dom", "dojo/keys", "esri/config", "esri/sniff", "e
             queryTask.on("complete", showResult);
             var query = new Query();
             query.returnGeometry = true;
-            query.outFields = ["ObjectID", "pname", "powner"];
+            query.outFields = ["ObjectID", "TowerCode", "TowerHeight", "BuiltDate","powner"];
 
             //info template for points returned
             var resultTemplate = new InfoTemplate();
             resultTemplate.setTitle("详细信息：");
-            resultTemplate.setContent("名称： ${pname} <br/>高度： ${powner}");
+            resultTemplate.setContent("电塔编号： ${TowerCode} <br/>电塔高度： ${TowerHeight}<br/>建设时间： ${BuiltDate}<br/>检修负责人： ${powner}");
 
             
             
@@ -302,9 +302,10 @@ require(["dojo/parser", "dojo/dom", "dojo/keys", "esri/config", "esri/sniff", "e
   //以下是空间查询所需函数
    function setGridHeader() {
                 var layout = [
-                    { field: 'pname', name: '名称', width: "100px", headerStyles: "text-align:center;" },
-                    { field: 'powner', name: '负责人', width: "100px", headerStyles: "text-align:center;" },
-                    
+                    { field: 'TowerCode', name: '电塔编号', width: "100px", headerStyles: "text-align:center;" },
+                    { field: 'TowerHeight', name: '电塔高度', width: "100px", headerStyles: "text-align:center;" },
+                    { field: 'BuiltDate', name: '建设年份', width: "100px", headerStyles: "text-align:center;" },
+                    { field: 'powner', name: '检修负责人', width: "100px", headerStyles: "text-align:center;" },
                 ];
 
                 gridWidget.setStructure(layout);
@@ -327,7 +328,7 @@ require(["dojo/parser", "dojo/dom", "dojo/keys", "esri/config", "esri/sniff", "e
                 var store = new ItemFileReadStore({ data: data });
 
                 gridWidget.setStore(store);
-                gridWidget.setQuery({ pname: '*' });
+                gridWidget.setQuery({ TowerCode: '*' });
 
             }
 
@@ -374,7 +375,7 @@ require(["dojo/parser", "dojo/dom", "dojo/keys", "esri/config", "esri/sniff", "e
                 var popTotal = 0;
                 var intHolder = 0;
                 for (var x = 0; x < features.length; x++) {
-                    popTotal = popTotal + features[x].attributes['pheight'];
+                    popTotal = popTotal + features[x].attributes['TowerHeight'];
                 }
                 return popTotal;
             }
