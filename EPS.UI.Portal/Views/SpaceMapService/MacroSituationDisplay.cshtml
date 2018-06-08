@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "MacroSituationDisplay";
+
+}
+<link rel="stylesheet" href="~/js_api_3.23/dijit/themes/tundra/tundra.css">
+<link rel="stylesheet" href="~/js_api_3.23/esri/css/esri.css">
+<style>
+
+    #map {
+        width: 1300px;
+        height: 630px;
+        border: 1px solid #000;
+        position: absolute
+    }
+    .esriControlsBR {
+        display: none;
+    }
+    #BasemapToggle {
+        position: absolute;
+        right: 0px;
+        top: 230px;
+        z-index: 1
+    }
+    #search {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 6px;
+        left: 80px;
+    }
+    #HomeButton {
+        left: 22px;
+        position: absolute;
+        top: 93px;
+        z-index: 1;
+    }
+    
+</style>
+<script type="text/javascript">
+    var dojoConfig = {
+        packages: [{
+            name: "thethirdjs",
+            location: "/mapjs/thethirdjs"
+        }]
+    };
+</script>
+<script src="~/mapjs/thethirdjs/main.js"></script>
+<script src="~/js_api_3.23/init.js"></script>
+<script src="~/mapjs/MacroSituationDisplay.js"></script>
+
+
+<section>
+    <div id="map">
+        <div id="BasemapToggle"></div>
+        <div id="search"></div>
+        <div id="HomeButton"></div>
+       
+    </div>
+</section>
