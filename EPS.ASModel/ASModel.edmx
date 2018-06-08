@@ -1,0 +1,857 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AsDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AsDbModelStoreContainer">
+    <EntitySet Name="AgriculturalStatistic" EntityType="AsDbModel.Store.AgriculturalStatistic" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="City" EntityType="AsDbModel.Store.City" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Company" EntityType="AsDbModel.Store.Company" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="County" EntityType="AsDbModel.Store.County" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Department" EntityType="AsDbModel.Store.Department" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Dictionary" EntityType="AsDbModel.Store.Dictionary" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employee" EntityType="AsDbModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FertilizerStatistic" EntityType="AsDbModel.Store.FertilizerStatistic" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Group" EntityType="AsDbModel.Store.Group" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Menu" EntityType="AsDbModel.Store.Menu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Province" EntityType="AsDbModel.Store.Province" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="AsDbModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AgriculturalStatisticCounty" Association="AsDbModel.Store.FK_AgriculturalStatisticCounty">
+      <End Role="County" EntitySet="County" />
+      <End Role="AgriculturalStatistic" EntitySet="AgriculturalStatistic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CityCounty" Association="AsDbModel.Store.FK_CityCounty">
+      <End Role="City" EntitySet="City" />
+      <End Role="County" EntitySet="County" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProvinceCity" Association="AsDbModel.Store.FK_ProvinceCity">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompanyDepartment" Association="AsDbModel.Store.FK_CompanyDepartment">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Department" EntitySet="Department" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FertilizerStatisticCounty" Association="AsDbModel.Store.FK_FertilizerStatisticCounty">
+      <End Role="County" EntitySet="County" />
+      <End Role="FertilizerStatistic" EntitySet="FertilizerStatistic" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DepartmentGroup" Association="AsDbModel.Store.FK_DepartmentGroup">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeUser" Association="AsDbModel.Store.FK_EmployeeUser">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupEmployee" Association="AsDbModel.Store.FK_GroupEmployee">
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="DepartmentEmployee" Association="AsDbModel.Store.DepartmentEmployee">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyEmployee" Association="AsDbModel.Store.CompanyEmployee">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyGroup" Association="AsDbModel.Store.CompanyGroup">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="ProvinceAgriculturalStatistic" Association="AsDbModel.Store.ProvinceAgriculturalStatistic">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="AgriculturalStatistic" EntitySet="AgriculturalStatistic" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AgriculturalStatistic">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArableLandArea" Type="float" Nullable="true" />
+    <Property Name="FertilizerQuantity" Type="float" Nullable="true" />
+    <Property Name="PotashFertilizerQuantity" Type="float" Nullable="true" />
+    <Property Name="TotalGrainOutput" Type="float" Nullable="true" />
+    <Property Name="CattleCount" Type="float" Nullable="true" />
+    <Property Name="PigCount" Type="float" Nullable="true" />
+    <Property Name="SheepCount" Type="float" Nullable="true" />
+    <Property Name="PoultryCount" Type="float" Nullable="true" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="CountyId" Type="int" Nullable="false" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="County">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dictionary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="true" />
+    <Property Name="Gender" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IsTeamLeader" Type="bit" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FertilizerStatistic">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quantity" Type="float" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="CountyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="DepartmentId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="Link" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="IconUrl" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PictureUrl" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="Available" Type="bit" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AgriculturalStatisticCounty">
+    <End Role="County" Type="AsDbModel.Store.County" Multiplicity="1" />
+    <End Role="AgriculturalStatistic" Type="AsDbModel.Store.AgriculturalStatistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="County">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgriculturalStatistic">
+        <PropertyRef Name="CountyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CityCounty">
+    <End Role="City" Type="AsDbModel.Store.City" Multiplicity="1" />
+    <End Role="County" Type="AsDbModel.Store.County" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="County">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProvinceCity">
+    <End Role="Province" Type="AsDbModel.Store.Province" Multiplicity="1" />
+    <End Role="City" Type="AsDbModel.Store.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="ProvinceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompanyDepartment">
+    <End Role="Company" Type="AsDbModel.Store.Company" Multiplicity="1" />
+    <End Role="Department" Type="AsDbModel.Store.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FertilizerStatisticCounty">
+    <End Role="County" Type="AsDbModel.Store.County" Multiplicity="1" />
+    <End Role="FertilizerStatistic" Type="AsDbModel.Store.FertilizerStatistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="County">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FertilizerStatistic">
+        <PropertyRef Name="CountyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DepartmentGroup">
+    <End Role="Department" Type="AsDbModel.Store.Department" Multiplicity="1" />
+    <End Role="Group" Type="AsDbModel.Store.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeUser">
+    <End Role="Employee" Type="AsDbModel.Store.Employee" Multiplicity="1" />
+    <End Role="User" Type="AsDbModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupEmployee">
+    <End Role="Group" Type="AsDbModel.Store.Group" Multiplicity="1" />
+    <End Role="Employee" Type="AsDbModel.Store.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DepartmentEmployee">
+    <End Role="Department" Type="AsDbModel.Store.Department" Multiplicity="1" />
+    <End Role="Employee" Type="AsDbModel.Store.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyEmployee">
+    <End Role="Company" Type="AsDbModel.Store.Company" Multiplicity="1" />
+    <End Role="Employee" Type="AsDbModel.Store.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyGroup">
+    <End Role="Company" Type="AsDbModel.Store.Company" Multiplicity="1" />
+    <End Role="Group" Type="AsDbModel.Store.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProvinceAgriculturalStatistic">
+    <End Role="Province" Type="AsDbModel.Store.Province" Multiplicity="1" />
+    <End Role="AgriculturalStatistic" Type="AsDbModel.Store.AgriculturalStatistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgriculturalStatistic">
+        <PropertyRef Name="ProvinceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AsDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AgriculturalStatistic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArableLandArea" Type="Double" />
+          <Property Name="FertilizerQuantity" Type="Double" />
+          <Property Name="PotashFertilizerQuantity" Type="Double" />
+          <Property Name="TotalGrainOutput" Type="Double" />
+          <Property Name="CattleCount" Type="Double" />
+          <Property Name="PigCount" Type="Double" />
+          <Property Name="SheepCount" Type="Double" />
+          <Property Name="PoultryCount" Type="Double" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="CountyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="County" Relationship="Self.FK_AgriculturalStatisticCounty" FromRole="AgriculturalStatistic" ToRole="County" />
+          <NavigationProperty Name="Province" Relationship="AsDbModel.ProvinceAgriculturalStatistic" FromRole="AgriculturalStatistic" ToRole="Province" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="County" Relationship="Self.FK_CityCounty" FromRole="City" ToRole="County" />
+          <NavigationProperty Name="Province" Relationship="Self.FK_ProvinceCity" FromRole="City" ToRole="Province" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_CompanyDepartment" FromRole="Company" ToRole="Department" />
+          <NavigationProperty Name="Employee" Relationship="AsDbModel.CompanyEmployee" FromRole="Company" ToRole="Employee" />
+          <NavigationProperty Name="Group" Relationship="AsDbModel.CompanyGroup" FromRole="Company" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="County">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AgriculturalStatistic" Relationship="Self.FK_AgriculturalStatisticCounty" FromRole="County" ToRole="AgriculturalStatistic" />
+          <NavigationProperty Name="City" Relationship="Self.FK_CityCounty" FromRole="County" ToRole="City" />
+          <NavigationProperty Name="FertilizerStatistic" Relationship="Self.FK_FertilizerStatisticCounty" FromRole="County" ToRole="FertilizerStatistic" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_CompanyDepartment" FromRole="Department" ToRole="Company" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_DepartmentGroup" FromRole="Department" ToRole="Group" />
+          <NavigationProperty Name="Employee" Relationship="AsDbModel.DepartmentEmployee" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Dictionary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsTeamLeader" Type="Boolean" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_EmployeeUser" FromRole="Employee" ToRole="User" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_GroupEmployee" FromRole="Employee" ToRole="Group" />
+          <NavigationProperty Name="Department" Relationship="AsDbModel.DepartmentEmployee" FromRole="Employee" ToRole="Department" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="AsDbModel.CompanyEmployee" FromRole="Employee" ToRole="Company" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FertilizerStatistic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="CountyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="County" Relationship="Self.FK_FertilizerStatisticCounty" FromRole="FertilizerStatistic" ToRole="County" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_DepartmentGroup" FromRole="Group" ToRole="Department" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_GroupEmployee" FromRole="Group" ToRole="Employee" />
+          <NavigationProperty Name="Company" Relationship="AsDbModel.CompanyGroup" FromRole="Group" ToRole="Company" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IconUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_ProvinceCity" FromRole="Province" ToRole="City" />
+          <NavigationProperty Name="AgriculturalStatistic" Relationship="AsDbModel.ProvinceAgriculturalStatistic" FromRole="Province" ToRole="AgriculturalStatistic" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PictureUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeUser" FromRole="User" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_AgriculturalStatisticCounty">
+          <End Role="County" Type="Self.County" Multiplicity="1" />
+          <End Role="AgriculturalStatistic" Type="Self.AgriculturalStatistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="County">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgriculturalStatistic">
+              <PropertyRef Name="CountyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CityCounty">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="County" Type="Self.County" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="County">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProvinceCity">
+          <End Role="Province" Type="Self.Province" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDepartment">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FertilizerStatisticCounty">
+          <End Role="County" Type="Self.County" Multiplicity="1" />
+          <End Role="FertilizerStatistic" Type="Self.FertilizerStatistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="County">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FertilizerStatistic">
+              <PropertyRef Name="CountyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentGroup">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeUser">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupEmployee">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AsModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AgriculturalStatistic" EntityType="Self.AgriculturalStatistic" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Company" EntityType="Self.Company" />
+          <EntitySet Name="County" EntityType="Self.County" />
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="Dictionary" EntityType="Self.Dictionary" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="FertilizerStatistic" EntityType="Self.FertilizerStatistic" />
+          <EntitySet Name="Group" EntityType="Self.Group" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" />
+          <EntitySet Name="Province" EntityType="Self.Province" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_AgriculturalStatisticCounty" Association="Self.FK_AgriculturalStatisticCounty">
+            <End Role="County" EntitySet="County" />
+            <End Role="AgriculturalStatistic" EntitySet="AgriculturalStatistic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CityCounty" Association="Self.FK_CityCounty">
+            <End Role="City" EntitySet="City" />
+            <End Role="County" EntitySet="County" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProvinceCity" Association="Self.FK_ProvinceCity">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDepartment" Association="Self.FK_CompanyDepartment">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FertilizerStatisticCounty" Association="Self.FK_FertilizerStatisticCounty">
+            <End Role="County" EntitySet="County" />
+            <End Role="FertilizerStatistic" EntitySet="FertilizerStatistic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentGroup" Association="Self.FK_DepartmentGroup">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeUser" Association="Self.FK_EmployeeUser">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupEmployee" Association="Self.FK_GroupEmployee">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="DepartmentEmployee" Association="AsDbModel.DepartmentEmployee">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyEmployee" Association="AsDbModel.CompanyEmployee">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyGroup" Association="AsDbModel.CompanyGroup">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="ProvinceAgriculturalStatistic" Association="AsDbModel.ProvinceAgriculturalStatistic">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="AgriculturalStatistic" EntitySet="AgriculturalStatistic" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="DepartmentEmployee">
+          <End Type="AsDbModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="AsDbModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyEmployee">
+          <End Type="AsDbModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="AsDbModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyGroup">
+          <End Type="AsDbModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="AsDbModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProvinceAgriculturalStatistic">
+          <End Type="AsDbModel.Province" Role="Province" Multiplicity="1" />
+          <End Type="AsDbModel.AgriculturalStatistic" Role="AgriculturalStatistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgriculturalStatistic">
+              <PropertyRef Name="ProvinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AsDbModelStoreContainer" CdmEntityContainer="AsModel">
+    <EntitySetMapping Name="AgriculturalStatistic">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.AgriculturalStatistic)">
+        <MappingFragment StoreEntitySet="AgriculturalStatistic">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ArableLandArea" ColumnName="ArableLandArea" />
+          <ScalarProperty Name="FertilizerQuantity" ColumnName="FertilizerQuantity" />
+          <ScalarProperty Name="PotashFertilizerQuantity" ColumnName="PotashFertilizerQuantity" />
+          <ScalarProperty Name="TotalGrainOutput" ColumnName="TotalGrainOutput" />
+          <ScalarProperty Name="CattleCount" ColumnName="CattleCount" />
+          <ScalarProperty Name="PigCount" ColumnName="PigCount" />
+          <ScalarProperty Name="SheepCount" ColumnName="SheepCount" />
+          <ScalarProperty Name="PoultryCount" ColumnName="PoultryCount" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CountyId" ColumnName="CountyId" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.City)">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Company">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.Company)">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="County">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.County)">
+        <MappingFragment StoreEntitySet="County">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.Department)">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dictionary">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.Dictionary)">
+        <MappingFragment StoreEntitySet="Dictionary">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.Employee)">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="IsTeamLeader" ColumnName="IsTeamLeader" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FertilizerStatistic">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.FertilizerStatistic)">
+        <MappingFragment StoreEntitySet="FertilizerStatistic">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CountyId" ColumnName="CountyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Group">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.Group)">
+        <MappingFragment StoreEntitySet="Group">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menu">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.Menu)">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="IconUrl" ColumnName="IconUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Province">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.Province)">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(AsDbModel.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Available" ColumnName="Available" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

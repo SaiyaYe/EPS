@@ -22,6 +22,7 @@ namespace EPS.Model
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
         public int ProvinceId { get; set; }
     
         public virtual Province Province { get; set; }

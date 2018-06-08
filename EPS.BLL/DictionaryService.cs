@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPS.BLL
 {
-    public class DictionaryService : BaseService<Model.Dictionary>, IDictionaryService
+    public class DictionaryService : BaseService<ASModel.Dictionary>, IDictionaryService
     {
     }
 }

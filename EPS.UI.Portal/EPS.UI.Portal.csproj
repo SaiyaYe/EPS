@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AgiculturalRagionalStatisticModel.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\CountyModel.cs" />
@@ -16103,6 +16104,7 @@
     <Content Include="js_api_3.9\xstyle\build\build-xstyle.cmd" />
     <Content Include="js_api_3.9\xstyle\LICENSE" />
     <Content Include="js_api_3.9\xstyle\package.json" />
+    <Content Include="App_Data\2011_trans.xlsx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -16349,10 +16351,10 @@
     <Content Include="Views\Analysis\ChinaMapDemo.cshtml" />
     <Content Include="Views\Analysis\BaiduMapDemo.cshtml" />
     <Content Include="wwwroot\js\bmap\README.md" />
+    <Content Include="Views\Analysis\_ChinaMap.cshtml" />
+    <Content Include="Views\Analysis\_AgriculturalBarChart.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
@@ -16374,6 +16376,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EPS.ASModel\EPS.ASModel.csproj">
+      <Project>{53114C8F-A7AF-4633-9F8E-6F78854A983F}</Project>
+      <Name>EPS.ASModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EPS.BLL\EPS.BLL.csproj">
       <Project>{193e3480-1460-4791-8ed3-dc8c25a20236}</Project>
       <Name>EPS.BLL</Name>
@@ -16397,10 +16403,6 @@
     <ProjectReference Include="..\EPS.IDAL\EPS.IDAL.csproj">
       <Project>{c4a40f75-72bc-4b54-8134-10c9e3d18c04}</Project>
       <Name>EPS.IDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
-      <Project>{7e09a44e-8531-48dd-ba50-7ceb857587a4}</Project>
-      <Name>EPS.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -231,6 +231,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="City">
     <Key>
@@ -238,6 +239,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ProvinceId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="County">
@@ -246,6 +248,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CityId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PatrolPoint">
@@ -937,6 +940,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="City" Relationship="DataModel.ProvinceCity" FromRole="Province" ToRole="City" />
+          <Property Name="Code" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -945,6 +949,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="Province" Relationship="DataModel.ProvinceCity" FromRole="City" ToRole="Province" />
+          <Property Name="Code" Type="String" Nullable="false" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="County" Relationship="DataModel.CityCounty" FromRole="City" ToRole="County" />
         </EntityType>
@@ -955,6 +960,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <NavigationProperty Name="City" Relationship="DataModel.CityCounty" FromRole="County" ToRole="City" />
+          <Property Name="Code" Type="String" Nullable="false" />
           <Property Name="CityId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PatrolPoint" Relationship="DataModel.CountyPatrolPoint" FromRole="County" ToRole="PatrolPoint" />
         </EntityType>
@@ -1273,6 +1279,7 @@
         <MappingFragment StoreEntitySet="Province">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1281,6 +1288,7 @@
         <MappingFragment StoreEntitySet="City">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1290,6 +1298,7 @@
         <MappingFragment StoreEntitySet="County">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="CityId" ColumnName="CityId" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAgriculturalStatistic.cs" />
     <Compile Include="IBaseDal.cs" />
     <Compile Include="IBaseSpatialDal.cs" />
+    <Compile Include="ICityDal.cs" />
     <Compile Include="ICompanyDal.cs" />
+    <Compile Include="ICountyDal.cs" />
     <Compile Include="IDbSession.cs" />
     <Compile Include="IDepartmentDal.cs" />
     <Compile Include="IDictionaryDal.cs" />
@@ -57,17 +60,18 @@
     <Compile Include="IPatrolReportDal.cs" />
     <Compile Include="IPatrolRouteDal.cs" />
     <Compile Include="IPatrolSchemeDal.cs" />
+    <Compile Include="IProvinceDal.cs" />
     <Compile Include="IUserDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EPS.ASModel\EPS.ASModel.csproj">
+      <Project>{53114C8F-A7AF-4633-9F8E-6F78854A983F}</Project>
+      <Name>EPS.ASModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EPS.Common\EPS.Common.csproj">
       <Project>{17e18178-3dcb-4655-a1e4-9bb2253b61b5}</Project>
       <Name>EPS.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
-      <Project>{7e09a44e-8531-48dd-ba50-7ceb857587a4}</Project>
-      <Name>EPS.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

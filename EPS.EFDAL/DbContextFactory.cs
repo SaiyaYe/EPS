@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
-using EPS.Model;
+using EPS.ASModel;
 
 namespace EPS.EFDAL
 {
@@ -25,7 +25,7 @@ namespace EPS.EFDAL
             DbContext db = CallContext.GetData("DbContext") as DbContext; 
             if (db == null)
             {
-                db = new DataModelContainer();
+                db = new AsModel();
                 CallContext.SetData("DbContext", db); //SetData存储给定对象并将其与指定名称关联  
             }
             return db;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EPS.Common;
 using EPS.IDAL;
-using EPS.Model;
+using EPS.ASModel;
 
 namespace EPS.EFDAL
 {

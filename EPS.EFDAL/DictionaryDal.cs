@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EPS.EFDAL
 {
-    public class DictionaryDal : BaseDal<Model.Dictionary>, IDictionaryDal
+    public class DictionaryDal : BaseDal<ASModel.Dictionary>, IDictionaryDal
     {
     }
 }

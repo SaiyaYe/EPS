@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgriculturalStatisticService.cs" />
     <Compile Include="BaseService.cs" />
     <Compile Include="BaseSpatialService.cs" />
     <Compile Include="DepartmentService.cs" />
@@ -47,15 +49,19 @@
     <Compile Include="EmployeeService.cs" />
     <Compile Include="GroupService.cs" />
     <Compile Include="PatrolPointService.cs" />
+    <Compile Include="PatrolReportService.cs" />
     <Compile Include="PatrolRouteService.cs" />
+    <Compile Include="PatrolSchemeService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="CompanyService.cs" />
-    <Compile Include="PatrolReportService.cs" />
-    <Compile Include="PatrolSchemeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EPS.ASModel\EPS.ASModel.csproj">
+      <Project>{53114C8F-A7AF-4633-9F8E-6F78854A983F}</Project>
+      <Name>EPS.ASModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EPS.Common\EPS.Common.csproj">
       <Project>{17e18178-3dcb-4655-a1e4-9bb2253b61b5}</Project>
       <Name>EPS.Common</Name>
@@ -75,10 +81,6 @@
     <ProjectReference Include="..\EPS.IDAL\EPS.IDAL.csproj">
       <Project>{c4a40f75-72bc-4b54-8134-10c9e3d18c04}</Project>
       <Name>EPS.IDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
-      <Project>{7e09a44e-8531-48dd-ba50-7ceb857587a4}</Project>
-      <Name>EPS.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,5 @@
 ﻿using EPS.Common;
 using EPS.IDAL;
-using EPS.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

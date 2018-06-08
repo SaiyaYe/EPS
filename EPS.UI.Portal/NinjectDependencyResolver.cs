@@ -49,6 +49,7 @@ namespace EPS.UI.Portal
             kernel.Bind<IPatrolRouteService>().To<PatrolRouteService>();
             kernel.Bind<IPatrolSchemeService>().To<PatrolSchemeService>();
             kernel.Bind<IPatrolReportService>().To<PatrolReportService>();
+            kernel.Bind<IAgriculturalStatisticService>().To<AgriculturalStatisticService>();
         }
     }
 }

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/07/2018 23:45:03
--- Generated from EDMX file: C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\DataModel.edmx
+-- Date Created: 06/04/2018 11:30:08
+-- Generated from EDMX file: E:\project\EPS\EPS.Model\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -82,6 +82,9 @@ IF OBJECT_ID(N'[dbo].[FK_PatrolReportDictionary]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_DefectLevelId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_DefectLevelId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CompanyGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Group] DROP CONSTRAINT [FK_CompanyGroup];
 GO
 
 -- --------------------------------------------------
@@ -256,7 +259,8 @@ GO
 -- Creating table 'Province'
 CREATE TABLE [dbo].[Province] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -264,6 +268,7 @@ GO
 CREATE TABLE [dbo].[City] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
     [ProvinceId] int  NOT NULL
 );
 GO
@@ -272,6 +277,7 @@ GO
 CREATE TABLE [dbo].[County] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
+    [Code] nvarchar(max)  NOT NULL,
     [CityId] int  NOT NULL
 );
 GO

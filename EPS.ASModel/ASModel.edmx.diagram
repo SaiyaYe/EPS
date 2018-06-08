@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e8df0a117f8d4ea4b65c3c3698000c59" Name="Diagram1">
+        <EntityTypeShape EntityType="AsDbModel.AgriculturalStatistic" Width="1.5" PointX="9.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.City" Width="1.5" PointX="5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.Company" Width="1.5" PointX="3.125" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.County" Width="1.5" PointX="7.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.Department" Width="1.5" PointX="5.375" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.Dictionary" Width="1.5" PointX="16.125" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.Employee" Width="1.5" PointX="9.875" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.FertilizerStatistic" Width="1.5" PointX="9.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.Group" Width="1.5" PointX="7.625" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.Menu" Width="1.5" PointX="14.875" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.Province" Width="1.5" PointX="2.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AsDbModel.User" Width="1.5" PointX="12.125" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="AsDbModel.FK_AgriculturalStatisticCounty" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.FK_CityCounty" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.FK_ProvinceCity" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.FK_CompanyDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.FK_FertilizerStatisticCounty" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.FK_DepartmentGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.FK_EmployeeUser" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.FK_GroupEmployee" ManuallyRouted="false" />
+        <AssociationConnector Association="AsDbModel.DepartmentEmployee" />
+        <AssociationConnector Association="AsDbModel.CompanyEmployee" />
+        <AssociationConnector Association="AsDbModel.CompanyGroup" />
+        <AssociationConnector Association="AsDbModel.ProvinceAgriculturalStatistic" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -7,7 +7,7 @@ using EPS.Common;
 using EPS.DALFactory;
 using EPS.IBLL;
 using EPS.IDAL;
-using EPS.Model;
+using EPS.ASModel;
 
 namespace EPS.BLL
 {

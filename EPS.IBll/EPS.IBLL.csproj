@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAgriculturalStatisticService.cs" />
     <Compile Include="IBaseService.cs" />
     <Compile Include="IBaseSpatialService.cs" />
     <Compile Include="ICompanyService.cs" />
@@ -56,13 +57,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EPS.ASModel\EPS.ASModel.csproj">
+      <Project>{53114C8F-A7AF-4633-9F8E-6F78854A983F}</Project>
+      <Name>EPS.ASModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EPS.Common\EPS.Common.csproj">
       <Project>{17E18178-3DCB-4655-A1E4-9BB2253B61B5}</Project>
       <Name>EPS.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EPS.Model\EPS.Model.csproj">
-      <Project>{7E09A44E-8531-48DD-BA50-7CEB857587A4}</Project>
-      <Name>EPS.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

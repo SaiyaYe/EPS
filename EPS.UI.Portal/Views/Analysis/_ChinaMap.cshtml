@@ -1,0 +1,93 @@
+﻿@using EPS.UI.Portal.Models
+@{
+    List<AgiculturalRagionalStatisticModel> modelList = ViewBag.Model as List<AgiculturalRagionalStatisticModel>;
+}
+
+<div id="chinamap" style="height:620px;"></div>
+
+<script src="~/wwwroot/js/echarts.min.js"></script>
+<script src="~/wwwroot/js/china.js"></script>
+
+<script>
+    function randomData() {
+        return Math.round(Math.random() * 500);
+    }
+
+    $(function () {
+        var mydata = []
+        @foreach (var item in modelList)
+        {
+            <text>
+                mydata.push({name:'@item.ProvinceName',value:'@item.ArableLandArea'})
+            </text>
+        }
+        //var mydata = [
+        //    { name: '北京', value: '100' }, { name: '天津', value: randomData() },
+        //    { name: '上海', value: randomData() }, { name: '重庆', value: randomData() },
+        //    { name: '河北', value: randomData() }, { name: '河南', value: randomData() },
+        //    { name: '云南', value: randomData() }, { name: '辽宁', value: randomData() },
+        //    { name: '黑龙江', value: randomData() }, { name: '湖南', value: randomData() },
+        //    { name: '安徽', value: randomData() }, { name: '山东', value: randomData() },
+        //    { name: '新疆', value: randomData() }, { name: '江苏', value: randomData() },
+        //    { name: '浙江', value: randomData() }, { name: '江西', value: randomData() },
+        //    { name: '湖北', value: randomData() }, { name: '广西', value: randomData() },
+        //    { name: '甘肃', value: randomData() }, { name: '山西', value: randomData() },
+        //    { name: '内蒙古', value: randomData() }, { name: '陕西', value: randomData() },
+        //    { name: '吉林', value: randomData() }, { name: '福建', value: randomData() },
+        //    { name: '贵州', value: randomData() }, { name: '广东', value: randomData() },
+        //    { name: '青海', value: randomData() }, { name: '西藏', value: randomData() },
+        //    { name: '四川', value: randomData() }, { name: '宁夏', value: randomData() },
+        //    { name: '海南', value: randomData() }, { name: '台湾', value: randomData() },
+        //    { name: '香港', value: randomData() }, { name: '澳门', value: randomData() }
+        //];
+
+        var optionMap = {
+            backgroundColor: '#FFFFFF',
+            //title: {
+            //    text: '全国地图大数据',
+            //    subtext: '',
+            //    x: 'center'
+            //},
+            tooltip: {
+                trigger: 'item'
+            },
+
+            //左侧小导航图标
+            visualMap: {
+                min: 0,
+                max: @modelList.Max(u => u.ArableLandArea),
+                left: 20,
+                bottom: 10,
+                text: ['高', '低'],// 文本，默认为数值文本
+                color: ['#2C6F45', '#568B69', '#739F83', '#88AE96', '#B8CDBF', '#cccccc'],
+                calculable: false
+            },
+
+            //配置属性
+            series: [{
+                name: '产量',
+                type: 'map',
+                mapType: 'china',
+                //roam: true,
+                zoom: 1.2,
+                label: {
+                    normal: {
+                        show: false  //省份名称
+                    },
+                    emphasis: {
+                        show: false
+                    }
+                },
+                data: mydata  //数据
+            }]
+        };
+
+        //初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chinamap'));
+
+        //使用制定的配置项和数据显示图表
+        myChart.setOption(optionMap);
+    })
+
+
+</script>

@@ -1,7 +1,7 @@
 ﻿using EPS.BLL;
 using EPS.Common;
 using EPS.IBLL;
-using EPS.Model;
+using EPS.ASModel;
 using EPS.UI.Portal.Models;
 using System;
 using System.Collections.Generic;

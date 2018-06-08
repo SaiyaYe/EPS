@@ -1,6 +1,6 @@
-﻿using EPS.Common;
+﻿using EPS.ASModel;
+using EPS.Common;
 using EPS.IBLL;
-using EPS.Model;
 using EPS.UI.Portal.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,9 @@ namespace EPS.UI.Portal.Controllers
     {
         [Ninject.Inject]
         public IPatrolPointService PatrolPointService { get; set; }
+
+        [Ninject.Inject]
+        public IAgriculturalStatisticService AgriculturalStatisticService { get; set; }
 
         /// <summary>
         /// 线路风险分析
@@ -204,8 +207,62 @@ namespace EPS.UI.Portal.Controllers
 
         public ActionResult _ChinaMap()
         {
-            string path = Server.MapPath("App_Data/2011_trans.xlsx");
+            //string path = Server.MapPath("App_Data/2011_trans.xlsx");
 
+            List<AgiculturalRagionalStatisticModel> modelList = new List<AgiculturalRagionalStatisticModel>();
+
+            var result = AgriculturalStatisticService.AgiculturalRagionalStatistic();
+            List<AgiculturalRagionalStatistic> itemList = result.Result;
+            foreach (AgiculturalRagionalStatistic item in itemList)
+            {
+                AgiculturalRagionalStatisticModel model = new AgiculturalRagionalStatisticModel
+                {
+                    ArableLandArea = item.ArableLandArea,
+                    CattleCount = item.CattleCount,
+                    FertilizerQuantity = item.FertilizerQuantity,
+                    PigCount = item.PigCount,
+                    PotashFertilizerQuantity = item.PotashFertilizerQuantity,
+                    PoultryCount = item.PoultryCount,
+                    ProvinceId = item.ProvinceId,
+                    ProvinceName = item.ProvinceName,
+                    SheepCount = item.SheepCount,
+                    TotalGrainOutput = item.TotalGrainOutput
+                };
+
+                modelList.Add(model);
+            }
+
+            ViewBag.Model = modelList;
+            return PartialView();
+        }
+
+        public ActionResult _AgriculturalBarChart(string barId = null)
+        {
+            List<AgiculturalRagionalStatisticModel> modelList = new List<AgiculturalRagionalStatisticModel>();
+
+            var result = AgriculturalStatisticService.AgiculturalRagionalStatistic();
+            List<AgiculturalRagionalStatistic> itemList = result.Result;
+            foreach (AgiculturalRagionalStatistic item in itemList)
+            {
+                AgiculturalRagionalStatisticModel model = new AgiculturalRagionalStatisticModel
+                {
+                    ArableLandArea = item.ArableLandArea,
+                    CattleCount = item.CattleCount,
+                    FertilizerQuantity = item.FertilizerQuantity,
+                    PigCount = item.PigCount,
+                    PotashFertilizerQuantity = item.PotashFertilizerQuantity,
+                    PoultryCount = item.PoultryCount,
+                    ProvinceId = item.ProvinceId,
+                    ProvinceName = item.ProvinceName,
+                    SheepCount = item.SheepCount,
+                    TotalGrainOutput = item.TotalGrainOutput
+                };
+
+                modelList.Add(model);
+            }
+
+            ViewBag.ModelList = modelList;
+            ViewBag.Id = barId;
             return PartialView();
         }
 

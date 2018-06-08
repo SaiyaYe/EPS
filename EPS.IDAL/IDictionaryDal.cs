@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EPS.IDAL
 {
-    public interface IDictionaryDal : IBaseDal<Model.Dictionary>
+    public interface IDictionaryDal : IBaseDal<ASModel.Dictionary>
     {
     }
 }

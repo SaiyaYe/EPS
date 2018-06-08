@@ -140,6 +140,7 @@
       <LastGenOutput>DataModel.cs</LastGenOutput>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Content>
+    <Content Include="total_as.sql" />
     <Content Include="total.sql" />
   </ItemGroup>
   <ItemGroup>

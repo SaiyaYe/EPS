@@ -1,6 +1,6 @@
 ﻿using EPS.Common;
 using EPS.IDAL;
-using EPS.Model;
+using EPS.ASModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -53,7 +53,7 @@ namespace EPS.DALFactory
             DbContext db = CallContext.GetData("DbContext") as DbContext;
             if (db == null)
             {
-                db = new DataModelContainer();
+                db = new AsModel();
                 CallContext.SetData("DbContext", db);
             }
 
