@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using EPS.Model;
 using EPS.UI.Portal.Models;
 
 namespace EPS.UI.Portal.Controllers
