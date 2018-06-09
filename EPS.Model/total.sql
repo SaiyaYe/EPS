@@ -95,7 +95,7 @@ insert into [Role](Name) values('组长')
 insert into [Role](Name) values('巡检人员')
 
 --organization
-insert into Company(Name,Number) values('阿里巴巴',1)
+insert into Company(Name,Number) values('国家电网有限公司',1)
 
 insert into Department(Name,CompanyId,Number) values('销售部',1,1)
 insert into Department(Name,CompanyId,Number) values('技术部',1,2)
