@@ -13,17 +13,23 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EPS.UI.Portal.Controllers
 {
-   
+
     public class SystemManagementController : BaseController
     {
         [Ninject.Inject]
-       public IEmployeeService EmployeeService { get; set; }
+        public IEmployeeService EmployeeService { get; set; }
 
         [Ninject.Inject]
         public IDepartmentService DepartmentService { get; set; }
 
         [Ninject.Inject]
         public IGroupService GroupService { get; set; }
+
+        [Ninject.Inject]
+        public IRoleService RoleService { get; set; }
+
+        [Ninject.Inject]
+        public IUserService UserService { get; set; }
 
         /// <summary>
         /// Employees the list.
@@ -39,7 +45,7 @@ namespace EPS.UI.Portal.Controllers
             return View();
         }
 
-       
+
         public ActionResult _EmployeeList(int companyId = 0, int departmentId = 0, int groupId = 0, int employeeId = 0, int patrolRouteId = 0, int pageIndex = 1, int pagesize = 0)
         {
             List<EmployeeModel> modelList = new List<EmployeeModel>();
@@ -51,16 +57,16 @@ namespace EPS.UI.Portal.Controllers
             {
                 EmployeeModel model = new EmployeeModel()
                 {
-                    Id=item.Id,
+                    Id = item.Id,
                     Number = item.Number,
-                    Name=item.Name,
-                    GroupId=item.GroupId,
-                    GroupName=item.Group.Name,
-                    DepartmentId=item.DepartmentId,
-                    DepartmentName=item.Department.Name,
-                    CompanyId=item.CompanyId,
-                    CompanyName=item.Company.Name
-                    
+                    Name = item.Name,
+                    GroupId = item.GroupId,
+                    GroupName = item.Group.Name,
+                    DepartmentId = item.DepartmentId,
+                    DepartmentName = item.Department.Name,
+                    CompanyId = item.CompanyId,
+                    CompanyName = item.Company.Name
+
                 };
                 modelList.Add(model);
             }
@@ -85,15 +91,15 @@ namespace EPS.UI.Portal.Controllers
             return View();
         }
         [HttpPost]
-       public ActionResult AddEmployee(EmployeeModel model)
+        public ActionResult AddEmployee(EmployeeModel model)
         {
             Employee employee = new Employee()
             {
                 Number = model.Number,
-                Name=model.Name,
-                GroupId= model.GroupId,
-                DepartmentId=model.DepartmentId,
-                CompanyId=model.CompanyId 
+                Name = model.Name,
+                GroupId = model.GroupId,
+                DepartmentId = model.DepartmentId,
+                CompanyId = model.CompanyId
             };
             var result = EmployeeService.Add(employee);
             if (!result.State)
@@ -120,17 +126,17 @@ namespace EPS.UI.Portal.Controllers
             {
                 Id = employee.Id,
                 Number = employee.Number,
-                Name=employee.Name,
-                CompanyId = employee.CompanyId, 
-                CompanyName=employee.Company.Name,
+                Name = employee.Name,
+                CompanyId = employee.CompanyId,
+                CompanyName = employee.Company.Name,
                 DepartmentId = employee.DepartmentId,
-                 DepartmentName = employee.Department.Name,
+                DepartmentName = employee.Department.Name,
                 GroupId = employee.GroupId,
-                 GroupName = employee.Group.Name,
-                
+                GroupName = employee.Group.Name,
+
 
             };
-           
+
             return View(model);
         }
         [HttpPost]
@@ -138,7 +144,7 @@ namespace EPS.UI.Portal.Controllers
         {
             Employee employee = new Employee
             {
-                Id=model.Id,
+                Id = model.Id,
                 Number = model.Number,
                 Name = model.Name,
                 GroupId = model.GroupId,
@@ -165,7 +171,7 @@ namespace EPS.UI.Portal.Controllers
             var result = EmployeeService.DeleteById(employeeId);
             return Json(result);
         }
-       
+
 
         /// <summary>
         /// Departments the list.
@@ -177,7 +183,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改时间：
         public ActionResult DepartmentList()
         {
-           
+
             return View();
         }
         public ActionResult _DepartmentList(int companyId = 0, int departmentId = 0, int pageIndex = 1, int pagesize = 0)
@@ -185,7 +191,7 @@ namespace EPS.UI.Portal.Controllers
             List<DepartmentModel> modelList = new List<DepartmentModel>();
 
             pagesize = pagesize == 0 ? ControllerCommon.PageSize : pagesize;
-            var result = DepartmentService.GetDepartmentList(companyId, departmentId,  pagesize, pageIndex);
+            var result = DepartmentService.GetDepartmentList(companyId, departmentId, pagesize, pageIndex);
             List<Department> departmentList = result.Result;
             foreach (var item in departmentList)
             {
@@ -291,7 +297,7 @@ namespace EPS.UI.Portal.Controllers
         /// 修改人：
         /// 修改日期：
         public ActionResult GroupList()
-        { 
+        {
             return View();
         }
         public ActionResult _GroupList(int companyId = 0, int departmentId = 0, int groupId = 0, int pageIndex = 1, int pagesize = 0)
@@ -300,7 +306,7 @@ namespace EPS.UI.Portal.Controllers
             List<GroupModel> modelList = new List<GroupModel>();
 
             pagesize = pagesize == 0 ? ControllerCommon.PageSize : pagesize;
-            var result = GroupService.GetGroupList(companyId, departmentId, groupId,  pagesize, pageIndex);
+            var result = GroupService.GetGroupList(companyId, departmentId, groupId, pagesize, pageIndex);
             List<Group> groupList = result.Result;
             foreach (var item in groupList)
             {
@@ -313,7 +319,7 @@ namespace EPS.UI.Portal.Controllers
                     DepartmentName = item.Department.Name,
                     CompanyId = item.CompanyId,
                     CompanyName = item.Company.Name,
-                   
+
                 };
                 modelList.Add(model);
             }
@@ -377,7 +383,7 @@ namespace EPS.UI.Portal.Controllers
                 CompanyName = group.Company.Name,
                 DepartmentId = group.DepartmentId,
                 DepartmentName = group.Department.Name,
-            
+
             };
 
             return View(model);
@@ -389,7 +395,7 @@ namespace EPS.UI.Portal.Controllers
             {
                 Id = model.Id,
                 Number = model.Number,
-                Name = model.Name,            
+                Name = model.Name,
                 DepartmentId = model.DepartmentId,
                 CompanyId = model.CompanyId,
             };
@@ -401,6 +407,94 @@ namespace EPS.UI.Portal.Controllers
         {
             var result = GroupService.DeleteById(groupId);
             return Json(result);
+        }
+
+        /// <summary>
+        /// 权限管理
+        /// </summary>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/6/9 16:27
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult RoleManagementList()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// 权限管理
+        /// </summary>
+        /// <param name="pageIndex">页码号</param>
+        /// <param name="pageSize">页容量</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/6/9 16:45
+        /// 修改者：
+        /// 修改时间：
+        public ActionResult _RoleManagementListList(int pageIndex = 1, int pageSize = 0)
+        {
+            List<UserModel> modelList = new List<UserModel>();
+
+            pageSize = pageSize == 0 ? ControllerCommon.PageSize : pageSize;
+            var result = UserService.GetUserList(pageIndex, pageSize);
+            List<User> employeeList = result.Result;
+            foreach (var item in employeeList)
+            {
+                UserModel model = new UserModel()
+                {
+                    Id = item.Id,
+                    UserName = item.UserName,
+                    CreateTime = item.CreateTime,
+                    EmployeeId = item.EmployeeId,
+                    EmployeeName = item.Employee.Name,
+                    RoleId = item.RoleId,
+                    RoleName = item.Role.Name
+                };
+                modelList.Add(model);
+            }
+
+            GetPaginationModel(modelList.Count, result.TotalCount, pageIndex, pageSize);
+
+            ViewBag.Model = modelList;
+            return PartialView();
+
+        }
+
+
+        /// <summary>
+        /// Updates the employee.
+        /// </summary>
+        /// <param name="employeeId">The employee identifier.</param>
+        /// <returns>
+        /// </returns>
+        /// 创建者：王一鹤
+        /// 创建日期：2018/5/8 16:28
+        /// 修改人：
+        /// 修改日期：
+        public ActionResult UpdateRole(int userId)
+        {
+            User user = UserService.Find(userId).Result;
+            UserModel model = new UserModel
+            {
+                Id = user.Id,
+                RoleId = user.RoleId
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateRole(UserModel model)
+        {
+            User user = new User
+            {
+                Id = model.Id,
+                RoleId = model.RoleId
+            };
+            var result = UserService.UpdateRole(user);
+            return RedirectToAction("RoleManagementList");
         }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="IPatrolReportService.cs" />
     <Compile Include="IPatrolRouteService.cs" />
     <Compile Include="IPatrolSchemeService.cs" />
+    <Compile Include="IRoleService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

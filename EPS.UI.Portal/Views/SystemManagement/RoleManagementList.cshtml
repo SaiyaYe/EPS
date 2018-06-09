@@ -1,15 +1,13 @@
-﻿
-@using EPS.UI.Portal.Models
-<link href="/wwwroot/lib/layer/theme/default/layer.css" rel="stylesheet" />
+﻿<link href="/wwwroot/lib/layer/theme/default/layer.css" rel="stylesheet" />
 
 <section class="content-header">
     <h1>
-        部门管理
+        权限管理
     </h1>
     <ol class="breadcrumb">
         <li><a href="/Home/Index"><i class="fa fa-dashboard"></i>首页</a></li>
         <li>系统管理</li>
-        <li class="active">部门管理</li>
+        <li class="active">权限管理</li>
     </ol>
     <hr style="margin:15px 0px 0px 0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;" />
 </section>
@@ -17,16 +15,15 @@
 <section class="content container-fluid">
     <div class="ibox float-e-margins">
         @*title*@
-        <form action="@Url.Action("_DepartmentList")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#contentList" id="form0" method="get">
+        <form action="@Url.Action("_RoleManagementListList")" data-ajax="true" data-ajax-method="get" data-ajax-mode="replace" data-ajax-update="#contentList" id="form0" method="get">
             <div style="float:left">
-                @Html.Action("SetCompanyDepartment", "Select")
+                @Html.Action("CompanyDepartmentGroupEmployee", "Select")
             </div>
+
 
             <div style="float:left">
                 &nbsp<button id="btnSearch" class="btn btn btn-primary" type="submit"> <i class="fa fa-search"></i> 搜索</button>
             </div>
-            @Html.ActionLink("添加", "AddDepartment", "SystemManagement", new { }, new { @class = "btn btn-success", style = "float:right" })
-            @Html.ActionLink("导出", "ExportWord", "Transaction", new { }, new { @class = "btn btn-warning", style = "float:right" })
             <input id="pageSize" name="pageSize" type="hidden" />
             <input id="pageIndex" name="pageIndex" type="hidden" />
             <div style="clear:both"></div>

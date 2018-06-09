@@ -23,11 +23,7 @@ namespace EPS.BLL
             {
                 query = query.Where(u => u.Id == departmentId);
             }
-
-          
-
-
-
+            
             int totalCount = query.Count();
             var result = query.OrderBy(u => u.Id)
                               .Skip(pageSize * (pageIndex - 1))

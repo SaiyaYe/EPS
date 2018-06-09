@@ -1,0 +1,85 @@
+﻿@using EPS.UI.Portal.Models
+@{
+    ViewBag.Title = "RoleManagementList";
+    List<UserModel> userList = ViewBag.Model as List<UserModel>;
+}
+
+@*table-body*@
+<div class="box-body">
+    <table id="example2" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>用户名</th>
+                <th>员工</th>
+                <th>权限</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in userList)
+            {
+                <tr>
+                    <td>@user.UserName<input type="hidden" name="id" class="schemeId" value=@user.Id /></td>
+                    <td>@user.EmployeeName<input type="hidden" name="employeeId" value=@user.EmployeeId /></td>
+                    <td>@user.RoleName<input type="hidden" name="patrolRouteId" value=@user.RoleId /></td>
+
+                    <td>
+                        @Html.ActionLink("修改", "UpdateRole", "SystemManagement", new { employeeId = user.Id }, new { @class = "btn btn-primary" })
+                        @*<button class="btn btn-danger btn_Delete" id=@user.Id value="删除">删除</button>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@*pagination*@
+<div class="text-right">
+    <div class="pagination">
+        @{
+            var pageModel = ViewBag.PageModel == null ? null : (PaginationModel)ViewBag.PageModel;
+        }
+        @Html.Partial("Pagination", pageModel)
+    </div>
+</div>
+
+<script src="/wwwroot/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        //点击删除按钮
+        $('.btn_Delete').click(function () {
+            var employeeId = $(this).attr('id')
+            console.log(employeeId)
+            layer.alert('确定要删除吗', {
+                //skin: 'layui-layer-molv',   //样式类名  自定义样式
+                closeBtn: 1,                // 是否显示关闭按钮
+                anim: 1,                    //动画类型
+                btn: ['确定', '取消'],      //按钮
+                icon: 3,                    // icon
+                yes: function () {
+                    layer.msg('按钮1')
+
+                    $.ajax({
+                        url: '/SystemManagement/DeleteEmployeeById',
+                        type: 'post',
+                        async: false,
+                        data: { employeeId: employeeId },
+                        success: function (result) {
+                            if (!result.State) {
+                                layer.alert("删除失败", { icon: 2 });
+                            }
+                            else {
+                                setTimeout(function () {
+                                    window.location = window.location.href;
+                                }, 1);
+                                layer.alert("删除成功", { icon: 1 });
+                            }
+                        }
+                    })
+                },
+                btn2: function () {
+                }
+            });
+        })
+    });
+</script>

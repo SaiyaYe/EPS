@@ -59,5 +59,62 @@ namespace EPS.BLL
                 State = true
             };
         }
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="pageIndex">页码号</param>
+        /// <param name="pageSize">页容量</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/6/9 16:36
+        /// 修改者：
+        /// 修改时间：
+        public ServiceResultList<User> GetUserList(int pageIndex = 1, int pageSize = 0)
+        {
+            var query = DbSession.EntityQueryable<User>().Query();
+
+            int totalCount = query.Count();
+            var result = query.OrderBy(u => u.Id)
+                              .Skip(pageSize * (pageIndex - 1))
+                              .Take(pageSize);
+
+            return new ServiceResultList<User>
+            {
+                Result = result.ToList(),
+                TotalCount = totalCount,
+                State = true
+            };
+        }
+
+        /// <summary>
+        /// 更新权限
+        /// </summary>
+        /// <param name="user">用户数据</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/6/9 16:59
+        /// 修改者：
+        /// 修改时间：
+        public ServiceResult<bool> UpdateRole(User user)
+        {
+            var model = DbSession.EntityQueryable<User>().Find(user.Id).Result;
+            if (model == null)
+            {
+                return new ServiceResult<bool>
+                {
+                    State = false,
+                    Message = "找不到该人员信息"
+                };
+            }
+            model.RoleId = user.RoleId;
+
+            DbSession.SaveChanges();
+            return new ServiceResult<bool>()
+            {
+                Result = true,
+                State = true
+            };
+        }
     }
 }

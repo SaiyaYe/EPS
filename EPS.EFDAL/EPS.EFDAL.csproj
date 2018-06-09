@@ -61,6 +61,7 @@
     <Compile Include="PatrolRouteDal.cs" />
     <Compile Include="PatrolSchemeDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleDal.cs" />
     <Compile Include="UserDal.cs" />
   </ItemGroup>
   <ItemGroup>

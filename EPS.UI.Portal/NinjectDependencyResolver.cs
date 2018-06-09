@@ -41,6 +41,7 @@ namespace EPS.UI.Portal
             kernel.Bind<IMenuService>().To<MenuService>();
             kernel.Bind<IDictionaryService>().To<DictionaryService>();
             kernel.Bind<IUserService>().To<UserService>();
+            kernel.Bind<IRoleService>().To<RoleService>();
             kernel.Bind<ICompanyService>().To<CompanyService>();
             kernel.Bind<IDepartmentService>().To<DepartmentService>();
             kernel.Bind<IGroupService>().To<GroupService>();

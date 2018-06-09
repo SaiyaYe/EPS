@@ -110,6 +110,9 @@
     <Compile Include="Province.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Statistic.cs" />
     <Compile Include="User.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

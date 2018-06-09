@@ -21,5 +21,28 @@ namespace EPS.IBLL
         /// 修改者：
         /// 修改时间：
         ServiceResult<User> Login(string username, string password);
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="pageIndex">页码号</param>
+        /// <param name="pageSize">页容量</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/6/9 16:34
+        /// 修改者：
+        /// 修改时间：
+        ServiceResultList<User> GetUserList(int pageIndex = 1, int pageSize = 0);
+
+        /// <summary>
+        /// 更新权限
+        /// </summary>
+        /// <param name="user">用户数据</param>
+        /// <returns></returns>
+        /// 创建者：叶烨星
+        /// 创建时间：2018/6/9 16:57
+        /// 修改者：
+        /// 修改时间：
+        ServiceResult<bool> UpdateRole(User user);
     }
 }

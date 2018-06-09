@@ -41,5 +41,6 @@ namespace EPS.Model
         public virtual DbSet<PatrolPoint> PatrolPoint { get; set; }
         public virtual DbSet<PatrolRoute> PatrolRoute { get; set; }
         public virtual DbSet<PatrolDefect> PatrolDefect { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
     }
 }

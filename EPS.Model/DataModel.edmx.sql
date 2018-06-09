@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/07/2018 23:45:03
--- Generated from EDMX file: C:\Users\王一鹤\Desktop\9\EPS\EPS.Model\DataModel.edmx
+-- Date Created: 06/09/2018 16:15:09
+-- Generated from EDMX file: E:\project\EPS\EPS.Model\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -82,6 +82,9 @@ IF OBJECT_ID(N'[dbo].[FK_PatrolReportDictionary]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_DefectLevelId]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PatrolReport] DROP CONSTRAINT [FK_DefectLevelId];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CompanyGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Group] DROP CONSTRAINT [FK_CompanyGroup];
 GO
 
 -- --------------------------------------------------
@@ -225,7 +228,8 @@ CREATE TABLE [dbo].[User] (
     [PictureUrl] nvarchar(max)  NULL,
     [CreateTime] datetime  NOT NULL,
     [Available] bit  NOT NULL,
-    [EmployeeId] int  NOT NULL
+    [EmployeeId] int  NOT NULL,
+    [RoleId] int  NOT NULL
 );
 GO
 
@@ -302,6 +306,13 @@ CREATE TABLE [dbo].[PatrolDefect] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [DefectTypeId] int  NOT NULL
+);
+GO
+
+-- Creating table 'Role'
+CREATE TABLE [dbo].[Role] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -409,6 +420,12 @@ GO
 -- Creating primary key on [Id] in table 'PatrolDefect'
 ALTER TABLE [dbo].[PatrolDefect]
 ADD CONSTRAINT [PK_PatrolDefect]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Role'
+ALTER TABLE [dbo].[Role]
+ADD CONSTRAINT [PK_Role]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -759,6 +776,21 @@ GO
 CREATE INDEX [IX_FK_CompanyGroup]
 ON [dbo].[Group]
     ([CompanyId]);
+GO
+
+-- Creating foreign key on [RoleId] in table 'User'
+ALTER TABLE [dbo].[User]
+ADD CONSTRAINT [FK_RoleUser]
+    FOREIGN KEY ([RoleId])
+    REFERENCES [dbo].[Role]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RoleUser'
+CREATE INDEX [IX_FK_RoleUser]
+ON [dbo].[User]
+    ([RoleId]);
 GO
 
 -- --------------------------------------------------

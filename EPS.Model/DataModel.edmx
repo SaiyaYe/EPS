@@ -22,6 +22,7 @@
     <EntitySet Name="PatrolPoint" EntityType="DataModel.Store.PatrolPoint" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PatrolRoute" EntityType="DataModel.Store.PatrolRoute" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PatrolDefect" EntityType="DataModel.Store.PatrolDefect" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="DataModel.Store.Role" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PatrolPoint_PatrolRoute" EntityType="DataModel.Store.PatrolPoint_PatrolRoute" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CompanyDepartment" Association="DataModel.Store.CompanyDepartment">
       <End Role="Company" EntitySet="Company" />
@@ -115,6 +116,10 @@
       <End Role="Company" EntitySet="Company" />
       <End Role="Group" EntitySet="Group" />
     </AssociationSet>
+    <AssociationSet Name="RoleUser" Association="DataModel.Store.RoleUser">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Company">
     <Key>
@@ -200,6 +205,7 @@
     <Property Name="CreateTime" Type="datetime" Nullable="false" />
     <Property Name="Available" Type="bit" Nullable="false" />
     <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AcquisitionRecord">
     <Key>
@@ -276,6 +282,13 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="DefectTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PatrolPoint_PatrolRoute">
     <Key>
@@ -537,6 +550,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="RoleUser">
+    <End Role="Role" Type="DataModel.Store.Role" Multiplicity="1" />
+    <End Role="User" Type="DataModel.Store.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PatrolPoint_PatrolRoute_PatrolPoint">
     <End Role="PatrolPoint" Type="DataModel.Store.PatrolPoint" Multiplicity="1" />
     <End Role="PatrolPoint_PatrolRoute" Type="DataModel.Store.PatrolPoint_PatrolRoute" Multiplicity="*" />
@@ -669,6 +694,11 @@
           <AssociationSet Name="CompanyGroup" Association="DataModel.CompanyGroup">
             <End Role="Company" EntitySet="Company" />
             <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <EntitySet Name="Role" EntityType="DataModel.Role" />
+          <AssociationSet Name="RoleUser" Association="DataModel.RoleUser">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Company">
@@ -838,6 +868,8 @@
           <Property Name="Available" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="DataModel.UserEmployee" FromRole="User" ToRole="Employee" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="DataModel.RoleUser" FromRole="User" ToRole="Role" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="UserEmployee">
           <End Type="DataModel.User" Role="User" Multiplicity="*" />
@@ -1143,6 +1175,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="DataModel.RoleUser" FromRole="Role" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="RoleUser">
+          <End Type="DataModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="DataModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1239,6 +1291,7 @@
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="Available" ColumnName="Available" />
           <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1323,6 +1376,14 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DefectTypeId" ColumnName="DefectTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Role)">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

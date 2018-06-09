@@ -40,10 +40,10 @@ insert into Menu(Name,ParentId,Link) values('线路风险分析',4,'Analysis/RiskAnaly
 insert into Menu(Name,ParentId,Link) values('巡检报告',4,'')
 
 insert into Menu(Name,ParentId,Link) values('基础信息',8,'')
-insert into Menu(Name,ParentId,Link) values('部门',8,'SystemManagement/DepartmentList')
-insert into Menu(Name,ParentId,Link) values('小组',8,'SystemManagement/GroupList')
-insert into Menu(Name,ParentId,Link) values('人员',8,'SystemManagement/EmployeeList')
-insert into Menu(Name,ParentId,Link) values('角色权限',8,'')
+insert into Menu(Name,ParentId,Link) values('部门管理',8,'SystemManagement/DepartmentList')
+insert into Menu(Name,ParentId,Link) values('小组管理',8,'SystemManagement/GroupList')
+insert into Menu(Name,ParentId,Link) values('人员管理',8,'SystemManagement/EmployeeList')
+insert into Menu(Name,ParentId,Link) values('角色权限',8,'SystemManagement/RoleManagementList')
 insert into Menu(Name,ParentId,Link) values('用户日志统计',8,'')
 insert into Menu(Name,ParentId,Link) values('系统信息',8,'')
 
@@ -88,6 +88,12 @@ insert into County(Name,CityId) values('婺城区',2)
 insert into County(Name,CityId) values('二七区',3)
 insert into County(Name,CityId) values('新都区',4)
 
+--role
+insert into [Role](Name) values('系统管理员')
+insert into [Role](Name) values('部门主管')
+insert into [Role](Name) values('组长')
+insert into [Role](Name) values('巡检人员')
+
 --organization
 insert into Company(Name,Number) values('阿里巴巴',1)
 
@@ -107,7 +113,11 @@ insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) va
 insert into Employee(Name,IsTeamLeader,GroupId,DepartmentId,CompanyId,Number) values('李博洋',0,2,1,1,6)
 
 --user
-insert into [User](UserName,Password,CreateTime,Available,EmployeeId) values('yyx','666','2018-2-2',1,1)
+insert into [User](UserName,Password,CreateTime,Available,EmployeeId,RoleId) values('yyx','666','2018-2-2',1,1,1)
+insert into [User](UserName,Password,CreateTime,Available,EmployeeId,RoleId) values('wyh','666','2018-2-2',1,2,1)
+insert into [User](UserName,Password,CreateTime,Available,EmployeeId,RoleId) values('gqy','666','2018-2-2',1,3,1)
+insert into [User](UserName,Password,CreateTime,Available,EmployeeId,RoleId) values('cpf','666','2018-2-2',1,4,1)
+insert into [User](UserName,Password,CreateTime,Available,EmployeeId,RoleId) values('txq','666','2018-2-2',1,5,1)
 
 --PatrolRoute
 insert into PatrolRoute(Name,Shape) values('线路一',geography::STGeomFromText('LINESTRING(116.63 40.32, 115.33 40.57, 114.82 40.16)', 4326))

@@ -57,6 +57,7 @@
     <Compile Include="IPatrolReportDal.cs" />
     <Compile Include="IPatrolRouteDal.cs" />
     <Compile Include="IPatrolSchemeDal.cs" />
+    <Compile Include="IRoleDal.cs" />
     <Compile Include="IUserDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
